@@ -8,6 +8,8 @@
     import csBackground from "$lib/assets/images/csBackground.png";
     import ieeeLogo from "$lib/assets/images/ieeeLogo.png";
     import manipalLogo from "$lib/assets/images/manipalLogo.png";
+    import {goto} from "$app/navigation";
+    import Showcase from "$lib/common/Showcase.svelte";
 
 
     let hoveredChapter;
@@ -37,45 +39,19 @@
                 markers: false,
             },
         });
-
-
         timeline.to('.main-attraction', {
             scaleX: 1,
             scaleY: 1,
         });
         timeline.to('.main-links', {
-            left: 300,
+            opacity: 0,
         }, "<");
-        // timeline.to('.main-bg', {
-        //     backgroundColor: "#191c1d",
-        // });
         timeline.to('.text-left-in', {
             left: 20,
         }, "<");
         timeline.to('.text-right-in', {
             right: 20,
         }, "<");
-        // timeline.to(".about-us-1", {
-        //     y: -45,
-        //     opacity: 0,
-        // });
-        // timeline.to(".about-us-2", {
-        //     y: -35,
-        //     opacity: 1,
-        // });
-        // timeline.to(".about-us-2", {
-        //     y: -75,
-        //     opacity: 0,
-        // }, ">");
-        // timeline.to(".about-us-3", {
-        //     y: -35,
-        //     opacity: 1,
-        // });
-        // timeline.to(".about-us-3", {
-        //     y: -120,
-        //     opacity: 0,
-        // }, ">");
-
 
         let timelineAnother = gsap.timeline({
             scrollTrigger: {
@@ -83,7 +59,6 @@
                 start: 'bottom top',
                 end: 'bottom -130%',
                 scrub: true,
-                // markers: true,
             }
         });
         timelineAnother.to(".about-us-1", {
@@ -103,23 +78,25 @@
         }, "<");
         timelineAnother.to(".logo-navbar-manipal", {
             opacity: 1,
-        }, "<")
+        }, "<");
         timelineAnother.to(".about-us-3", {
             top: 27,
             opacity: 1,
         });
+        timelineAnother.to(".logo-navbar-manipal", {
+            opacity: 0,
+        }, ">");
+        timelineAnother.to(".logo-navbar-ieee", {
+            opacity: 1,
+        }, "<");
 
-        // timelineAnother.to(".about-us-3", {
-        //     y: -10,
-        //     opacity: 0,
-        // }, ">");
         let showcaseTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '.showcase-cards-div',
                 start: 'bottom top',
-                end: 'bottom -200%',
+                end: 'bottom -500%',
                 scrub: true,
-                markers: true,
+                markers: false,
             }
         });
 
@@ -147,7 +124,50 @@
             x: -350,
             opacity: 0,
         });
-    })
+        showcaseTimeline.to('.about-us-3', {
+            opacity: 0
+        }, '<');
+
+        gsap.registerPlugin(ScrollTrigger);
+        let showcasePictureTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: '.showcase-pictures-div',
+                start: 'bottom center',
+                end: 'bottom -400%',
+                scrub: true,
+                markers: false,
+            }
+        });
+        showcasePictureTimeline.to('.showcase-picture-1', {
+            scale: 0,
+        });
+        showcasePictureTimeline.to('.showcase-pictures-name-1', {
+            opacity: 0,
+            scale: 0,
+        }, "<");
+        showcasePictureTimeline.to('.showcase-picture-2', {
+            scale: 1,
+        }, ">1");
+        showcasePictureTimeline.to('.showcase-pictures-name-2', {
+            opacity: 1,
+            scale: 1,
+        }, "<");
+        showcasePictureTimeline.to('.showcase-picture-2', {
+            opacity: 0,
+            scale: 0,
+        }, ">1");
+        showcasePictureTimeline.to('.showcase-pictures-name-2', {
+            opacity: 0,
+            scale: 0,
+        }, "<");
+        showcasePictureTimeline.to('.showcase-picture-3', {
+            scale: 1,
+        }, ">1");
+        showcasePictureTimeline.to('.showcase-pictures-name-3', {
+            opacity: 1,
+            scale: 1,
+        }, "<");
+    });
 </script>
 <div class="h-fit w-full">
     <div class="h-[300vh] w-full sticky top-0">
@@ -194,17 +214,17 @@
                         events
                     </p>
                 </a>
-                <a href="/our-team" class="main-links">
+                <a href="/our-team" class="main-links opacity-100">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
                         our team
                     </p>
                 </a>
-                <a href="/our-team" class="main-links">
+                <a href="/our-team" class="main-links opacity-100">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
                         contact us
                     </p>
                 </a>
-                <a href="/our-team" class="main-links">
+                <a href="/our-team" class="main-links opacity-100">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
                         ieee website
                     </p>
@@ -258,12 +278,12 @@
             <!--            <p class="heading-font text-lg text-surface">Contact Us</p>-->
         </div>
     </div>
-    <div class="h-[300vh] bg-on-surface sticky top-0">
-        <div class="flex flex-col sticky top-[45%] items-center justify-center h-fit w-full">
+    <div class="h-[320vh] bg-on-surface sticky top-0">
+        <div class="flex flex-col sticky top-[45%] sm:top-[39%] items-center justify-center h-fit w-full">
             <div class="flex flex-col items-center justify-center">
                 <p class="heading-font text-sm sm:text-2xl text-gray-600">About us</p>
             </div>
-            <div class="flex flex-col h-[6.375rem] overflow-hidden about-us-attraction items-center justify-start">
+            <div class="flex flex-col h-[6.375rem] sm:h-[8.575rem] lg:h-[11.875rem] overflow-hidden about-us-attraction items-center justify-start">
                 <p class="heading-font tracking-wide text-center text-4xl sm:text-7xl lg:text-8xl text-primary-container about-us-1">
                     IEEE Student Branch
                 </p>
@@ -277,57 +297,58 @@
             </div>
         </div>
     </div>
-    <div class="h-[315vh] bg-on-surface sticky top-0">
-        <div class="flex flex-col sticky top-[40%] items-center justify-center h-fit w-full">
+    <div class="h-[550vh] bg-on-surface sticky top-0">
+        <div class="flex flex-col sticky top-[30%] items-center justify-center h-fit w-full">
             <div class="w-full h-fit relative flex flex-col items-center justify-center showcase-cards-div">
-                <div class="h-[275px] w-[32%] relative">
-                    <div class="h-full w-full absolute top-0 border-4 border-border/30 bg-on-surface rounded-2xl rotate-9 items-center justify-center p-10 showcase-event-4">
-                        <div class="flex flex-col w-full h-full items-start justify-between">
-                            <p class="heading-font text-xl text-primary-container">
+                <div class="h-[275px] w-[90%] sm:w-[75%] md:w-[63%] lg:w-[45%] xl:w-[37%] 2xl:w-[32%] relative">
+                    <div class="h-full w-full absolute top-0 border-4 border-border/30 bg-on-surface rounded-2xl rotate-[9deg] items-center justify-center p-10 showcase-event-4">
+                        <div class="flex flex-col w-full h-full items-start justify-around">
+                            <p class="heading-font text-lg sm:text-xl text-primary-container">
                                 Event Name
                             </p>
-                            <p class="heading-font text-xl text-surface/50">
+                            <p class="heading-font text-[0.95rem] sm:text-lg lg:text-xl text-surface/50">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium amet cum
                                 deserunt doloribus dolorum eum harum id
                             </p>
                         </div>
                     </div>
                     <div class="h-full w-full absolute top-0 border-4 border-border/30 bg-on-surface rounded-2xl rotate-6 items-center justify-center p-10 showcase-event-3">
-                        <div class="flex flex-col w-full h-full items-start justify-between">
-                            <p class="heading-font text-xl text-primary-container">
+                        <div class="flex flex-col w-full h-full items-start justify-around">
+                            <p class="heading-font text-lg sm:text-xl text-primary-container">
                                 Event Name
                             </p>
-                            <p class="heading-font text-xl text-surface/50">
+                            <p class="heading-font text-[0.95rem] sm:text-lg lg:text-xl text-surface/50">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium amet cum
                                 deserunt doloribus dolorum eum harum id
                             </p>
                         </div>
                     </div>
                     <div class="h-full w-full absolute top-0 border-4 border-border/30 bg-on-surface rounded-2xl rotate-3 items-center justify-center p-10 showcase-event-2">
-                        <div class="flex flex-col w-full h-full items-start justify-between">
-                            <p class="heading-font text-xl text-primary-container">
+                        <div class="flex flex-col w-full h-full items-start justify-around">
+                            <p class="heading-font text-lg sm:text-xl text-primary-container">
                                 Event Name
                             </p>
-                            <p class="heading-font text-xl text-surface/50">
+                            <p class="heading-font text-[0.95rem] sm:text-lg lg:text-xl text-surface/50">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium amet cum
                                 deserunt doloribus dolorum eum harum id
                             </p>
                         </div>
                     </div>
-                    <div class="h-full w-full absolute top-0 border-4 border-border/30 bg-on-surface rounded-2xl items-center justify-center p-10 showcase-event-1">
-                        <div class="flex flex-col w-full h-full items-start justify-between">
-                            <p class="heading-font text-xl text-primary-container">
+                    <div class="h-full w-full absolute top-0 border-4 border-border/30 bg-on-surface rounded-2xl items-center justify-center p-10 lg:p-10 showcase-event-1">
+                        <div class="flex flex-col w-full h-full items-start justify-around">
+                            <p class="heading-font text-lg sm:text-xl text-primary-container">
                                 Event Name
                             </p>
-                            <p class="heading-font text-xl text-surface/50">
+                            <p class="heading-font text-[0.95rem] sm:text-lg lg:text-xl text-surface/50">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium amet cum
                                 deserunt doloribus dolorum eum harum id
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="h-[275px] w-full absolute top-0 -z-[1] flex flex-col items-center justify-center">
-                    <p class="heading-font text-8xl text-primary-container text-center">Our Flagship Events</p>
+                <div class="h-[275px] w-full absolute -top-[75%] md:-top-5 -z-[1] flex flex-col items-center justify-center">
+                    <p class="heading-font text-4xl sm:text-7xl md:text-6xl lg:text-7xl xl:text-8xl text-primary-container text-center">
+                        Our Flagship Events</p>
                 </div>
             </div>
         </div>
@@ -336,20 +357,56 @@
     <!--<div class="h-fit w-full sticky top-0">-->
     <!--</div>-->
 </div>
-<div class="h-[100vh] bg-on-surface flex flex-row items-center justify-center px-32">
-    <div class="w-1/2 h-full flex flex-col items-start justify-center">
-        <p class="heading-font text-lg text-surface/30 mb-5">Our Team</p>
-        <p class="heading-font text-5xl font-bold text-left text-primary-container leading-[1.2]">
+<Showcase showcaseHeading="Showcase">
+    <div class="w-full h-full" slot="inside-side-card">
+        <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 showcase-pictures-name-1 absolute top-0">
+            <p class="heading-font text-2xl 2xl:text-3xl text-primary-container">Event Name 1</p>
+            <p class="heading-font text-surface/50 text-sm 2xl:text-lg">Lorem ipsum dolor sit amet, consectetur
+                adipisicing
+                elit. Animi minus quia repellat sed voluptate! Ab accusamus, autem blanditiis cupiditate dicta
+                dignissimos minus modi mollitia nobis optio quaerat rerum sequi velit!</p>
+        </div>
+        <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-0 showcase-pictures-name-2 absolute top-0">
+            <p class="heading-font text-2xl text-primary-container 2xl:text-3xl">Event Name 2</p>
+            <p class="heading-font text-surface/50 text-sm 2xl:text-lg">Lorem ipsum dolor sit amet, consectetur
+                adipisicing
+                elit. Animi minus quia repellat sed voluptate! Ab accusamus, autem blanditiis cupiditate dicta
+                dignissimos minus modi mollitia nobis optio quaerat rerum sequi velit!</p>
+        </div>
+        <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-0 showcase-pictures-name-3 absolute top-0">
+            <p class="heading-font text-2xl text-primary-container 2xl:text-3xl">Event Name 3</p>
+            <p class="heading-font text-surface/50 text-sm 2xl:text-lg">Lorem ipsum dolor sit amet, consectetur
+                adipisicing
+                elit. Animi minus quia repellat sed voluptate! Ab accusamus, autem blanditiis cupiditate dicta
+                dignissimos minus modi mollitia nobis optio quaerat rerum sequi velit!</p>
+        </div>
+    </div>
+    <div class="w-full h-full" slot="inside-main-card">
+        <img src="{cisBackground}" alt="random course"
+             class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 showcase-picture-1">
+        <img src="{csBackground}" alt="random course"
+             class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-2">
+        <img src="{iBackground}" alt="random course"
+             class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-3">
+    </div>
+</Showcase>
+<div class="h-[100vh] bg-on-surface flex flex-col md:flex-row items-center justify-center w-full p-5 gap-6 lg:px-32">
+    <div class="w-full lg:w-1/2 h-fit flex flex-col items-center justify-center">
+        <p class="heading-font w-full text-sm lg:text-lg text-surface/50 mb-3 lg:mb-5">Our Team</p>
+        <p class="heading-font w-full text-2xl sm:text-3xl md:text-5xl lg:text-5xl font-bold text-left text-primary-container leading-[1.2]">
             Meet the talents that make IEEE
         </p>
     </div>
-    <div class="w-1/2 h-full flex flex-col items-start justify-center gap-5">
-        <p class="heading-font text-surface/30">
+    <div class="w-full lg:w-1/2 h-fit flex flex-col items-start justify-between gap-5">
+        <p class="heading-font md:text-[0.90rem] leading-[1.7] text-surface/30">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, et nulla. Accusantium amet aperiam, at
             autem, culpa dolorum ea eos expedita illo labore magnam maxime necessitatibus perspiciatis ratione
             recusandae ut.
         </p>
-        <button class="rounded-full bg-primary-container text-on-primary-container text-sm py-4 px-6 heading-font hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_rgba(0,31,36,1)] transition-all duration-300">
+        <button class="rounded-full bg-primary-container text-on-primary-container text-sm py-4 px-6 heading-font hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_rgba(0,31,36,1)] transition-all duration-300"
+                on:click={() => {
+                goto("/about-us");
+            }}>
             Our Team
         </button>
     </div>
@@ -357,15 +414,8 @@
 
 <div class="h-[75px] w-full bg-surface flex flex-row items-start justify-center">
     <div class="h-full w-fit p-5 flex">
-        <p class="heading-font text-xl text-on-surface">
-            Code Available on <a href="https://github.com/vsharma-va" target="_blank" class="text-primary">Github</a>
+        <p class="heading-font text-lg text-on-surface text-center">
+            Code Available on <a href="https://github.com/vsharma-va/mblr-ieee" target="_blank" class="text-primary">Github</a>
         </p>
     </div>
 </div>
-
-<style>
-    .svg-windmill {
-        height: max(2.9375rem, min(10.86084vw + .32949rem, 15.5625rem));
-        width: max(2.9375rem, min(10.86084vw + .32949rem, 15.5625rem));
-    }
-</style>
