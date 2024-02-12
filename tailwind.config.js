@@ -16,11 +16,13 @@ export default {
         "cis-primary-container": "#ffdad6",
         "cis-on-primary-container": "#410003",
         "cis-surface": "#fffbff",
+        "cis-on-surface": "#201a19",
         "cs-primary": "#676000",
         "cs-on-primary": "#ffffff",
         "cs-primary-container": "#f1e66b",
         "cs-on-primary-container": "#1f1c00",
         "cs-surface": "#fffbff",
+        "cs-on-surface": "#1d1c16",
       }
     },
   },
