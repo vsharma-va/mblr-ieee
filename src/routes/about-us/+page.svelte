@@ -14,9 +14,9 @@
             scrollTrigger: {
                 trigger: '.zoom-scroll',
                 start: 'bottom top',
-                end: 'bottom -110%',
+                end: 'bottom -85%',
                 scrub: true,
-                markers: true,
+                markers: false,
             },
         });
         photoZoomInTimeline.to('.photo-zoom-in', {
@@ -71,12 +71,12 @@
 </script>
 
 <div class="h-fit w-full bg-on-surface">
-    <div class="h-[350vh] w-full flex flex-col gap-5">
+    <div class="h-[300vh] w-full flex flex-col gap-5">
         <div class="h-fit w-full flex flex-col items-center justify-center gap-5 zoom-scroll mt-28 px-[5%]">
-            <p class="heading-font text-primary-container text-4xl sm:text-5xl md:text-6xl leading-[1.2] tracking-wide">
+            <p class="heading-font text-primary-container text-left text-4xl sm:text-5xl md:text-6xl leading-[1.2] tracking-wide">
                 Unveiling the story behind our passionate team
             </p>
-            <p class="heading-font text-surface/30 text-sm sm:text-[0.90rem] md:text-lg leading-[1.5] tracking-wider">
+            <p class="heading-font text-surface/30 text-sm text-left sm:text-[0.90rem] md:text-lg leading-[1.5] tracking-wider">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi consectetur cumque eaque
                 eligendi enim eos exercitationem inventore iste iure iusto.
             </p>
@@ -84,9 +84,9 @@
         <div class="h-[250px] sm:h-[390px] lg:h-[450px] xl:h-[550px] w-full flex flex-row gap-2 sticky top-0 items-center justify-center photo-zoom-in overflow-x-hidden mt-16">
             <img src="{cisBackground}" alt="random course"
                  class="h-full w-[75%] absolute object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl z-[1] photo-to-zoom-in-1">
-            <img src="{cisBackground}" alt="random course"
+            <img src="{csBackground}" alt="random course"
                  class="h-[80%] w-[25%] absolute top-2 -right-14 object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl z-0">
-            <img src="{cisBackground}" alt="random course"
+            <img src="{iBackground}" alt="random course"
                  class="h-[80%] w-[25%] absolute bottom-2 -left-14 object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl z-0">
         </div>
     </div>

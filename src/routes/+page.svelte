@@ -1,7 +1,6 @@
 <script>
     import {gsap} from "gsap/dist/gsap";
     import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
-    import {TextPlugin} from "gsap/dist/TextPlugin";
     import {onMount} from "svelte";
     import iBackground from "$lib/assets/images/iiBackground.jpg";
     import cisBackground from "$lib/assets/images/cisBackground.png";
@@ -27,7 +26,6 @@
 
     onMount(() => {
         gsap.registerPlugin(ScrollTrigger);
-        gsap.registerPlugin(TextPlugin);
         ScrollTrigger.refresh();
 
         let timeline = gsap.timeline({
@@ -214,7 +212,7 @@
                         events
                     </p>
                 </a>
-                <a href="/our-team" class="main-links opacity-100">
+                <a href="/about-us" class="main-links opacity-100">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
                         our team
                     </p>
