@@ -1,6 +1,6 @@
 <script>
-    import {gsap} from "gsap/dist/gsap";
-    import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
+    import {gsap} from "gsap";
+    import ScrollTrigger from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
     import iBackground from "$lib/assets/images/iiBackground.jpg";
     import cisBackground from "$lib/assets/images/cisBackground.png";
@@ -29,23 +29,24 @@
         gsap.registerPlugin(ScrollTrigger);
         ScrollTrigger.normalizeScroll({
             lockAxis: true,
-            type: "touch",
+            type: "touch,wheel,pointer,scroll",
         });
-        // ScrollTrigger.observe({
-        //     trigger: '.main-attraction',
-        //     type: "touch,pointer", // comma-delimited list of what to listen for ("wheel,touch,scroll,pointer")
-        //     onUp: () => {
-        //         ScrollTrigger.update();
-        //     },
-        // });
-
+        // if(ScrollTrigger.isTouch === 1){
+        //     ScrollTrigger.normalizeScroll({
+        //         lockAxis: false,
+        //         type: "touch,pointer,wheel",
+        //     })
+        // } else {
+        //     ScrollTrigger.normalizeScroll(false);
+        // }
         let timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '.main-attraction',
-                start: 'top -110%',
+                start: 'top -120%',
                 end: 'bottom end',
                 scrub: true,
                 markers: false,
+                onLeave: () => ScrollTrigger.clearScrollMemory()
             },
         });
         timeline.to('.main-attraction', {
@@ -61,7 +62,7 @@
         timeline.to('.text-right-in', {
             right: 20,
         }, "<");
-
+        // ScrollTrigger.normalizeScroll(false);
         let timelineAnother = gsap.timeline({
             scrollTrigger: {
                 trigger: '.about-us-attraction',
