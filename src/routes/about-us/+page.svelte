@@ -6,6 +6,7 @@
     import Showcase from "$lib/common/Showcase.svelte";
     import csBackground from "$lib/assets/images/csBackground.png";
     import iBackground from "$lib/assets/images/iiBackground.jpg";
+    import Navbar from "$lib/common/Navbar.svelte";
 
     onMount(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -70,6 +71,7 @@
     });
 </script>
 
+<Navbar/>
 <div class="h-fit w-full bg-on-surface">
     <div class="h-[300vh] w-full flex flex-col gap-5">
         <div class="h-fit w-full flex flex-col items-center justify-center gap-5 zoom-scroll mt-28 px-[5%]">
@@ -124,7 +126,7 @@
     <div class="h-[75px] w-full bg-surface flex flex-row items-start justify-center">
         <div class="h-full w-fit p-5 flex">
             <p class="heading-font text-lg text-on-surface text-center">
-                Code Available on <a href="https://github.com/vsharma-va/mblr-ieee" target="_blank"
+                 Project Available on <a href="https://github.com/vsharma-va/mblr-ieee" target="_blank"
                                      class="text-primary">Github</a>
             </p>
         </div>

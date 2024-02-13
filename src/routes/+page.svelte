@@ -7,6 +7,7 @@
     import csBackground from "$lib/assets/images/csBackground.png";
     import ieeeLogo from "$lib/assets/images/ieeeLogo.png";
     import manipalLogo from "$lib/assets/images/manipalLogo.png";
+    import mouseScroll from "$lib/assets/images/mouse-cursor.png";
     import {goto} from "$app/navigation";
     import Showcase from "$lib/common/Showcase.svelte";
 
@@ -207,22 +208,25 @@
                 <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
                     IEEE
                 </p>
-                <a href="/our-team" class="main-links">
+                <div class="h-[16px] w-[16px] z-[1] main-links">
+                    <img src="{mouseScroll}">
+                </div>
+                <a href="/events" class="main-links z-[1]">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] tracking-wide group-hover:tracking-wider transition-all duration-300 text-on-primary-container absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
                         events
                     </p>
                 </a>
-                <a href="/about-us" class="main-links opacity-100">
+                <a href="/about-us" class="main-links z-[1] opacity-100">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
                         our team
                     </p>
                 </a>
-                <a href="/our-team" class="main-links opacity-100">
+                <a href="/our-team" class="main-links z-[1] opacity-100">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
                         contact us
                     </p>
                 </a>
-                <a href="/our-team" class="main-links opacity-100">
+                <a href="/our-team" class="main-links z-[1] opacity-100">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
                         ieee website
                     </p>
@@ -413,7 +417,7 @@
 <div class="h-[75px] w-full bg-surface flex flex-row items-start justify-center">
     <div class="h-full w-fit p-5 flex">
         <p class="heading-font text-lg text-on-surface text-center">
-            Code Available on <a href="https://github.com/vsharma-va/mblr-ieee" target="_blank" class="text-primary">Github</a>
+            Project Available on <a href="https://github.com/vsharma-va/mblr-ieee" target="_blank" class="text-primary">Github</a>
         </p>
     </div>
 </div>

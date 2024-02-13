@@ -2,6 +2,7 @@
     import {gsap} from "gsap/dist/gsap";
     import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
+    import mouseScroll from "$lib/assets/images/mouse-cursor.png";
 
     export let mainHeading;
     export let textColorClass;
