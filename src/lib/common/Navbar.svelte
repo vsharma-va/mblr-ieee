@@ -5,6 +5,7 @@
     import {navigating} from "$app/stores";
 
     let navbar;
+    let navOpen = false;
     let departmentSelection
 
     onMount(() => {
@@ -62,7 +63,7 @@
         }, ">");
     });
 
-    function toggleNavBar() {
+    function toggleNavBar(forceClose = false) {
         // navbar is closed
         if (navbar.classList.contains("-left-[100%]")) {
             if (departmentSelection.classList.contains("right-0")) {
@@ -71,10 +72,12 @@
             }
             navbar.classList.remove("-left-[100%]");
             navbar.classList.add("left-0");
+            navOpen = true
             // navbar is open
         } else {
             navbar.classList.remove("left-0");
             navbar.classList.add("-left-[100%]");
+            navOpen = false
         }
     }
 
@@ -84,6 +87,7 @@
             if (navbar.classList.contains("left-0")) {
                 navbar.classList.remove("left-0");
                 navbar.classList.add("-left-[100%]");
+                navOpen = false
             }
             departmentSelection.classList.remove("-right-[100%]");
             departmentSelection.classList.add("right-0");
@@ -95,7 +99,10 @@
     }
 
     $: if ($navigating) {
-        toggleNavBar();
+        if(navOpen) {
+            navbar.classList.remove("left-0");
+            navbar.classList.add("-left-[100%]");
+        }
     }
 </script>
 

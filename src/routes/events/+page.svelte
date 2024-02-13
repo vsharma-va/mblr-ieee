@@ -2,6 +2,11 @@
     import EventsTemplate from "$lib/common/EventsTemplate.svelte";
     import EventCard from "$lib/common/EventCard.svelte";
     import Navbar from "$lib/common/Navbar.svelte";
+    import {onMount} from "svelte";
+
+    onMount(() => {
+
+    })
 </script>
 
 <Navbar/>
