@@ -27,7 +27,17 @@
 
     onMount(() => {
         gsap.registerPlugin(ScrollTrigger);
-        ScrollTrigger.refresh();
+        ScrollTrigger.normalizeScroll({
+            lockAxis: true,
+            type: "touch",
+        });
+        // ScrollTrigger.observe({
+        //     trigger: '.main-attraction',
+        //     type: "touch,pointer", // comma-delimited list of what to listen for ("wheel,touch,scroll,pointer")
+        //     onUp: () => {
+        //         ScrollTrigger.update();
+        //     },
+        // });
 
         let timeline = gsap.timeline({
             scrollTrigger: {
@@ -300,7 +310,7 @@
         </div>
     </div>
     <div class="h-[550vh] bg-on-surface sticky top-0">
-        <div class="flex flex-col sticky top-[30%] items-center justify-center h-fit w-full">
+        <div class="flex flex-col sticky top-[40%] items-center justify-center h-fit w-full">
             <div class="w-full h-fit relative flex flex-col items-center justify-center showcase-cards-div">
                 <div class="h-[275px] w-[90%] sm:w-[75%] md:w-[63%] lg:w-[45%] xl:w-[37%] 2xl:w-[32%] relative">
                     <div class="h-full w-full absolute top-0 border-4 border-border/30 bg-on-surface rounded-2xl rotate-[9deg] items-center justify-center p-10 showcase-event-4">
