@@ -27,10 +27,11 @@
 
     onMount(() => {
         gsap.registerPlugin(ScrollTrigger);
-        ScrollTrigger.normalizeScroll({
-            lockAxis: true,
-            type: "touch,wheel,pointer,scroll",
-        });
+        // ScrollTrigger.normalizeScroll({type: "touch"});
+        // ScrollTrigger.normalizeScroll({
+        //     lockAxis: false,
+        //     type: "touch,wheel,pointer,scroll",
+        // });
         // if(ScrollTrigger.isTouch === 1){
         //     ScrollTrigger.normalizeScroll({
         //         lockAxis: false,
@@ -41,17 +42,15 @@
         // }
         let timeline = gsap.timeline({
             scrollTrigger: {
-                trigger: '.main-attraction',
-                start: 'top -120%',
+                trigger: '.zoom-out-trigger',
+                start: 'top top',
                 end: 'bottom end',
                 scrub: true,
                 markers: false,
-                onLeave: () => ScrollTrigger.clearScrollMemory()
             },
         });
-        timeline.to('.main-attraction', {
-            scaleX: 1,
-            scaleY: 1,
+        timeline.to('.zoom-out-to-normal', {
+            scale: 1,
         });
         timeline.to('.main-links', {
             opacity: 0,
@@ -62,13 +61,14 @@
         timeline.to('.text-right-in', {
             right: 20,
         }, "<");
-        // ScrollTrigger.normalizeScroll(false);
+
         let timelineAnother = gsap.timeline({
             scrollTrigger: {
                 trigger: '.about-us-attraction',
                 start: 'bottom top',
                 end: 'bottom -130%',
                 scrub: true,
+                markers: false,
             }
         });
         timelineAnother.to(".about-us-1", {
@@ -99,7 +99,7 @@
         timelineAnother.to(".logo-navbar-ieee", {
             opacity: 1,
         }, "<");
-
+        // ScrollTrigger.normalizeScroll(false);
         let showcaseTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '.showcase-cards-div',
@@ -139,15 +139,16 @@
         }, '<');
 
         gsap.registerPlugin(ScrollTrigger);
-        let showcasePictureTimeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: '.showcase-pictures-div',
-                start: 'bottom center',
-                end: 'bottom -400%',
-                scrub: true,
-                markers: false,
-            }
-        });
+        let showcasePictureTimeline = gsap.timeline(
+            {
+                scrollTrigger: {
+                    trigger: '.showcase-pictures-div',
+                    start: 'bottom center',
+                    end: 'bottom -400%',
+                    scrub: true,
+                    markers: false,
+                }
+            });
         showcasePictureTimeline.to('.showcase-picture-1', {
             scale: 0,
         });
@@ -180,48 +181,47 @@
     });
 </script>
 <div class="h-fit w-full">
-    <div class="h-[300vh] w-full sticky top-0">
-        <div class="h-[100vh] bg-surface sticky top-0 left-0 right-0 bottom-0 scale-x-[3.2] scale-y-[3.2] grid grid-cols-1 sm:grid-cols-[20%_60%_20%] lg:grid-cols-[25%_50%_25%] xl:grid-cols-[30%_40%_30%] gap-y-2 grid-rows-3 w-full main-attraction overflow-hidden">
-            <div class="absolute top-0 bottom-0 w-full h-full transition-all hover-background-image scale-0 opacity-0"
-                 bind:this={hoverBackgroundImageDiv}>
-                {#if hoveredChapter === "ieee-main"}
-                    <img src="{iBackground}" alt="random course"
-                         class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
-                {:else if hoveredChapter === "ieee-cs"}
-                    <img src="{csBackground}" alt="random course"
-                         class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
-                {:else if hoveredChapter === "ieee-cis"}
-                    <img src="{cisBackground}" alt="random course"
-                         class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
-                {/if}
-            </div>
-            <div class="absolute -left-[100%] text-left-in h-full items-center justify-start px-10 w-full flex p-5 z-[0]">
-                <p class="heading-font text-3xl md:text-6xl lg:text-7xl tracking-wider leading-[1.2] text-on-surface sm:-rotate-90 sm:pb-[100px] md:pb-[300px] xl:pb-[0px]">
+    <div class="h-[255vh] w-full sticky top-0 p-2 sm:p-0">
+        <div class="h-screen w-full grid grid-cols-1 overflow-hidden sm:grid-cols-[20%_60%_20%] lg:grid-cols-[25%_50%_25%] xl:grid-cols-[30%_40%_30%] gap-y-2 grid-rows-3 zoom-out-trigger sticky top-0"
+             style="transform-style: preserve-3d">
+            <div class="absolute w-full h-full flex flex-col items-start justify-center -left-[100%] text-left-in">
+                <p class="heading-font text-2xl -rotate-90">
                     Manipal
                 </p>
             </div>
-            <!--        <div class="col-start-1 row-start-1 col-span-3 row-span-3 gradient-text blur-2xl rounded-2xl -z-[5]">-->
-
-            <!--        </div>-->
-            <div class="absolute -right-[100%] text-right-in h-full items-center justify-end px-10 w-full flex z-[0]">
-                <p class="heading-font text-3xl md:text-6xl lg:text-7xl tracking-wider leading-[1.2] text-on-surface sm:-rotate-90 sm:pt-[100px] md:pt-[305px] xl:pt-[0px]">
-                    Bangalore
-                </p>
+            <div class="absolute w-full h-full flex flex-col items-end justify-center -right-[100%] text-right-in">
+                <p class="heading-font text-2xl rotate-90">Bangalore</p>
             </div>
-            <!--        <div class="bg-primary-container col-start-1 row-start-1 h-full w-full relative">-->
-            <!--            {#if hoveredChapter === "ieee-main"}-->
-            <!--                <img src="{iBackground}" alt="random course"-->
-            <!--                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">-->
-            <!--            {/if}-->
-            <!--        </div>-->
-            <div class="col-start-1 sm:col-start-2 row-start-2 rounded-2xl bg-primary-container h-full w-full flex flex-col items-center justify-center relative group cursor-pointer hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,31,36,1)] transition-all duration-300 overflow-hidden ieee-main"
-                 on:mouseenter={handleChapterHover}>
+            <div class="col-start-1 sm:col-start-2 row-start-1 bg-cis-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
+                 style="transform-style: preserve-3d">
+                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-cis-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
+                    IEEE CIS
+                </p>
+                <img src="{cisBackground}" alt="random course"
+                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
+                duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
+            </div>
+            <div class="col-start-1 sm:col-start-2 row-start-3 bg-cs-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
+                 style="transform-style: preserve-3d">
+                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-cs-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
+                    IEEE CS
+                </p>
+                <img src="{csBackground}" alt="random course"
+                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
+                duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
+            </div>
+            <div class="bg-primary-container col-start-1 sm:col-start-2 row-start-2 scale-[3.2] zoom-out-to-normal z-[2] rounded-2xl flex flex-col items-center justify-center transform-gpu group cursor-pointer overflow-hidden"
+                 style="transform-style: preserve-3d">
                 <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
                     IEEE
                 </p>
                 <div class="h-[16px] w-[16px] z-[1] main-links">
-                    <img src="{mouseScroll}">
+                    <img src="{mouseScroll}" alt="svg of a mouse indicating scroll">
                 </div>
+                <img src="{iBackground}" alt="random course"
+                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
+                duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
+
                 <a href="/events" class="main-links z-[1]">
                     <p class="primary-font text-[0.45rem] sm:text-[0.75rem] tracking-wide group-hover:tracking-wider transition-all duration-300 text-on-primary-container absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
                         events
@@ -242,42 +242,107 @@
                         ieee website
                     </p>
                 </a>
-                <img src="{iBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
-                <!--            <p class="primary-font text-2xl text-on-primary-container transition-all duration-300 group-hover:tracking-wider">-->
-                <!--                Manipal Banglore Branch</p>-->
-            </div>
-            <!--                        <div class="col-start-1 row-start-2 rounded-2xl bg-blue-300 h-full w-full">-->
-            <!--                            <img src="{manipalBanglore}" alt="random course"-->
-            <!--                                 class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-200 ease-in-out rounded-2xl">-->
-            <!--                        </div>-->
-            <!--                        <div class="col-start-3 row-start-2 rounded-2xl bg-blue-300 h-full w-full">-->
-            <!--                            <img src="{im1}" alt="random course"-->
-            <!--                                 class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-200 ease-in-out rounded-2xl">-->
-
-            <div class="relative col-start-1 sm:col-start-2 row-start-1 rounded-2xl h-full w-full bg-cis-primary-container flex flex-col items-center justify-center group cursor-pointer hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(65,0,3,1)] transition-all duration-300 main-card overflow-hidden ieee-cis"
-                 on:mouseenter={handleChapterHover}>
-                <p class="heading-font text-3xl md:text-6xl lg:text-8xl bg-blend-multiply tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
-                    IEEE CIS</p>
-                <img src="{cisBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
-                <!--            <p class="primary-font text-2xl text-cis-on-primary-container group-hover:tracking-wider transition-all duration-300">-->
-                <!--                Manipal Banglore Branch</p>-->
-            </div>
-
-            <div class="relative col-start-1 sm:col-start-2 row-start-3 rounded-2xl h-full w-full bg-cs-primary-container flex flex-col items-center justify-center group cursor-pointer hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(31,28,0,1)] transition-all duration-300 overflow-hidden ieee-cs"
-                 on:mouseenter={handleChapterHover}>
-                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-cs-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
-                    IEEE CS
-                </p>
-                <img src="{csBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
-                <!--            <p class="primary-font text-2xl text-cs-on-primary-container group-hover:tracking-wider transition-all duration-300">-->
-                <!--                Manipal Banglore Branch</p>-->
             </div>
         </div>
-
     </div>
+    <!--    <div class="h-[300vh] w-full sticky top-0 normalize-scroll">-->
+    <!--        <div class="h-[100vh] bg-surface sticky top-0 left-0 right-0 bottom-0 scale-x-[3.2] scale-y-[3.2] grid grid-cols-1 sm:grid-cols-[20%_60%_20%] lg:grid-cols-[25%_50%_25%] xl:grid-cols-[30%_40%_30%] gap-y-2 grid-rows-3 w-full main-attraction overflow-hidden">-->
+    <!--            <div class="absolute top-0 bottom-0 w-full h-full transition-all hover-background-image scale-0 opacity-0"-->
+    <!--                 bind:this={hoverBackgroundImageDiv}>-->
+    <!--                {#if hoveredChapter === "ieee-main"}-->
+    <!--                    <img src="{iBackground}" alt="random course"-->
+    <!--                         class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">-->
+    <!--                {:else if hoveredChapter === "ieee-cs"}-->
+    <!--                    <img src="{csBackground}" alt="random course"-->
+    <!--                         class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">-->
+    <!--                {:else if hoveredChapter === "ieee-cis"}-->
+    <!--                    <img src="{cisBackground}" alt="random course"-->
+    <!--                         class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">-->
+    <!--                {/if}-->
+    <!--            </div>-->
+    <!--            <div class="absolute -left-[100%] text-left-in h-full items-center justify-start px-10 w-full flex p-5 z-[0]">-->
+    <!--                <p class="heading-font text-3xl md:text-6xl lg:text-7xl tracking-wider leading-[1.2] text-on-surface sm:-rotate-90 sm:pb-[100px] md:pb-[300px] xl:pb-[0px]">-->
+    <!--                    Manipal-->
+    <!--                </p>-->
+    <!--            </div>-->
+    <!--            &lt;!&ndash;        <div class="col-start-1 row-start-1 col-span-3 row-span-3 gradient-text blur-2xl rounded-2xl -z-[5]">&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;        </div>&ndash;&gt;-->
+    <!--            <div class="absolute -right-[100%] text-right-in h-full items-center justify-end px-10 w-full flex z-[0]">-->
+    <!--                <p class="heading-font text-3xl md:text-6xl lg:text-7xl tracking-wider leading-[1.2] text-on-surface sm:-rotate-90 sm:pt-[100px] md:pt-[305px] xl:pt-[0px]">-->
+    <!--                    Bangalore-->
+    <!--                </p>-->
+    <!--            </div>-->
+    <!--            &lt;!&ndash;        <div class="bg-primary-container col-start-1 row-start-1 h-full w-full relative">&ndash;&gt;-->
+    <!--            &lt;!&ndash;            {#if hoveredChapter === "ieee-main"}&ndash;&gt;-->
+    <!--            &lt;!&ndash;                <img src="{iBackground}" alt="random course"&ndash;&gt;-->
+    <!--            &lt;!&ndash;                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">&ndash;&gt;-->
+    <!--            &lt;!&ndash;            {/if}&ndash;&gt;-->
+    <!--            &lt;!&ndash;        </div>&ndash;&gt;-->
+    <!--            <div class="col-start-1 sm:col-start-2 row-start-2 rounded-2xl bg-primary-container h-full w-full flex flex-col items-center justify-center relative group cursor-pointer hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,31,36,1)] transition-all duration-300 overflow-hidden ieee-main"-->
+    <!--                 on:mouseenter={handleChapterHover}>-->
+    <!--                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">-->
+    <!--                    IEEE-->
+    <!--                </p>-->
+    <!--                <div class="h-[16px] w-[16px] z-[1] main-links">-->
+    <!--                    <img src="{mouseScroll}">-->
+    <!--                </div>-->
+    <!--                <a href="/events" class="main-links z-[1]">-->
+    <!--                    <p class="primary-font text-[0.45rem] sm:text-[0.75rem] tracking-wide group-hover:tracking-wider transition-all duration-300 text-on-primary-container absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">-->
+    <!--                        events-->
+    <!--                    </p>-->
+    <!--                </a>-->
+    <!--                <a href="/about-us" class="main-links z-[1] opacity-100">-->
+    <!--                    <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">-->
+    <!--                        our team-->
+    <!--                    </p>-->
+    <!--                </a>-->
+    <!--                <a href="/our-team" class="main-links z-[1] opacity-100">-->
+    <!--                    <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">-->
+    <!--                        contact us-->
+    <!--                    </p>-->
+    <!--                </a>-->
+    <!--                <a href="/our-team" class="main-links z-[1] opacity-100">-->
+    <!--                    <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">-->
+    <!--                        ieee website-->
+    <!--                    </p>-->
+    <!--                </a>-->
+    <!--                <img src="{iBackground}" alt="random course"-->
+    <!--                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">-->
+    <!--                &lt;!&ndash;            <p class="primary-font text-2xl text-on-primary-container transition-all duration-300 group-hover:tracking-wider">&ndash;&gt;-->
+    <!--                &lt;!&ndash;                Manipal Banglore Branch</p>&ndash;&gt;-->
+    <!--            </div>-->
+    <!--            &lt;!&ndash;                        <div class="col-start-1 row-start-2 rounded-2xl bg-blue-300 h-full w-full">&ndash;&gt;-->
+    <!--            &lt;!&ndash;                            <img src="{manipalBanglore}" alt="random course"&ndash;&gt;-->
+    <!--            &lt;!&ndash;                                 class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-200 ease-in-out rounded-2xl">&ndash;&gt;-->
+    <!--            &lt;!&ndash;                        </div>&ndash;&gt;-->
+    <!--            &lt;!&ndash;                        <div class="col-start-3 row-start-2 rounded-2xl bg-blue-300 h-full w-full">&ndash;&gt;-->
+    <!--            &lt;!&ndash;                            <img src="{im1}" alt="random course"&ndash;&gt;-->
+    <!--            &lt;!&ndash;                                 class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-200 ease-in-out rounded-2xl">&ndash;&gt;-->
+
+    <!--            <div class="relative col-start-1 sm:col-start-2 row-start-1 rounded-2xl h-full w-full bg-cis-primary-container flex flex-col items-center justify-center group cursor-pointer hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(65,0,3,1)] transition-all duration-300 main-card overflow-hidden ieee-cis"-->
+    <!--                 on:mouseenter={handleChapterHover}>-->
+    <!--                <p class="heading-font text-3xl md:text-6xl lg:text-8xl bg-blend-multiply tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">-->
+    <!--                    IEEE CIS</p>-->
+    <!--                <img src="{cisBackground}" alt="random course"-->
+    <!--                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">-->
+    <!--                &lt;!&ndash;            <p class="primary-font text-2xl text-cis-on-primary-container group-hover:tracking-wider transition-all duration-300">&ndash;&gt;-->
+    <!--                &lt;!&ndash;                Manipal Banglore Branch</p>&ndash;&gt;-->
+    <!--            </div>-->
+
+    <!--            <div class="relative col-start-1 sm:col-start-2 row-start-3 rounded-2xl h-full w-full bg-cs-primary-container flex flex-col items-center justify-center group cursor-pointer hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(31,28,0,1)] transition-all duration-300 overflow-hidden ieee-cs"-->
+    <!--                 on:mouseenter={handleChapterHover}>-->
+    <!--                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-cs-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">-->
+    <!--                    IEEE CS-->
+    <!--                </p>-->
+    <!--                <img src="{csBackground}" alt="random course"-->
+    <!--                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0">-->
+    <!--                &lt;!&ndash;            <p class="primary-font text-2xl text-cs-on-primary-container group-hover:tracking-wider transition-all duration-300">&ndash;&gt;-->
+    <!--                &lt;!&ndash;                Manipal Banglore Branch</p>&ndash;&gt;-->
+    <!--            </div>-->
+    <!--        </div>-->
+
+    <!--    </div>-->
     <div class="flex flex-col sticky top-[25px] z-[2] h-fit w-full items-center justify-center">
         <div class="h-[75px] w-fit rounded-2xl isolate bg-white/10 shadow-lg flex flex-row items-center justify-between px-2">
             <div class="h-full p-4 relative">
