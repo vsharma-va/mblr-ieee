@@ -1,67 +1,9 @@
 <script>
-    import {onMount} from "svelte";
-    import {gsap} from "gsap/dist/gsap";
-    import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
     import {navigating} from "$app/stores";
 
     let navbar;
     let navOpen = false;
     let departmentSelection
-
-    onMount(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        let csNavColorChange = gsap.timeline({
-            scrollTrigger: {
-                trigger: `.cs-entry-trigger`,
-                start: 'top top',
-                end: 'top 0%',
-                scrub: true,
-                markers: false,
-            }
-        });
-        csNavColorChange.to('.nav-bg-color', {
-            backgroundColor: "#1d1c16",
-        });
-        csNavColorChange.to('.vertical-strike-nav-menu-bg', {
-            backgroundColor: "#f1e66b",
-        }, ">");
-        csNavColorChange.to('.nav-link-underline-bg', {
-            backgroundColor: "#f1e66b",
-            opacity: 0.9,
-        }, ">");
-        csNavColorChange.to('.department-button-color', {
-            backgroundColor: "#f1e66b",
-        }, ">");
-        csNavColorChange.to('.department-button-text-color', {
-            color: "#1f1c00",
-        }, ">");
-
-        let cisNavColorChange = gsap.timeline({
-            scrollTrigger: {
-                trigger: `.cis-entry-trigger`,
-                start: 'top top',
-                end: 'top -0%',
-                scrub: true,
-                markers: false,
-            }
-        });
-        cisNavColorChange.to('.nav-bg-color', {
-            backgroundColor: "#201a19",
-        });
-        cisNavColorChange.to('.vertical-strike-nav-menu-bg', {
-            backgroundColor: "#ffdad6",
-        }, ">");
-        cisNavColorChange.to('.nav-link-underline-bg', {
-            backgroundColor: "#ffdad6",
-            opacity: 0.9,
-        }, ">");
-        cisNavColorChange.to('.department-button-color', {
-            backgroundColor: "#ffdad6",
-        }, ">");
-        cisNavColorChange.to('.department-button-text-color', {
-            color: "#410003",
-        }, ">");
-    });
 
     function toggleNavBar(forceClose = false) {
         // navbar is closed
@@ -99,7 +41,7 @@
     }
 
     $: if ($navigating) {
-        if(navOpen) {
+        if (navOpen) {
             navbar.classList.remove("left-0");
             navbar.classList.add("-left-[100%]");
         }

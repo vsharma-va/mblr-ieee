@@ -8,9 +8,8 @@
     import iBackground from "$lib/assets/images/iiBackground.jpg";
     import Navbar from "$lib/common/Navbar.svelte";
 
+    gsap.registerPlugin(ScrollTrigger);
     onMount(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        ScrollTrigger.refresh();
         let photoZoomInTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '.zoom-scroll',

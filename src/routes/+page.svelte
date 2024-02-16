@@ -1,5 +1,5 @@
 <script>
-    import {gsap} from "gsap";
+    import {gsap} from "gsap/dist/gsap";
     import ScrollTrigger from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
     import iBackground from "$lib/assets/images/iiBackground.jpg";
@@ -25,21 +25,8 @@
         }
     }
 
+    gsap.registerPlugin(ScrollTrigger);
     onMount(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        // ScrollTrigger.normalizeScroll({type: "touch"});
-        // ScrollTrigger.normalizeScroll({
-        //     lockAxis: false,
-        //     type: "touch,wheel,pointer,scroll",
-        // });
-        // if(ScrollTrigger.isTouch === 1){
-        //     ScrollTrigger.normalizeScroll({
-        //         lockAxis: false,
-        //         type: "touch,pointer,wheel",
-        //     })
-        // } else {
-        //     ScrollTrigger.normalizeScroll(false);
-        // }
         let timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '.zoom-out-trigger',
@@ -185,12 +172,12 @@
         <div class="h-screen w-full grid grid-cols-1 overflow-hidden sm:grid-cols-[20%_60%_20%] lg:grid-cols-[25%_50%_25%] xl:grid-cols-[30%_40%_30%] gap-y-2 grid-rows-3 zoom-out-trigger sticky top-0"
              style="transform-style: preserve-3d">
             <div class="absolute w-full h-full flex flex-col items-start justify-center -left-[100%] text-left-in">
-                <p class="heading-font text-2xl -rotate-90">
+                <p class="heading-font text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl -rotate-90">
                     Manipal
                 </p>
             </div>
-            <div class="absolute w-full h-full flex flex-col items-end justify-center -right-[100%] text-right-in">
-                <p class="heading-font text-2xl rotate-90">Bangalore</p>
+            <div class="absolute w-full h-full flex flex-col items-end justify-center -right-[100%] text-right-in pl-4">
+                <p class="heading-font text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl rotate-90">Bangalore</p>
             </div>
             <div class="col-start-1 sm:col-start-2 row-start-1 bg-cis-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
                  style="transform-style: preserve-3d">
@@ -461,11 +448,11 @@
     </div>
     <div class="w-full h-full" slot="inside-main-card">
         <img src="{cisBackground}" alt="random course"
-             class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 showcase-picture-1">
+             class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-[0] showcase-picture-1">
         <img src="{csBackground}" alt="random course"
-             class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-2">
+             class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-[0] scale-0 showcase-picture-2">
         <img src="{iBackground}" alt="random course"
-             class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-3">
+             class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-[0] scale-0 showcase-picture-3">
     </div>
 </Showcase>
 <div class="h-[100vh] bg-on-surface flex flex-col md:flex-row items-center justify-center w-full p-5 gap-6 lg:px-32">
