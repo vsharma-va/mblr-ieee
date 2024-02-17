@@ -27,6 +27,26 @@
 
     gsap.registerPlugin(ScrollTrigger);
     onMount(() => {
+        let onLoadTimeline = gsap.timeline({});
+        onLoadTimeline.to('.center-text', {
+            opacity: 1,
+            scale: 1,
+            duration: 0.85,
+        })
+        onLoadTimeline.to('.reveal-div', {
+            top: "-320%",
+            duration: 2,
+        })
+        onLoadTimeline.to('.center-text', {
+            y: 0,
+            color: "#001f24",
+            delay: 0.75
+        }, "<");
+        onLoadTimeline.to('.center-text-containing-div', {
+            height: "fit-content",
+        }, "<")
+        onLoadTimeline.play(0);
+
         let timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '.zoom-out-trigger',
@@ -167,6 +187,9 @@
         }, "<");
     });
 </script>
+
+<!--<div class="h-screen w-full fixed bg-primary-container top-0 reveal-div z-[1] flex flex-col items-center justify-center">-->
+<!--</div>-->
 <div class="h-fit w-full">
     <div class="h-[255vh] w-full sticky top-0 p-2 sm:p-0">
         <div class="h-screen w-full grid grid-cols-1 overflow-hidden sm:grid-cols-[20%_60%_20%] lg:grid-cols-[25%_50%_25%] xl:grid-cols-[30%_40%_30%] gap-y-2 grid-rows-3 zoom-out-trigger sticky top-0"
@@ -197,11 +220,15 @@
                      class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
                 duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
             </div>
-            <div class="bg-primary-container col-start-1 sm:col-start-2 row-start-2 scale-[3.2] zoom-out-to-normal z-[2] rounded-2xl flex flex-col items-center justify-center transform-gpu group cursor-pointer overflow-hidden"
+            <div class="bg-primary-container col-start-1 sm:col-start-2 row-start-2 scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group cursor-pointer overflow-hidden"
                  style="transform-style: preserve-3d">
-                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
-                    IEEE
-                </p>
+                <div class="absolute top-0 h-screen w-full bg-primary-container reveal-div z-[2]"></div>
+                <div class="w-full h-full heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[999] relative items-center justify-center flex flex-row center-text-containing-div">
+                    <span class="center-text opacity-0 scale-0">I</span><span
+                        class="translate-y-full center-text opacity-0 scale-0">E</span><span
+                        class="center-text opacity-0 scale-0">E</span><span
+                        class="translate-y-full center-text opacity-0 scale-0">E</span>
+                </div>
                 <div class="h-[16px] w-[16px] z-[1] main-links">
                     <img src="{mouseScroll}" alt="svg of a mouse indicating scroll">
                 </div>
