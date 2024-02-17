@@ -109,11 +109,11 @@
             </div>
             <div class="w-full h-full" slot="inside-main-card">
                 <img src="{cisBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 showcase-picture-1">
+                     class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-0 showcase-picture-1">
                 <img src="{csBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-2">
+                     class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-2">
                 <img src="{iBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-300 rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-3">
+                     class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-3">
             </div>
         </Showcase>
     </div>
