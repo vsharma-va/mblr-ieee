@@ -4,7 +4,7 @@
 </script>
 
 <div class="h-[550vh] bg-on-surface w-full">
-    <div class="flex flex-col w-full h-[500px] gap-5 sticky top-[2%] lg:top-[10%] xl:top-[20%] items-center justify-center showcase-pictures-div px-[5%]">
+    <div class="flex flex-col w-full h-[500px] gap-5 sticky top-[2%] lg:top-[20%] xl:top-[20%] items-center justify-center showcase-pictures-div px-[5%]">
         <div class="flex flex-col items-start w-full md:w-[90%] lg:w-[55%] justify-center">
             <p class="heading-font text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-primary-container">{showcaseHeading}</p>
         </div>

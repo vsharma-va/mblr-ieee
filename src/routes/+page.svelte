@@ -1,19 +1,33 @@
+<!--capitalize links-->
+<!--links should be intuitive that they are clickable-->
+<!--reduce font size-->
+<!--landing page dark mode-->
+<!--padding on home page-->
+<!--add nav bar on landing page-->
+<!--ieee website action should show that it is an external website-->
+<!--snapping scroll on cards-->
+<!--our team alignment with meet the team-->
+<!--left and right margin for navbar-->
+
 <script>
     import {gsap} from "gsap/dist/gsap";
     import ScrollTrigger from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
-    import iBackground from "$lib/assets/images/iiBackground.jpg";
-    import cisBackground from "$lib/assets/images/cisBackground.png";
-    import csBackground from "$lib/assets/images/csBackground.png";
+    import iBackground from "$lib/assets/images/ieee-group.avif";
+    import cisBackground from "$lib/assets/images/cis-group.avif";
+    import csBackground from "$lib/assets/images/cs-group.avif";
     import ieeeLogo from "$lib/assets/images/ieeeLogo.png";
     import manipalLogo from "$lib/assets/images/manipalLogo.png";
     import mouseScroll from "$lib/assets/images/mouse-cursor.png";
     import {goto} from "$app/navigation";
     import Showcase from "$lib/common/Showcase.svelte";
+    import Navbar from "$lib/common/Navbar.svelte";
 
 
     let hoveredChapter;
     let hoverBackgroundImageDiv;
+    let ieeeHeadingText;
+    let navbar;
 
     function handleChapterHover(event) {
         if (event.target.classList.contains("ieee-main")) {
@@ -27,10 +41,26 @@
 
     gsap.registerPlugin(ScrollTrigger);
     onMount(() => {
-        let onLoadTimeline = gsap.timeline({});
+        let cloudTimeline = gsap.timeline({repeat: 1}, {});
+        cloudTimeline.to('.cloud-1', {
+            left: "-100%",
+            duration: 145,
+            delay: 1,
+        });
+        cloudTimeline.to('.cloud-2', {
+            left: "-100%",
+            duration: 190,
+            delay: 1,
+        }, "<")
+
+        let onLoadTimeline = gsap.timeline({
+            // onComplete: () => {
+            //     ieeeHeadingText.classList.add("mix-blend-difference")
+            // }
+        }, {});
         onLoadTimeline.to('.center-text', {
             opacity: 1,
-            scale: 1,
+            scale: 1.2,
             duration: 0.85,
         })
         onLoadTimeline.to('.reveal-div', {
@@ -39,12 +69,21 @@
         })
         onLoadTimeline.to('.center-text', {
             y: 0,
-            color: "#001f24",
-            delay: 0.75
+            color: "#ffffff",
+            scale: 1,
+            delay: 0.75,
         }, "<");
         onLoadTimeline.to('.center-text-containing-div', {
             height: "fit-content",
-        }, "<")
+        }, "<");
+        onLoadTimeline.to('.make-italic', {
+            skewX: -7,
+            duration: 1,
+        });
+        onLoadTimeline.to('.left-of-make-italic', {
+            x: -2,
+            duration: 1,
+        }, "<");
         onLoadTimeline.play(0);
 
         let timeline = gsap.timeline({
@@ -78,10 +117,14 @@
                 markers: false,
             }
         });
+        timelineAnother.to(".navbar", {
+            display: "flex",
+            opacity: 1,
+        });
         timelineAnother.to(".about-us-1", {
             y: -25,
             opacity: 0,
-        });
+        }, "<");
         timelineAnother.to(".about-us-2", {
             top: 27,
             opacity: 1,
@@ -157,33 +200,40 @@
                 }
             });
         showcasePictureTimeline.to('.showcase-picture-1', {
-            scale: 0,
+            scale: 0.75,
+            opacity: 0.75,
         });
         showcasePictureTimeline.to('.showcase-pictures-name-1', {
             opacity: 0,
-            scale: 0,
+            scale: 0.75,
         }, "<");
         showcasePictureTimeline.to('.showcase-picture-2', {
             scale: 1,
-        }, ">1");
+            opacity: 1,
+            y: 0,
+        }, "<");
         showcasePictureTimeline.to('.showcase-pictures-name-2', {
             opacity: 1,
             scale: 1,
+            y: 0,
         }, "<");
         showcasePictureTimeline.to('.showcase-picture-2', {
-            opacity: 0,
-            scale: 0,
-        }, ">1");
+            opacity: 0.75,
+            scale: 0.75,
+        }, ">");
         showcasePictureTimeline.to('.showcase-pictures-name-2', {
             opacity: 0,
-            scale: 0,
+            scale: 0.75,
         }, "<");
         showcasePictureTimeline.to('.showcase-picture-3', {
             scale: 1,
-        }, ">1");
+            opacity: 1,
+            y: 0,
+        }, "<");
         showcasePictureTimeline.to('.showcase-pictures-name-3', {
             opacity: 1,
             scale: 1,
+            y: 0,
         }, "<");
     });
 </script>
@@ -191,6 +241,9 @@
 <!--<div class="h-screen w-full fixed bg-primary-container top-0 reveal-div z-[1] flex flex-col items-center justify-center">-->
 <!--</div>-->
 <div class="h-fit w-full">
+    <div class="navbar absolute -top-0 opacity-0 w-full hidden z-[5]">
+        <Navbar/>
+    </div>
     <div class="h-[255vh] w-full sticky top-0 p-2 sm:p-0">
         <div class="h-screen w-full grid grid-cols-1 overflow-hidden sm:grid-cols-[20%_60%_20%] lg:grid-cols-[25%_50%_25%] xl:grid-cols-[30%_40%_30%] gap-y-2 grid-rows-3 zoom-out-trigger sticky top-0"
              style="transform-style: preserve-3d">
@@ -204,55 +257,59 @@
             </div>
             <div class="col-start-1 sm:col-start-2 row-start-1 bg-cis-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
                  style="transform-style: preserve-3d">
-                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-cis-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
+                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-white mix-blend-difference tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
                     IEEE CIS
                 </p>
                 <img src="{cisBackground}" alt="random course"
                      class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
-                duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
+                duration-700 rounded-2xl absolute top-0 bottom-0 z-0">
+                <div class="h-full w-full absolute top-0 image-overlay"></div>
             </div>
             <div class="col-start-1 sm:col-start-2 row-start-3 bg-cs-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
                  style="transform-style: preserve-3d">
-                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-cs-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
+                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-white mix-blend-difference tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
                     IEEE CS
                 </p>
                 <img src="{csBackground}" alt="random course"
                      class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
-                duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
+                duration-700 rounded-2xl absolute top-0 bottom-0 z-0">
+                <div class="h-full w-full absolute top-0 image-overlay"></div>
             </div>
-            <div class="bg-primary-container col-start-1 sm:col-start-2 row-start-2 scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group cursor-pointer overflow-hidden"
+            <div class="bg-surface col-start-1 sm:col-start-2 row-start-2 scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group cursor-pointer overflow-hidden"
                  style="transform-style: preserve-3d">
                 <div class="absolute top-0 h-screen w-full bg-primary-container reveal-div z-[2]"></div>
-                <div class="w-full h-full heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[999] relative items-center justify-center flex flex-row center-text-containing-div">
-                    <span class="center-text opacity-0 scale-0">I</span><span
-                        class="translate-y-full center-text opacity-0 scale-0">E</span><span
-                        class="center-text opacity-0 scale-0">E</span><span
+                <div class="w-full h-full heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[999] relative items-center justify-center flex flex-row center-text-containing-div"
+                     bind:this={ieeeHeadingText}>
+                    <span class="center-text -translate-y-[85%] opacity-0 scale-0 left-of-make-italic">I</span><span
+                        class="translate-y-full center-text opacity-0 scale-0 make-italic">E</span><span
+                        class="center-text -translate-y-[85%] opacity-0 scale-0">E</span><span
                         class="translate-y-full center-text opacity-0 scale-0">E</span>
                 </div>
                 <div class="h-[16px] w-[16px] z-[1] main-links">
                     <img src="{mouseScroll}" alt="svg of a mouse indicating scroll">
                 </div>
                 <img src="{iBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
-                duration-300 rounded-2xl absolute top-0 bottom-0 z-0">
-
+                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-700 rounded-2xl absolute top-0 bottom-0 z-0">
+                <div class="h-full w-full absolute top-0 image-overlay"></div>
+                <!--                <img src="{cloud1}" alt="" class="h-1/3 w-1/3 absolute top-0 cloud-1">-->
+                <!--                <img src="{cloud2}" alt="" class="h-1/3 w-1/3 absolute top-12 -right-16 cloud-2">-->
                 <a href="/events" class="main-links z-[1]">
-                    <p class="primary-font text-[0.45rem] sm:text-[0.75rem] tracking-wide group-hover:tracking-wider transition-all duration-300 text-on-primary-container absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
+                    <p class="primary-font text-[0.25rem] sm:text-[0.45rem] tracking-wide group-hover:tracking-wider transition-all duration-300 text-on-primary-container absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
                         events
                     </p>
                 </a>
                 <a href="/about-us" class="main-links z-[1] opacity-100">
-                    <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
+                    <p class="primary-font text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
                         our team
                     </p>
                 </a>
                 <a href="/our-team" class="main-links z-[1] opacity-100">
-                    <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
+                    <p class="primary-font text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
                         contact us
                     </p>
                 </a>
                 <a href="/our-team" class="main-links z-[1] opacity-100">
-                    <p class="primary-font text-[0.45rem] sm:text-[0.75rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
+                    <p class="primary-font text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
                         ieee website
                     </p>
                 </a>
@@ -357,7 +414,7 @@
     <!--        </div>-->
 
     <!--    </div>-->
-    <div class="flex flex-col sticky top-[25px] z-[2] h-fit w-full items-center justify-center">
+    <div class="flex flex-col sticky top-[75px] z-[2] h-fit w-full items-center justify-center">
         <div class="h-[75px] w-fit rounded-2xl isolate bg-white/10 shadow-lg flex flex-row items-center justify-between px-2">
             <div class="h-full p-4 relative">
                 <img src="{ieeeLogo}" alt="ieee logo" class="h-full logo-navbar-ieee">
@@ -390,7 +447,7 @@
         </div>
     </div>
     <div class="h-[550vh] bg-on-surface sticky top-0">
-        <div class="flex flex-col sticky top-[40%] items-center justify-center h-fit w-full">
+        <div class="flex flex-col sticky top-[37%] items-center justify-center h-fit w-full">
             <div class="w-full h-fit relative flex flex-col items-center justify-center showcase-cards-div">
                 <div class="h-[275px] w-[90%] sm:w-[75%] md:w-[63%] lg:w-[45%] xl:w-[37%] 2xl:w-[32%] relative">
                     <div class="h-full w-full absolute top-0 border-4 border-border/30 bg-on-surface rounded-2xl rotate-[9deg] items-center justify-center p-10 showcase-event-4">
@@ -458,14 +515,14 @@
                 elit. Animi minus quia repellat sed voluptate! Ab accusamus, autem blanditiis cupiditate dicta
                 dignissimos minus modi mollitia nobis optio quaerat rerum sequi velit!</p>
         </div>
-        <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-0 showcase-pictures-name-2 absolute top-0">
+        <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-[1.15] translate-y-10 showcase-pictures-name-2 absolute top-0">
             <p class="heading-font text-2xl text-primary-container 2xl:text-3xl">Event Name 2</p>
             <p class="heading-font text-surface/50 text-sm 2xl:text-lg">Lorem ipsum dolor sit amet, consectetur
                 adipisicing
                 elit. Animi minus quia repellat sed voluptate! Ab accusamus, autem blanditiis cupiditate dicta
                 dignissimos minus modi mollitia nobis optio quaerat rerum sequi velit!</p>
         </div>
-        <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-0 showcase-pictures-name-3 absolute top-0">
+        <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-[1.15] translate-y-10 showcase-pictures-name-3 absolute top-0">
             <p class="heading-font text-2xl text-primary-container 2xl:text-3xl">Event Name 3</p>
             <p class="heading-font text-surface/50 text-sm 2xl:text-lg">Lorem ipsum dolor sit amet, consectetur
                 adipisicing
@@ -477,9 +534,9 @@
         <img src="{cisBackground}" alt="random course"
              class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-[0] showcase-picture-1">
         <img src="{csBackground}" alt="random course"
-             class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-[0] scale-0 showcase-picture-2">
+             class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-[0] opacity-0 scale-[1.15] translate-y-10 showcase-picture-2">
         <img src="{iBackground}" alt="random course"
-             class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-[0] scale-0 showcase-picture-3">
+             class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-[0] opacity-0 scale-[1.15] translate-y-10 showcase-picture-3">
     </div>
 </Showcase>
 <div class="h-[100vh] bg-on-surface flex flex-col md:flex-row items-center justify-center w-full p-5 gap-6 lg:px-32">
@@ -511,3 +568,9 @@
         </p>
     </div>
 </div>
+
+<style>
+    .image-overlay {
+        background-image: linear-gradient(rgba(0, 0, 0, 0), #3d3c3c);
+    }
+</style>

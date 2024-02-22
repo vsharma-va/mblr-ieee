@@ -48,26 +48,26 @@
     }
 </script>
 
-<div class="h-screen w-full fixed top-0 z-[3] -left-[100%] transition-all duration-300 gap-1 sm:gap-2 bg-surface flex flex-row items-center justify-center"
+<div class="h-screen w-full fixed top-0 z-[5] -left-[100%] transition-all duration-300 gap-1 sm:gap-2 bg-surface flex flex-row items-center justify-center"
      bind:this={navbar}>
-    <div class="w-full h-fit flex flex-col justify-center items-center sm:items-start sm:pl-14 gap-10">
+    <div class="w-full h-fit flex flex-col justify-center items-center sm:items-start sm:pl-[5%] gap-10">
         <a href="/">
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-6xl sm:text-7xl font-bold tracking-wide text-on-surface">Home</p>
-                <div class="absolute bottom-0 h-[25px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
+                <p class="heading-font text-4xl sm:text-6xl font-bold tracking-wide text-on-surface">Home</p>
+                <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
         </a>
         <a href="/events">
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-6xl sm:text-7xl font-bold tracking-wide text-on-surface">Events</p>
-                <div class="absolute bottom-0 h-[25px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
+                <p class="heading-font text-4xl sm:text-6xl font-bold tracking-wide text-on-surface">Events</p>
+                <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
         </a>
         <a href="/about-us">
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-6xl sm:text-7xl font-bold tracking-wide text-on-surface text-center">
+                <p class="heading-font text-4xl sm:text-6xl font-bold tracking-wide text-on-surface text-center">
                     About</p>
-                <div class="absolute bottom-0 h-[25px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
+                <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
         </a>
     </div>
@@ -77,38 +77,38 @@
     </div>
 </div>
 
-<div class="h-screen w-full fixed top-0 z-[3] -right-[100%] transition-all duration-300 gap-2 bg-surface flex flex-row items-center justify-center"
+<div class="h-screen w-full fixed top-0 z-[5] -right-[100%] transition-all duration-300 gap-2 bg-surface flex flex-row items-center justify-center"
      bind:this={departmentSelection}>
     <div class="w-[2%] h-full flex flex-col justify-center items-start bg-primary-container vertical-strike-nav-menu-bg">
     </div>
     <div class="w-[2%] h-full flex flex-col justify-center items-start bg-primary-container vertical-strike-nav-menu-bg">
     </div>
-    <div class="w-full h-fit flex flex-col justify-center items-center sm:items-end sm:pr-14 gap-10">
+    <div class="w-full h-fit flex flex-col justify-center items-center sm:items-end sm:pl-[5%] gap-10">
         <a href="#ieee" on:click={toggleDepartmentSelection}>
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-6xl sm:text-7xl font-bold tracking-wide text-on-surface">IEEE</p>
-                <div class="absolute bottom-0 h-[25px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
+                <p class="heading-font text-4xl sm:text-5xl font-bold tracking-wide text-on-surface">IEEE</p>
+                <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
         </a>
         <a href="#ieee-cs" on:click={toggleDepartmentSelection}>
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-6xl sm:text-7xl font-bold tracking-wide text-on-surface text-center">IEEE
+                <p class="heading-font text-4xl sm:text-5xl font-bold tracking-wide text-on-surface text-center">IEEE
                     CS</p>
-                <div class="absolute bottom-0 h-[25px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
+                <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
         </a>
         <a href="#ieee-cis" on:click={toggleDepartmentSelection}>
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-6xl sm:text-7xl font-bold tracking-wide text-on-surface text-center">IEEE
+                <p class="heading-font text-4xl sm:text-5xl font-bold tracking-wide text-on-surface text-center">IEEE
                     CIS</p>
-                <div class="absolute bottom-0 h-[25px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
+                <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
         </a>
     </div>
 </div>
 
-<div class="h-fit w-full flex flex-row justify-between items-center fixed top-0 z-[3] backdrop-blur-xl bg-on-surface nav-bg-color">
-    <div class="w-full h-full px-[10px] flex flex-col py-2 items-start justify-start"
+<div class="h-fit w-full flex flex-row justify-between items-center fixed top-0 z-[5] backdrop-blur-xl bg-on-surface nav-bg-color">
+    <div class="w-full h-full pl-[5%] flex flex-col py-2 items-start justify-start"
          on:click={toggleNavBar}>
         <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@
             />
         </svg>
     </div>
-    <div class="w-full h-full flex flex-col items-end justify-start py-2 pr-[10px]">
+    <div class="w-full h-full flex flex-col items-end justify-start py-2 pr-[5%]">
         <div class="w-fit h-fit bg-primary-container department-button-color py-2 px-4 rounded-2xl cursor-pointer"
              on:click={toggleDepartmentSelection}>
             <p class="text-sm heading-font tracking-wide text-on-primary-container department-button-text-color">

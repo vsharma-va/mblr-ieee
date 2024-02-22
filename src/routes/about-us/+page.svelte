@@ -1,11 +1,11 @@
 <script>
-    import cisBackground from "$lib/assets/images/cisBackground.png";
+    import cisBackground from "$lib/assets/images/cis-group.avif";
     import {gsap} from "gsap/dist/gsap";
     import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
     import Showcase from "$lib/common/Showcase.svelte";
-    import csBackground from "$lib/assets/images/csBackground.png";
-    import iBackground from "$lib/assets/images/iiBackground.jpg";
+    import csBackground from "$lib/assets/images/cs-group.avif";
+    import iBackground from "$lib/assets/images/ieee-group.avif";
     import Navbar from "$lib/common/Navbar.svelte";
 
     gsap.registerPlugin(ScrollTrigger);
@@ -39,33 +39,40 @@
             }
         });
         showcasePictureTimeline.to('.showcase-picture-1', {
-            scale: 0,
+            scale: 0.75,
+            opacity: 0.75,
         });
         showcasePictureTimeline.to('.showcase-pictures-name-1', {
             opacity: 0,
-            scale: 0,
+            scale: 0.75,
         }, "<");
         showcasePictureTimeline.to('.showcase-picture-2', {
             scale: 1,
-        }, ">1");
+            opacity: 1,
+            y: 0,
+        }, "<");
         showcasePictureTimeline.to('.showcase-pictures-name-2', {
             opacity: 1,
             scale: 1,
+            y: 0,
         }, "<");
         showcasePictureTimeline.to('.showcase-picture-2', {
-            opacity: 0,
-            scale: 0,
-        }, ">1");
+            opacity: 0.75,
+            scale: 0.75,
+        }, ">");
         showcasePictureTimeline.to('.showcase-pictures-name-2', {
             opacity: 0,
-            scale: 0,
+            scale: 0.75,
         }, "<");
         showcasePictureTimeline.to('.showcase-picture-3', {
             scale: 1,
-        }, ">1");
+            opacity: 1,
+            y: 0,
+        }, "<");
         showcasePictureTimeline.to('.showcase-pictures-name-3', {
             opacity: 1,
             scale: 1,
+            y: 0,
         }, "<");
     });
 </script>
@@ -98,11 +105,11 @@
                     <p class="heading-font text-2xl 2xl:text-3xl text-primary-container">Name Placeholder</p>
                     <p class="heading-font text-surface/50 text-sm 2xl:text-lg">Position Placeholder</p>
                 </div>
-                <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-0 showcase-pictures-name-2 absolute top-0">
+                <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-[1.15] translate-y-10 showcase-pictures-name-2 absolute top-0">
                     <p class="heading-font text-2xl text-primary-container 2xl:text-3xl">Name Placeholder</p>
                     <p class="heading-font text-surface/50 text-sm 2xl:text-lg">Position Placeholder</p>
                 </div>
-                <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-0 showcase-pictures-name-3 absolute top-0">
+                <div class="flex flex-col w-full h-full px-4 lg:px-10 justify-center gap-5 opacity-0 scale-[1.15] translate-y-10 showcase-pictures-name-3 absolute top-0">
                     <p class="heading-font text-2xl text-primary-container 2xl:text-3xl">Name Placeholder</p>
                     <p class="heading-font text-surface/50 text-sm 2xl:text-lg">Position Placeholder</p>
                 </div>
@@ -111,9 +118,9 @@
                 <img src="{cisBackground}" alt="random course"
                      class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-0 showcase-picture-1">
                 <img src="{csBackground}" alt="random course"
-                     class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-2">
+                     class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-0 scale-[1.15] translate-y-10 opacity-0 showcase-picture-2">
                 <img src="{iBackground}" alt="random course"
-                     class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-0 scale-0 showcase-picture-3">
+                     class="h-full w-full object-cover rounded-2xl absolute top-0 bottom-0 z-0 scale-[1.15] translate-y-10 opacity-0 showcase-picture-3">
             </div>
         </Showcase>
     </div>
