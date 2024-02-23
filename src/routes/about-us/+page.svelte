@@ -1,11 +1,11 @@
 <script>
-    import cisBackground from "$lib/assets/images/cis-group.avif";
+    import cisBackground from "$lib/assets/images/cis-group.webp";
     import {gsap} from "gsap/dist/gsap";
     import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
     import Showcase from "$lib/common/Showcase.svelte";
-    import csBackground from "$lib/assets/images/cs-group.avif";
-    import iBackground from "$lib/assets/images/ieee-group.avif";
+    import csBackground from "$lib/assets/images/cs-group.webp";
+    import iBackground from "$lib/assets/images/ieee-group.webp";
     import Navbar from "$lib/common/Navbar.svelte";
 
     gsap.registerPlugin(ScrollTrigger);

@@ -13,9 +13,9 @@
     import {gsap} from "gsap/dist/gsap";
     import ScrollTrigger from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
-    import iBackground from "$lib/assets/images/ieee-group.avif";
-    import cisBackground from "$lib/assets/images/cis-group.avif";
-    import csBackground from "$lib/assets/images/cs-group.avif";
+    import iBackground from "$lib/assets/images/ieee-group.webp";
+    import cisBackground from "$lib/assets/images/cis-group.webp";
+    import csBackground from "$lib/assets/images/cs-group.webp";
     import ieeeLogo from "$lib/assets/images/ieeeLogo.png";
     import manipalLogo from "$lib/assets/images/manipalLogo.png";
     import mouseScroll from "$lib/assets/images/mouse-cursor.png";
@@ -58,20 +58,32 @@
             //     ieeeHeadingText.classList.add("mix-blend-difference")
             // }
         }, {});
-        onLoadTimeline.to('.center-text', {
+        onLoadTimeline.to('.center-text-top', {
             opacity: 1,
+            y: "-85%",
             scale: 1.2,
-            duration: 0.85,
+            duration: 0.65,
         })
+        onLoadTimeline.to('.center-text-bottom', {
+            opacity: 1,
+            y: "100%",
+            scale: 1.2,
+            duration: 0.65,
+        }, "<");
         onLoadTimeline.to('.reveal-div', {
             top: "-320%",
             duration: 2,
         })
-        onLoadTimeline.to('.center-text', {
+        onLoadTimeline.to('.center-text-top', {
             y: 0,
             color: "#ffffff",
             scale: 1,
             delay: 0.75,
+        }, "<");
+        onLoadTimeline.to('.center-text-bottom', {
+            y: 0,
+            color: "#ffffff",
+            scale: 1,
         }, "<");
         onLoadTimeline.to('.center-text-containing-div', {
             height: "fit-content",
@@ -257,9 +269,13 @@
             </div>
             <div class="col-start-1 sm:col-start-2 row-start-1 bg-cis-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
                  style="transform-style: preserve-3d">
-                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-white mix-blend-difference tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
-                    IEEE CIS
-                </p>
+                <div class="heading-font text-3xl md:text-6xl lg:text-8xl text-white tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1] relative items-center justify-center flex flex-row">
+                    <span class="left-of-make-italic">I</span><span
+                        class="make-italic">E</span><span>E</span><span>E</span>
+                    <span class="left-of-make-italic"> </span><span>C</span><span
+                        class="left-of-make-italic">I</span><span
+                        class="make-italic">S</span>
+                </div>
                 <img src="{cisBackground}" alt="random course"
                      class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
                 duration-700 rounded-2xl absolute top-0 bottom-0 z-0">
@@ -267,9 +283,12 @@
             </div>
             <div class="col-start-1 sm:col-start-2 row-start-3 bg-cs-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
                  style="transform-style: preserve-3d">
-                <p class="heading-font text-3xl md:text-6xl lg:text-8xl text-white mix-blend-difference tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1]">
-                    IEEE CS
-                </p>
+                <div class="w-fit heading-font text-3xl md:text-6xl lg:text-8xl text-white tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1] relative items-center justify-center flex flex-row">
+                    <span class="left-of-make-italic">I</span><span
+                        class="make-italic">E</span><span>E</span><span>E</span>
+                    <span class="left-of-make-italic"> </span><span class="left-of-make-italic">C</span><span
+                        class="make-italic">S</span>
+                </div>
                 <img src="{csBackground}" alt="random course"
                      class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
                 duration-700 rounded-2xl absolute top-0 bottom-0 z-0">
@@ -280,10 +299,10 @@
                 <div class="absolute top-0 h-screen w-full bg-primary-container reveal-div z-[2]"></div>
                 <div class="w-full h-full heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[999] relative items-center justify-center flex flex-row center-text-containing-div"
                      bind:this={ieeeHeadingText}>
-                    <span class="center-text -translate-y-[85%] opacity-0 scale-0 left-of-make-italic">I</span><span
-                        class="translate-y-full center-text opacity-0 scale-0 make-italic">E</span><span
-                        class="center-text -translate-y-[85%] opacity-0 scale-0">E</span><span
-                        class="translate-y-full center-text opacity-0 scale-0">E</span>
+                    <span class="center-text-top -translate-y-[115%] opacity-0 scale-[1.45] left-of-make-italic">I</span><span
+                        class="translate-y-[140%] center-text-bottom opacity-0 scale-[1.45] make-italic">E</span><span
+                        class="center-text-top -translate-y-[115%] opacity-0 scale-[1.45]">E</span><span
+                        class="translate-y-[140%] center-text-bottom opacity-0 scale-[1.45]">E</span>
                 </div>
                 <div class="h-[16px] w-[16px] z-[1] main-links">
                     <img src="{mouseScroll}" alt="svg of a mouse indicating scroll">
@@ -294,24 +313,30 @@
                 <!--                <img src="{cloud1}" alt="" class="h-1/3 w-1/3 absolute top-0 cloud-1">-->
                 <!--                <img src="{cloud2}" alt="" class="h-1/3 w-1/3 absolute top-12 -right-16 cloud-2">-->
                 <a href="/events" class="main-links z-[1]">
-                    <p class="primary-font text-[0.25rem] sm:text-[0.45rem] tracking-wide group-hover:tracking-wider transition-all duration-300 text-on-primary-container absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
+                    <div class="primary-font bg-surface px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] tracking-wide group-hover:tracking-wider transition-all duration-300 text-on-primary-container absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1] hover:underline">
                         events
-                    </p>
+                    </div>
                 </a>
                 <a href="/about-us" class="main-links z-[1] opacity-100">
-                    <p class="primary-font text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
+                    <div class="primary-font bg-surface px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1] hover:underline">
                         our team
-                    </p>
+                    </div>
                 </a>
                 <a href="/our-team" class="main-links z-[1] opacity-100">
-                    <p class="primary-font text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1]">
+                    <div class="primary-font bg-surface px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1] hover:underline">
                         contact us
-                    </p>
+                    </div>
                 </a>
-                <a href="/our-team" class="main-links z-[1] opacity-100">
-                    <p class="primary-font text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1]">
+                <a href="/our-team" class="main-links z-[1] opacity-100" target="_blank">
+                    <div class="primary-font bg-surface px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1] hover:underline group/underline flex flex-row">
                         ieee website
-                    </p>
+                        <svg width="8" height="8" viewBox="0 0 24 24" class="pl-[2px] hidden group-hover/underline:flex"
+                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M20 14a1 1 0 0 0-1 1v3.077c0 .459-.022.57-.082.684a.363.363 0 0 1-.157.157c-.113.06-.225.082-.684.082H5.923c-.459 0-.571-.022-.684-.082a.363.363 0 0 1-.157-.157c-.06-.113-.082-.225-.082-.684L4.999 5.5a.5.5 0 0 1 .5-.5l3.5.005a1 1 0 1 0 .002-2L5.501 3a2.5 2.5 0 0 0-2.502 2.5v12.577c0 .76.083 1.185.32 1.627.223.419.558.753.977.977.442.237.866.319 1.627.319h12.154c.76 0 1.185-.082 1.627-.319.419-.224.753-.558.977-.977.237-.442.319-.866.319-1.627V15a1 1 0 0 0-1-1zm-2-9.055v-.291l-.39.09A10 10 0 0 1 15.36 5H14a1 1 0 1 1 0-2l5.5.003a1.5 1.5 0 0 1 1.5 1.5V10a1 1 0 1 1-2 0V8.639c0-.757.086-1.511.256-2.249l.09-.39h-.295a10 10 0 0 1-1.411 1.775l-5.933 5.932a1 1 0 0 1-1.414-1.414l5.944-5.944A10 10 0 0 1 18 4.945z"
+                                  fill="currentColor"/>
+                        </svg>
+                    </div>
                 </a>
             </div>
         </div>
