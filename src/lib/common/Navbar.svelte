@@ -83,23 +83,23 @@
     </div>
     <div class="w-[2%] h-full flex flex-col justify-center items-start bg-primary-container vertical-strike-nav-menu-bg">
     </div>
-    <div class="w-full h-fit flex flex-col justify-center items-center sm:items-end sm:pl-[5%] gap-10">
+    <div class="w-full h-fit flex flex-col justify-center items-center sm:items-end sm:pr-[5%] gap-10">
         <a href="#ieee" on:click={toggleDepartmentSelection}>
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-4xl sm:text-5xl font-bold tracking-wide text-on-surface">IEEE</p>
+                <p class="heading-font text-4xl sm:text-6xl font-bold tracking-wide text-on-surface">IEEE</p>
                 <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
         </a>
         <a href="#ieee-cs" on:click={toggleDepartmentSelection}>
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-4xl sm:text-5xl font-bold tracking-wide text-on-surface text-center">IEEE
+                <p class="heading-font text-4xl sm:text-6xl font-bold tracking-wide text-on-surface text-center">IEEE
                     CS</p>
                 <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
         </a>
         <a href="#ieee-cis" on:click={toggleDepartmentSelection}>
             <div class="h-fit w-fit relative group cursor-pointer">
-                <p class="heading-font text-4xl sm:text-5xl font-bold tracking-wide text-on-surface text-center">IEEE
+                <p class="heading-font text-4xl sm:text-6xl font-bold tracking-wide text-on-surface text-center">IEEE
                     CIS</p>
                 <div class="absolute bottom-0 h-[18px] w-0 bg-primary-container/90 group-hover:w-full transition-all duration-300 nav-link-underline-bg"></div>
             </div>
@@ -107,7 +107,7 @@
     </div>
 </div>
 
-<div class="h-fit w-full flex flex-row justify-between items-center fixed top-0 z-[5] backdrop-blur-xl bg-on-surface nav-bg-color">
+<div class="h-fit w-full flex flex-row justify-between items-center fixed top-0 z-[5] backdrop-blur-xl bg-on-surface nav-bg-color pt-4">
     <div class="w-full h-full pl-[5%] flex flex-col py-2 items-start justify-start"
          on:click={toggleNavBar}>
         <svg
