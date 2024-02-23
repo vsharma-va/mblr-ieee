@@ -1,24 +1,23 @@
 <script>
     import "../app.css";
     import Lenis from '@studio-freight/lenis';
-    import ScrollTrigger from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
 
     onMount(() => {
-        if (ScrollTrigger.isTouch !== 1) {
-            const lenis = new Lenis()
+        // if (ScrollTrigger.isTouch !== 1) {
+        const lenis = new Lenis()
 
-            lenis.on('scroll', (e) => {
-                console.log(e)
-            })
+        lenis.on('scroll', (e) => {
+            console.log(e)
+        })
 
-            function raf(time) {
-                lenis.raf(time)
-                requestAnimationFrame(raf)
-            }
-
+        function raf(time) {
+            lenis.raf(time)
             requestAnimationFrame(raf)
         }
+
+        requestAnimationFrame(raf)
+        // }
     })
 </script>
 
