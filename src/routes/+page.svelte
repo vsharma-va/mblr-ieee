@@ -13,9 +13,9 @@
     import {gsap} from "gsap/dist/gsap";
     import ScrollTrigger from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
-    import iBackground from "$lib/assets/images/ieee-ab-background.webp";
-    import cisBackground from "$lib/assets/images/cis-ab-background.webp";
-    import csBackground from "$lib/assets/images/cs-group.webp";
+    import iBackground from "$lib/assets/images/iiBackground.jpg";
+    import cisBackground from "$lib/assets/images/cisBackground.png";
+    import csBackground from "$lib/assets/images/csBackground.png";
     import ieeeLogo from "$lib/assets/images/ieeeLogo.png";
     import manipalLogo from "$lib/assets/images/manipalLogo.png";
     import mouseScroll from "$lib/assets/images/mouse-cursor.png";
@@ -43,71 +43,6 @@
 
     gsap.registerPlugin(ScrollTrigger);
     onMount(() => {
-        VANTA.TOPOLOGY({
-            el: ".fog-background-ieee",
-            mouseControls: false,
-            touchControls: false,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x96f0ff,
-            backgroundColor: 0xfafdfd,
-            p5
-        })
-        VANTA.TOPOLOGY({
-            el: ".fog-background-cis",
-            mouseControls: false,
-            touchControls: false,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0xffdad6,
-            backgroundColor: 0xfffbff,
-            p5
-        })
-        VANTA.TOPOLOGY({
-            el: ".fog-background-cs",
-            mouseControls: false,
-            touchControls: false,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0xf1e66b,
-            backgroundColor: 0xfffbff,
-            p5
-        })
-        // VANTA.FOG({
-        //     el: ".fog-background-ieee",
-        //     mouseControls: true,
-        //     touchControls: true,
-        //     gyroControls: false,
-        //     minHeight: 200.00,
-        //     minWidth: 200.00,
-        //     highlightColor: "#96f0ff",
-        //     midtoneColor: "#006874",
-        //     lowlightColor: "rgb(190,190,190)",
-        //     baseColor: "#fafdfd",
-        // })
-
-        // VANTA.FOG({
-        //     el: ".fog-background-cis",
-        //     mouseControls: true,
-        //     touchControls: true,
-        //     gyroControls: false,
-        //     minHeight: 200.00,
-        //     minWidth: 200.00,
-        //     highlightColor: "#ffdad6",
-        //     midtoneColor: "#b02d2c",
-        //     lowlightColor: "rgb(190,190,190)",
-        //     baseColor: "#fafdfd",
-        // })
-
         let cloudTimeline = gsap.timeline({repeat: 1}, {});
         cloudTimeline.to('.cloud-1', {
             left: "-100%",
@@ -121,9 +56,9 @@
         }, "<")
 
         let onLoadTimeline = gsap.timeline({
-            // onComplete: () => {
-            //     ieeeHeadingText.classList.add("mix-blend-difference")
-            // }
+            onComplete: () => {
+                strokeTimeline.play(0);
+            }
         }, {});
         onLoadTimeline.to('.center-text-top', {
             opacity: 1,
@@ -164,6 +99,29 @@
             duration: 1,
         }, "<");
         onLoadTimeline.play(0);
+
+        let strokeTimeline = gsap.timeline({
+            // onComplete: () => {
+            //     setTimeout(() => {
+            //         strokeTimeline.reverse();
+            //     }, 2000)
+            // },
+            // onReverseComplete: () => {
+            //     setTimeout(() => {
+            //         strokeTimeline.play(0);
+            //     }, 2000)
+            // }
+        })
+        strokeTimeline.to('.stroke-center', {
+            height: "100%",
+        });
+        strokeTimeline.to('.stroke-left', {
+            height: "100%",
+        });
+        strokeTimeline.to('.stroke-right', {
+            height: "100%",
+        });
+        strokeTimeline.pause(0);
 
         let timeline = gsap.timeline({
             scrollTrigger: {
@@ -345,6 +303,10 @@
                         class="left-of-make-italic">I</span><span
                         class="make-italic">S</span>
                 </div>
+                <div class="h-full w-full absolute top-0 bg-gradient-to-br from-cis-primary-container to-cis-surface"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-cis-primary-container to-cis-surface stroke-center absolute top-0"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-cis-surface to-cis-primary-container stroke-left absolute left-[35%] top-0"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-cis-surface to-cis-primary-container stroke-right absolute right-[35%] top-0"></div>
                 <!--                <img src="{cisBackground}" alt="random course"-->
                 <!--                     class="h-full w-full object-cover inline-block display-image rounded-2xl absolute top-0 bottom-0 z-0">-->
                 <div class="h-full w-full absolute top-0 fog-background-cis"></div>
@@ -357,12 +319,16 @@
                     <span class="left-of-make-italic"> </span><span class="left-of-make-italic">C</span><span
                         class="make-italic">S</span>
                 </div>
+                <div class="h-full w-full absolute top-0 bg-gradient-to-br from-cs-primary-container to-cs-surface"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-cs-primary-container to-cs-surface stroke-center absolute top-0"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-cs-surface to-cs-primary-container stroke-left absolute left-[35%] top-0"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-cs-surface to-cs-primary-container stroke-right absolute right-[35%] top-0"></div>
                 <div class="h-full w-full absolute top-0 fog-background-cs"></div>
             </div>
-            <div class="bg-surface col-start-1 sm:col-start-2 row-start-2 scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group cursor-pointer overflow-hidden"
+            <div class="bg-surface col-start-1 sm:col-start-2 row-start-2 scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group cursor-pointer overflow-hidden border-1 border-primary-container"
                  style="transform-style: preserve-3d">
                 <div class="absolute top-0 h-screen w-full bg-primary-container reveal-div z-[2]"></div>
-                <div class="w-full h-full heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] z-[999] relative items-center justify-center flex flex-row center-text-containing-div"
+                <div class="w-fit h-full heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] z-[999] relative items-center justify-center flex flex-row center-text-containing-div"
                      bind:this={ieeeHeadingText}>
                     <span class="center-text-top -translate-y-[115%] opacity-0 scale-[1.45] left-of-make-italic">I</span><span
                         class="translate-y-[140%] center-text-bottom opacity-0 scale-[1.45] make-italic">E</span><span
@@ -372,9 +338,12 @@
                 <div class="h-[16px] w-[16px] z-[1] main-links">
                     <img src="{mouseScroll}" alt="svg of a mouse indicating scroll">
                 </div>
-                <!--                <img src="{iBackground}" alt="random course"-->
-                <!--                     class="h-full w-full object-cover inline-block display-image rounded-2xl absolute top-0 bottom-0 z-0">-->
-                <div class="h-full w-full absolute top-0 fog-background-ieee"></div>
+                <div class="h-full w-full absolute top-0 bg-gradient-to-br from-primary-container to-surface"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-primary-container to-surface stroke-center absolute top-0"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-surface to-primary-container stroke-left absolute left-[35%] top-0"></div>
+                <div class="h-0 w-[5%] bg-gradient-to-b from-surface to-primary-container stroke-right absolute right-[35%] top-0"></div>
+<!--                                <img src="{iBackground}" alt="random course"-->
+<!--                                     class="h-full w-full object-cover inline-block display-image rounded-2xl absolute top-0 bottom-0 z-0">-->
                 <!--                <img src="{cloud1}" alt="" class="h-1/3 w-1/3 absolute top-0 cloud-1">-->
                 <!--                <img src="{cloud2}" alt="" class="h-1/3 w-1/3 absolute top-12 -right-16 cloud-2">-->
                 <a href="/events" class="main-links z-[1]">
@@ -504,7 +473,7 @@
     <!--        </div>-->
 
     <!--    </div>-->
-    <div class="flex flex-col sticky top-[75px] z-[2] h-fit w-full items-center justify-center">
+    <div class="flex flex-col sticky top-[95px] z-[2] h-fit w-full items-center justify-center">
         <div class="h-[75px] w-fit rounded-2xl isolate bg-white/10 shadow-lg flex flex-row items-center justify-between px-2">
             <div class="h-full p-4 relative">
                 <img src="{ieeeLogo}" alt="ieee logo" class="h-full logo-navbar-ieee">
