@@ -380,7 +380,7 @@
         <div class="row-start-2 w-full h-full bg-primary-container reveal-content-2"></div>
         <div class="row-start-3 w-full h-full bg-primary-container reveal-content-3"></div>
         <div class="row-start-4 w-full h-full bg-primary-container reveal-content-4"></div>
-        <p class="heading-font reveal-content-text text-9xl text-on-primary-container font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <p class="heading-font text-center reveal-content-text text-9xl text-on-primary-container font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             IEEE
         </p>
     </div>
@@ -450,7 +450,7 @@
             <div class="row-start-2 w-full h-full bg-cs-primary-container reveal-cs-content-2"></div>
             <div class="row-start-3 w-full h-full bg-cs-primary-container reveal-cs-content-3"></div>
             <div class="row-start-4 w-full h-full bg-cs-primary-container reveal-cs-content-4"></div>
-            <p class="heading-font absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 reveal-cs-content-text text-9xl text-cs-on-primary-container font-bold">
+            <p class="heading-font text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 reveal-cs-content-text text-9xl text-cs-on-primary-container font-bold">
                 IEEE CS
             </p>
         </div>
@@ -523,7 +523,7 @@
             <div class="row-start-2 w-full h-full bg-cis-primary-container reveal-cis-content-2"></div>
             <div class="row-start-3 w-full h-full bg-cis-primary-container reveal-cis-content-3"></div>
             <div class="row-start-4 w-full h-full bg-cis-primary-container reveal-cis-content-4"></div>
-            <p class="heading-font absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 reveal-cis-content-text text-9xl text-cis-on-primary-container font-bold">
+            <p class="heading-font text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 reveal-cis-content-text text-9xl text-cis-on-primary-container font-bold">
                 IEEE CIS
             </p>
         </div>
