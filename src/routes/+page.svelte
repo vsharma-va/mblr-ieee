@@ -13,8 +13,8 @@
     import {gsap} from "gsap/dist/gsap";
     import ScrollTrigger from "gsap/dist/ScrollTrigger";
     import {onMount} from "svelte";
-    import iBackground from "$lib/assets/images/ieee-group.webp";
-    import cisBackground from "$lib/assets/images/cis-group.webp";
+    import iBackground from "$lib/assets/images/ieee-ab-background.webp";
+    import cisBackground from "$lib/assets/images/cis-ab-background.webp";
     import csBackground from "$lib/assets/images/cs-group.webp";
     import ieeeLogo from "$lib/assets/images/ieeeLogo.png";
     import manipalLogo from "$lib/assets/images/manipalLogo.png";
@@ -28,6 +28,7 @@
     let hoverBackgroundImageDiv;
     let ieeeHeadingText;
     let navbar;
+    let ieeeTopologyColor = "0x96f0ff";
 
     function handleChapterHover(event) {
         if (event.target.classList.contains("ieee-main")) {
@@ -39,8 +40,74 @@
         }
     }
 
+
     gsap.registerPlugin(ScrollTrigger);
     onMount(() => {
+        VANTA.TOPOLOGY({
+            el: ".fog-background-ieee",
+            mouseControls: false,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x96f0ff,
+            backgroundColor: 0xfafdfd,
+            p5
+        })
+        VANTA.TOPOLOGY({
+            el: ".fog-background-cis",
+            mouseControls: false,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xffdad6,
+            backgroundColor: 0xfffbff,
+            p5
+        })
+        VANTA.TOPOLOGY({
+            el: ".fog-background-cs",
+            mouseControls: false,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xf1e66b,
+            backgroundColor: 0xfffbff,
+            p5
+        })
+        // VANTA.FOG({
+        //     el: ".fog-background-ieee",
+        //     mouseControls: true,
+        //     touchControls: true,
+        //     gyroControls: false,
+        //     minHeight: 200.00,
+        //     minWidth: 200.00,
+        //     highlightColor: "#96f0ff",
+        //     midtoneColor: "#006874",
+        //     lowlightColor: "rgb(190,190,190)",
+        //     baseColor: "#fafdfd",
+        // })
+
+        // VANTA.FOG({
+        //     el: ".fog-background-cis",
+        //     mouseControls: true,
+        //     touchControls: true,
+        //     gyroControls: false,
+        //     minHeight: 200.00,
+        //     minWidth: 200.00,
+        //     highlightColor: "#ffdad6",
+        //     midtoneColor: "#b02d2c",
+        //     lowlightColor: "rgb(190,190,190)",
+        //     baseColor: "#fafdfd",
+        // })
+
         let cloudTimeline = gsap.timeline({repeat: 1}, {});
         cloudTimeline.to('.cloud-1', {
             left: "-100%",
@@ -76,13 +143,13 @@
         })
         onLoadTimeline.to('.center-text-top', {
             y: 0,
-            color: "#ffffff",
+            color: "#001f24",
             scale: 1,
             delay: 0.75,
         }, "<");
         onLoadTimeline.to('.center-text-bottom', {
             y: 0,
-            color: "#ffffff",
+            color: "#001f24",
             scale: 1,
         }, "<");
         onLoadTimeline.to('.center-text-containing-div', {
@@ -269,35 +336,33 @@
             </div>
             <div class="col-start-1 sm:col-start-2 row-start-1 bg-cis-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
                  style="transform-style: preserve-3d">
-                <div class="heading-font text-3xl md:text-6xl lg:text-8xl text-white tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1] relative items-center justify-center flex flex-row">
-                    <span class="left-of-make-italic">I</span><span
-                        class="make-italic">E</span><span>E</span><span>E</span>
+                <div class="heading-font text-3xl md:text-6xl lg:text-8xl text-cis-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] z-[1] relative items-center justify-center flex flex-row"
+                >
+                    <span class="left-of-make-italic">I</span>
+                    <span
+                            class="make-italic">E</span><span>E</span><span>E</span>
                     <span class="left-of-make-italic"> </span><span>C</span><span
                         class="left-of-make-italic">I</span><span
                         class="make-italic">S</span>
                 </div>
-                <img src="{cisBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
-                duration-700 rounded-2xl absolute top-0 bottom-0 z-0">
-                <div class="h-full w-full absolute top-0 image-overlay"></div>
+                <!--                <img src="{cisBackground}" alt="random course"-->
+                <!--                     class="h-full w-full object-cover inline-block display-image rounded-2xl absolute top-0 bottom-0 z-0">-->
+                <div class="h-full w-full absolute top-0 fog-background-cis"></div>
             </div>
             <div class="col-start-1 sm:col-start-2 row-start-3 bg-cs-primary-container scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group overflow-hidden"
                  style="transform-style: preserve-3d">
-                <div class="w-fit heading-font text-3xl md:text-6xl lg:text-8xl text-white tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[1] relative items-center justify-center flex flex-row">
+                <div class="w-fit heading-font text-3xl md:text-6xl lg:text-8xl text-cs-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] z-[1] relative items-center justify-center flex flex-row">
                     <span class="left-of-make-italic">I</span><span
                         class="make-italic">E</span><span>E</span><span>E</span>
                     <span class="left-of-make-italic"> </span><span class="left-of-make-italic">C</span><span
                         class="make-italic">S</span>
                 </div>
-                <img src="{csBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all
-                duration-700 rounded-2xl absolute top-0 bottom-0 z-0">
-                <div class="h-full w-full absolute top-0 image-overlay"></div>
+                <div class="h-full w-full absolute top-0 fog-background-cs"></div>
             </div>
             <div class="bg-surface col-start-1 sm:col-start-2 row-start-2 scale-[3.2] zoom-out-to-normal rounded-2xl flex flex-col items-center justify-center transform-gpu group cursor-pointer overflow-hidden"
                  style="transform-style: preserve-3d">
                 <div class="absolute top-0 h-screen w-full bg-primary-container reveal-div z-[2]"></div>
-                <div class="w-full h-full heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider group-hover:drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] z-[999] relative items-center justify-center flex flex-row center-text-containing-div"
+                <div class="w-full h-full heading-font text-3xl md:text-6xl lg:text-8xl text-on-primary-container tracking-wide transition-all duration-300 group-hover:tracking-wider drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)] z-[999] relative items-center justify-center flex flex-row center-text-containing-div"
                      bind:this={ieeeHeadingText}>
                     <span class="center-text-top -translate-y-[115%] opacity-0 scale-[1.45] left-of-make-italic">I</span><span
                         class="translate-y-[140%] center-text-bottom opacity-0 scale-[1.45] make-italic">E</span><span
@@ -307,28 +372,28 @@
                 <div class="h-[16px] w-[16px] z-[1] main-links">
                     <img src="{mouseScroll}" alt="svg of a mouse indicating scroll">
                 </div>
-                <img src="{iBackground}" alt="random course"
-                     class="h-full w-full object-cover inline-block display-image group-hover:scale-110 transition-all duration-700 rounded-2xl absolute top-0 bottom-0 z-0">
-                <div class="h-full w-full absolute top-0 image-overlay"></div>
+                <!--                <img src="{iBackground}" alt="random course"-->
+                <!--                     class="h-full w-full object-cover inline-block display-image rounded-2xl absolute top-0 bottom-0 z-0">-->
+                <div class="h-full w-full absolute top-0 fog-background-ieee"></div>
                 <!--                <img src="{cloud1}" alt="" class="h-1/3 w-1/3 absolute top-0 cloud-1">-->
                 <!--                <img src="{cloud2}" alt="" class="h-1/3 w-1/3 absolute top-12 -right-16 cloud-2">-->
                 <a href="/events" class="main-links z-[1]">
-                    <div class="primary-font bg-surface px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] tracking-wide group-hover:tracking-wider transition-all duration-300 text-on-primary-container absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1] hover:underline">
+                    <div class="primary-font text-on-primary-container bg-primary-container px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1] hover:underline">
                         events
                     </div>
                 </a>
                 <a href="/about-us" class="main-links z-[1] opacity-100">
-                    <div class="primary-font bg-surface px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1] hover:underline">
+                    <div class="primary-font text-on-primary-container bg-primary-container px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] tracking-wide group-hover:tracking-wider transition-all duration-300 absolute top-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1] hover:underline">
                         our team
                     </div>
                 </a>
                 <a href="/our-team" class="main-links z-[1] opacity-100">
-                    <div class="primary-font bg-surface px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1] hover:underline">
+                    <div class="primary-font text-on-primary-container bg-primary-container px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 right-[38%] sm:right-[28%] md:right-[26%] lg:right-[22%] xl:right-[14%] z-[1] hover:underline">
                         contact us
                     </div>
                 </a>
                 <a href="/our-team" class="main-links z-[1] opacity-100" target="_blank">
-                    <div class="primary-font bg-surface px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] text-on-primary-container tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1] hover:underline group/underline flex flex-row">
+                    <div class="primary-font text-on-primary-container bg-primary-container px-2 py-1 rounded-2xl text-[0.25rem] sm:text-[0.45rem] tracking-wide group-hover:tracking-wider transition-all duration-300 absolute bottom-4 left-[38%] sm:left-[28%] md:left-[26%] lg:left-[22%] xl:left-[14%] z-[1] hover:underline group/underline flex flex-row">
                         ieee website
                         <svg width="8" height="8" viewBox="0 0 24 24" class="pl-[2px] hidden group-hover/underline:flex"
                              fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -597,5 +662,10 @@
 <style>
     .image-overlay {
         background-image: linear-gradient(rgba(0, 0, 0, 0), #3d3c3c);
+    }
+
+    .image-text-cis {
+        background-image: url("../lib/assets/images/cis-ab-background.webp");
+        background-clip: text;
     }
 </style>

@@ -20,6 +20,20 @@
     font-family: "Satoshi";
 }
 
+.noise-gradient {
+    background-image: linear-gradient(
+            175deg,
+            hsl(186deg 100% 23%) 0%,
+            hsl(188deg 100% 61%) 12%,
+            hsl(185deg 81% 86%) 88%,
+            hsl(180deg 43% 99%) 100%
+    );
+    /*-ms-filter: contrast(180%) brightness(1500%);*/
+    /*filter: contrast(180%) brightness(1500%);*/
+    background-size: 300% auto;
+    animation: textShine 5s ease-in-out infinite alternate;
+}
+
 .gradient-text {
     background-image: linear-gradient(
             144deg,

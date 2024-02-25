@@ -107,7 +107,7 @@
     </div>
 </div>
 
-<div class="h-fit w-full flex flex-row justify-between items-center fixed top-0 z-[5] backdrop-blur-xl bg-on-surface nav-bg-color pt-4">
+<div class="h-fit w-full flex flex-row justify-between items-center fixed top-0 z-[5] backdrop-blur-xl bg-on-surface nav-bg-color pt-4 pb-4">
     <div class="w-full h-full pl-[5%] flex flex-col py-2 items-start justify-start"
          on:click={toggleNavBar}>
         <svg
