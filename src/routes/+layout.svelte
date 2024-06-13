@@ -2,6 +2,7 @@
     import "../app.css";
     import Lenis from '@studio-freight/lenis';
     import {onMount} from "svelte";
+    import NewNavbar from "$lib/common/NewNavbar.svelte";
 
     onMount(() => {
         // if (ScrollTrigger.isTouch !== 1) {
@@ -21,4 +22,5 @@
     })
 </script>
 
+<NewNavbar />
 <slot/>
