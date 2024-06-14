@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Murmure';
+    src: url(./lib/assets/fonts/le-murmure.ttf);
+}
+
+@font-face {
+    font-family: "MeowScript";
+    src: url(./lib/assets/fonts/MeowScript-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(./libs/assets/fonts/Poppins-Regular.ttf);
+}
+
+.primary-font{
+    font-family: "Murmure";
+}
+.brand-font{
+    font-family: "MeowScript";
+}
+.regular-font{
+    font-family: "Poppins";
+}
