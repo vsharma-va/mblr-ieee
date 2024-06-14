@@ -134,7 +134,7 @@
     }
 </script>
 
-<Loader />
+<!--<Loader />-->
 <div class="h-fit min-h-screen w-full bg-surface">
     <div class="h-screen bg-primary-container w-full relative">
         <div class="h-screen w-full flex flex-col items-center justify-center scale-[0.85] bg-surface landing-page-container relative p-2 overflow-hidden pb-24 pt-12 md:hidden">
