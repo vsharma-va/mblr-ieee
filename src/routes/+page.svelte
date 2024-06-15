@@ -205,14 +205,14 @@
                 <div class="p-7 h-full bg-on-surface rounded-l-xl w-fit flex flex-row items-center justify-center relative overflow-hidden -rotate-1 origin-bottom-right">
                     <div class="h-full w-fit relative flex flex-col items-center justify-between">
                         <div class="h-fit w-fit flex flex-col items-center justify-center">
-                            <p class="text-2xl lg:text-3xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center"
-                               style="writing-mode: sideways-lr">
+                            <p class="text-2xl lg:text-3xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center rotate-180"
+                               style="writing-mode: vertical-rl">
                                 ADMIT X1
                             </p>
                         </div>
                         <div class="h-fit w-fit flex items-center justify-center">
-                            <p class="text-2xl lg:text-3xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center"
-                               style="writing-mode: sideways-lr">
+                            <p class="text-2xl lg:text-3xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center rotate-180"
+                               style="writing-mode: vertical-rl">
                                 YOU HAVE BEEN <span class="brand-font text-2xl">Invited!</span>
                             </p>
                         </div>
