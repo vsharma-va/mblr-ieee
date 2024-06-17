@@ -2,11 +2,13 @@
     import {onMount} from "svelte";
     import {gsap} from "gsap/dist/gsap";
     import {TextPlugin} from 'gsap/dist/TextPlugin';
+    import {ScrollTrigger} from 'gsap/dist/ScrollTrigger';
     import RSVP from "$lib/home/RSVP.svelte";
-    import Loader from "$lib/common/Loader.svelte";
+    import CanvasRibbon from "$lib/common/CanvasRibbon.svelte";
 
     let currentTime;
     let mobileRSVP;
+    let ieeeAboutPhoto;
     let currentLoadingPercentage = 0;
     let cycleBranchName = gsap.timeline({
         onComplete: () => {
@@ -26,6 +28,7 @@
     let percentageInterval;
     onMount(() => {
         gsap.registerPlugin(TextPlugin);
+        gsap.registerPlugin(ScrollTrigger);
 
         onLoadTimeline.to('.main-navbar', {
             scale: 1,
@@ -120,6 +123,105 @@
         percentageInterval = setInterval(() => {
             currentLoadingPercentage++
         }, 15);
+
+        // scroll animations
+        let aboutScrollTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: '.ieee-about-container',
+                start: 'top -20%',
+                end: 'top -300%',
+                scrub: true,
+                markers: true,
+            }
+        });
+        aboutScrollTimeline.to('.ieee-main-image', {
+            bottom: '50%',
+            left: '50%',
+            xPercent: -50,
+            yPercent: 50,
+            scale: 1,
+            opacity: 1,
+            rotation: -12,
+        });
+        aboutScrollTimeline.to('.ieee-about-background', {
+            backgroundColor: '#33004DFF',
+        });
+        aboutScrollTimeline.to('.ieee-main-image', {
+            bottom: '140%',
+            left: '140%',
+            rotation: -48,
+            opacity: 0.75,
+            scale: 0.75,
+        }, '<');
+        aboutScrollTimeline.to('.ieee-cs-image', {
+            bottom: '50%',
+            left: '50%',
+            xPercent: -50,
+            yPercent: 50,
+            scale: 1,
+            opacity: 1,
+            rotation: -12,
+        }, '<');
+
+
+        /*
+            IF YOU WANNA GO BACK TO HORIZONTAL SCROLLING
+         */
+        // let aboutScrollTimeline = gsap.timeline({
+        //     scrollTrigger: {
+        //         trigger: '.ieee-about-container',
+        //         start: 'top -40%',
+        //         end: 'top -100%',
+        //         scrub: true,
+        //         markers: true,
+        //     }
+        // });
+        // aboutScrollTimeline.to('.about-horizontal-scroll', {
+        //     xPercent: -100,
+        // });
+        // let iaboutScrollTimeline = gsap.timeline({
+        //     scrollTrigger: {
+        //         trigger: '.ieee-about-container',
+        //         start: 'top top',
+        //         end: 'top -10%',
+        //         scrub: false,
+        //         toggleActions: 'play none none reverse',
+        //         markers: true,
+        //     }
+        // });
+        // iaboutScrollTimeline.to('.ieee-main-about-photo', {
+        //     bottom: '50%',
+        //     left: '50%',
+        //     rotation: -12,
+        //     xPercent: -50,
+        //     yPercent: 50,
+        //     opacity: 1,
+        //     scale: 1,
+        //     ease: 'sine.in',
+        //     duration: 0.75,
+        // });
+        //
+        // let csAboutScrollTimeline = gsap.timeline({
+        //     scrollTrigger: {
+        //         trigger: '.ieee-about-container',
+        //         start: 'top -40%',
+        //         end: 'top -50%',
+        //         scrub: false,
+        //         toggleActions: 'play none none reverse',
+        //         markers: true,
+        //     }
+        // });
+        // csAboutScrollTimeline.to('.ieee-cs-about-photo', {
+        //     bottom: '50%',
+        //     left: '50%',
+        //     rotation: -12,
+        //     xPercent: -50,
+        //     yPercent: 50,
+        //     opacity: 1,
+        //     scale: 1,
+        //     ease: 'sine.in',
+        //     duration: 0.75,
+        // });
     })
 
     function updateCurrentTime() {
@@ -136,16 +238,19 @@
 
 <!--<Loader />-->
 <div class="h-fit min-h-screen w-full bg-surface">
-    <div class="h-screen bg-primary-container w-full relative">
-        <div class="h-screen w-full flex flex-col items-center justify-center scale-[0.85] bg-surface landing-page-container relative p-2 overflow-hidden pb-24 pt-12 md:hidden">
-            <div class="flex flex-col absolute -left-[42%] top-0 w-fit h-fit gap-5">
-                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>
-                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>
+    <div class="h-screen bg-primary-container w-full sticky top-0">
+        <div class="h-screen w-full flex flex-col items-center justify-center scale-[0.85] bg-surface landing-page-container p-2 overflow-hidden pb-24 pt-12 md:hidden">
+            <div class="h-full absolute top-0 w-full">
+                <CanvasRibbon/>
             </div>
-            <div class="flex flex-col absolute -right-[42%] bottom-0 w-fit h-fit gap-2 -rotate-45">
-                <div class="w-[100vw] h-5 bg-primary-container"></div>
-                <div class="w-[100vw] h-5 bg-primary-container"></div>
-            </div>
+            <!--            <div class="flex flex-col absolute -left-[42%] top-0 w-fit h-fit gap-5">-->
+            <!--                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>-->
+            <!--                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>-->
+            <!--            </div>-->
+            <!--            <div class="flex flex-col absolute -right-[42%] bottom-0 w-fit h-fit gap-2 -rotate-45">-->
+            <!--                <div class="w-[100vw] h-5 bg-primary-container"></div>-->
+            <!--                <div class="w-[100vw] h-5 bg-primary-container"></div>-->
+            <!--            </div>-->
             <div class="w-[80%] sm:w-[45%] h-fit py-2 rounded-t-xl flex flex-col items-center justify-center bg-on-surface overflow-hidden -rotate-3 origin-bottom-left">
                 <div class="w-full h-fit p-2 flex flex-row items-center justify-center relative">
                     <p class="text-2xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center">
@@ -193,15 +298,18 @@
             </div>
         </div>
         <div class="h-screen w-full hidden md:visible md:flex flex-col items-center justify-center scale-[0.85] bg-surface landing-page-container relative p-2 overflow-hidden pb-28 pt-4 px-4">
-            <div class="flex flex-col absolute -left-[42%] top-0 w-fit h-fit gap-5">
-                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>
-                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>
+            <div class="h-full absolute top-0 w-full">
+                <CanvasRibbon/>
             </div>
-            <div class="flex flex-col absolute -right-[42%] bottom-0 w-fit h-fit gap-2 -rotate-45">
-                <div class="w-[100vw] h-5 bg-primary-container"></div>
-                <div class="w-[100vw] h-5 bg-primary-container"></div>
-            </div>
-            <div class="min-h-fit w-[85%] min-[900px]:w-[70%] lg:w-[65%] xl:w-[55%] 2xl:w-[47%] flex flex-row items-center justify-start z-[2]">
+            <!--            <div class="flex flex-col absolute -left-[42%] top-0 w-fit h-fit gap-5">-->
+            <!--                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>-->
+            <!--                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>-->
+            <!--            </div>-->
+            <!--            <div class="flex flex-col absolute -right-[42%] bottom-0 w-fit h-fit gap-2 -rotate-45">-->
+            <!--                <div class="w-[100vw] h-5 bg-primary-container"></div>-->
+            <!--                <div class="w-[100vw] h-5 bg-primary-container"></div>-->
+            <!--            </div>-->
+            <div class="min-h-fit w-[85%] min-[900px]:w-[70%] lg:w-[65%] xl:w-[55%] 2xl:w-[47%] flex flex-row items-center justify-start z-[5]">
                 <div class="p-7 h-full bg-on-surface rounded-l-xl w-fit flex flex-row items-center justify-center relative overflow-hidden -rotate-1 origin-bottom-right">
                     <div class="h-full w-fit relative flex flex-col items-center justify-between">
                         <div class="h-fit w-fit flex flex-col items-center justify-center">
@@ -221,7 +329,7 @@
                     <div class="h-6 w-5 absolute -right-[0.65rem] -bottom-[0.75rem] bg-surface rounded-full"></div>
                     <div class="absolute right-0 bg-surface w-[0.5px] h-full border-[0.5px] border-surface border-dashed"></div>
                 </div>
-                <div class="w-full bg-on-surface rounded-r-xl relative flex flex-col items-center justify-center pb-4 px-4">
+                <div class="w-full bg-on-surface rounded-r-xl relative flex flex-col items-center justify-center pb-4 px-4 pt-4">
                     <div class="h-6 w-5 absolute -left-[0.65rem] -top-[0.75rem] bg-surface rounded-full"></div>
                     <div class="h-6 w-5 absolute -left-[0.65rem] -bottom-[0.75rem] bg-surface rounded-full"></div>
                     <p class="text-2xl lg:text-3xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center">
@@ -258,4 +366,29 @@
             <p class="primary-font text-2xl text-black">{currentLoadingPercentage}%</p>
         </div>
     </div>
+    <div class="w-full h-[600vh] flex flex-col items-center justify-start bg-surface ieee-about-container">
+        <div class="h-screen w-full sticky top-0 px-14 bg-surface overflow-hidden">
+            <div class="h-[88vh] w-full flex items-center justify-start">
+                <div class="h-[65%] w-full flex-shrink-0 bg-primary-container rounded-xl p-3 flex flex-col items-center justify-center ieee-about-background relative">
+                    <div class="absolute -bottom-[100%] -left-[100%] h-full w-full bg-tertiary rounded-xl rotate-12 opacity-75 scale-75 ieee-main-image">
+                    </div>
+                    <div class="absolute -bottom-[120%] -left-[120%] h-full w-full bg-tertiary-container rounded-xl rotate-12 opacity-75 scale-75 ieee-cs-image">
+                    </div>
+                    <div class="w-full h-full bg-on-surface rounded-xl z-[2]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    IF YOU WANNA GO BACK TO HORIZONTAL SCROLLING-->
+    <!--    <div class="w-screen h-[400vh] flex flex-col items-center justify-start bg-surface ieee-about-container">-->
+    <!--        <div class="h-screen w-full sticky top-0 px-14 overflow-x-scroll bg-surface">-->
+    <!--            <div class="h-[88vh] w-full flex flex-row items-center justify-start gap-12 about-horizontal-scroll">-->
+    <!--                <div class="h-[65%] w-full flex-shrink-0 bg-primary-container rounded-xl relative p-3 flex flex-col">-->
+    <!--                    <div class="bg-tertiary absolute -bottom-[100%] -left-[100%] rounded-xl h-full w-full scale-[0.25] opacity-[0.5] rotate-12 ieee-main-about-photo"></div>-->
+    <!--                    <div class="bg-on-surface rounded-xl h-full w-full z-[2]"></div>-->
+    <!--                </div>-->
+    <!--                <div class="h-[65%] w-full flex-shrink-0 bg-tertiary-container rounded-xl"></div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </div>
