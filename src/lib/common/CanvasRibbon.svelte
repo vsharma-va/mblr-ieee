@@ -1,6 +1,8 @@
 <script>
     import {onMount} from "svelte";
 
+    export let desktop;
+
     onMount(() => {
         window.requestAnimFrame = (function () {
             return window.requestAnimationFrame ||
@@ -13,8 +15,13 @@
                 };
         })();
 
-        var c = document.getElementById('canv'),
-            $ = c.getContext('2d'),
+        var c;
+        if(desktop) {
+            c = document.getElementById('canvas-desktop')
+        } else {
+            c = document.getElementById('canvas-mobile');
+        }
+        var $ = c.getContext('2d'),
             w = c.width = window.innerWidth,
             h = c.height = window.innerHeight,
             arr = [],
@@ -56,18 +63,18 @@
 
         var pretty = function () {
             if (stopAnimation) return;
-            u -= .2;
-            var now = Date.now();
+            // u -= .2;
+            // var now = Date.now();
 
-            // Filter out rays older than 3 seconds and add new ones
-            arr = arr.filter(function (b) {
-                if (now - b.createdAt < 3000) {
-                    return true;
-                } else {
-                    set(); // Add a new ray to replace the old one
-                    return false;
-                }
-            });
+            // // Filter out rays older than 3 seconds and add new ones
+            // arr = arr.filter(function (b) {
+            //     if (now - b.createdAt < 3000) {
+            //         return true;
+            //     } else {
+            //         set(); // Add a new ray to replace the old one
+            //         return false;
+            //     }
+            // });
 
             // Clear the canvas for the next frame
             // $.clearRect(0, 0, w, h);
@@ -97,8 +104,12 @@
         pretty();
         setTimeout(function() {
             stopAnimation = true;
-        }, 5000);  // Stop the animation after 5 seconds
+        }, 2000);  // Stop the animation after 5 seconds
     })
 </script>
 
-<canvas id='canv' class="z-[1]"></canvas>
+{#if desktop}
+    <canvas id='canvas-desktop' class="z-[1] h-full w-full"></canvas>
+{:else}
+    <canvas id='canvas-mobile' class="z-[1] h-full w-full"></canvas>
+{/if}
