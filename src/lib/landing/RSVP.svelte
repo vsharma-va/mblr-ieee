@@ -53,6 +53,6 @@
                     S509.502,87.794,504.969,83.262z"/>
             </g>
             </svg>
-        <p class="text-2xl primary-font text-on-primary-container">EHM I AM SOLD! BUT SURE.</p>
+        <p class="text-2xl primary-font text-on-primary-container">Ehm I am sold! But Sure.</p>
     </div>
 </div>

@@ -21,7 +21,8 @@ export default {
                 "on-secondary-container": "#acd7f5",
                 "tertiary-container": "#d28cf6",
                 "on-tertiary-container": "#33004d",
-                "surface": "#0e1418",
+                "surface": "#0a0a0a",
+                "dim-surface": "#242424",
                 "on-surface": "#dee3e9",
             }
         },

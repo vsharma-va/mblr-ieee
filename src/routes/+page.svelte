@@ -1,55 +1,49 @@
 <script>
-	import AboutSliderSingle from '$lib/common/landing/AboutSliderSingle.svelte';
-    import { onMount } from "svelte";
-    import { gsap } from "gsap/dist/gsap";
-    import { TextPlugin } from "gsap/dist/TextPlugin";
-    import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-    import RSVP from "$lib/home/RSVP.svelte";
-    import CanvasRibbon from "$lib/common/CanvasRibbon.svelte";
+    import {onMount} from "svelte";
+    import {gsap} from "gsap/dist/gsap";
+    import DynamicCard from "$lib/landing/DynamicCard.svelte";
+    import Loader from "$lib/common/Loader.svelte";
 
+    let userDiscardName = '';
+    let userActualName = '';
     let currentTime;
-    let mobileRSVP;
-    let currentLoadingPercentage = 0;
-    let cycleBranchName = gsap.timeline({
-        onComplete: () => {
-            setTimeout(() => {
-                cycleBranchName.reverse();
-            }, 5000);
-        },
-        onReverseComplete: () => {
-            cycleBranchName.play(0);
-        },
-    });
-    let onLoadTimeline = gsap.timeline({
-        onComplete: () => {
-            cycleBranchName.play(0);
-        },
-    });
-    let percentageInterval;
-    onMount(() => {
-        gsap.registerPlugin(TextPlugin);
-        gsap.registerPlugin(ScrollTrigger);
+    let onLoadTimeline;
 
+    onMount(() => {
+        onLoadTimeline = gsap.timeline({
+            onComplete: () => {
+                userActualName = 'STRANGER';
+            }
+        })
+
+        onLoadTimeline.to('.main-heading-container', {
+            x: 0,
+            duration: 1.5,
+            ease: 'power4.inOut',
+        });
+        onLoadTimeline.to('.main-heading-support', {
+            scale: 1,
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power4.inOut',
+        });
+        onLoadTimeline.to('.type-username', {
+            text: 'STRANGER',
+            duration: 1,
+        });
+        onLoadTimeline.to('.dynamic-common', {
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power4.inOut',
+        }, '<');
         onLoadTimeline.to(".main-navbar", {
             scale: 1,
             ease: "power4.inOut",
             duration: 0.75,
-        });
-        onLoadTimeline.to(
-            ".landing-page-container",
-            {
-                scale: 1,
-                ease: "power4.inOut",
-            },
-            "<",
-        );
-        onLoadTimeline.to(
-            ".landing-progress-indicator",
-            {
-                display: "none",
-            },
-            "<",
-        );
+        }, '<');
         onLoadTimeline.to(
             ".navbar-closed-display",
             {
@@ -68,374 +62,118 @@
             },
             "<0.1",
         );
-        for (let i = 0; i < 7; i++) {
-            onLoadTimeline.to(
-                `.landing-branch-letter-${i + 1}`,
-                {
-                    y: 0,
-                    ease: "power4.inOut",
-                    duration: 0.75,
-                },
-                "<",
-            );
-            onLoadTimeline.to(
-                `.landing-society-letter-${i + 1}`,
-                {
-                    y: 0,
-                    ease: "power4.inOut",
-                    duration: 0.75,
-                },
-                "<",
-            );
-        }
-        if (mobileRSVP) {
-            onLoadTimeline.to(
-                ".mobile-rsvp",
-                {
-                    scale: 1,
-                    opacity: 1,
-                    display: "flex",
-                    duration: 0.5,
-                    ease: "power4.inOut",
-                },
-                "<0.1",
-            );
-            onLoadTimeline.to(".mobile-rsvp-stamp", {
-                opacity: 1,
-                scale: 1,
-                ease: "power4.inOut",
-                duration: 0.75,
-            });
-            onLoadTimeline.to(
-                ".mobile-rsvp",
-                {
-                    rotate: "12deg",
-                    duration: 0.75,
-                    ease: "bounce.out",
-                },
-                ">",
-            );
-        }
-
-        cycleBranchName.to(".landing-branch-name", {
-            text: "IEEE",
-            duration: 0.75,
-        });
-        cycleBranchName.to(".landing-branch-name", {
-            text: "I",
-            duration: 0.75,
-            delay: 5,
-        });
-        cycleBranchName.to(".landing-branch-name", {
-            text: "IEEE CIS",
-            duration: 0.75,
-        });
-        cycleBranchName.to(".landing-branch-name", {
-            text: "I",
-            duration: 0.75,
-            delay: 5,
-        });
-        cycleBranchName.to(".landing-branch-name", {
-            text: "IEEE CS",
-            duration: 0.75,
-        });
-        cycleBranchName.to(".landing-branch-name", {
-            text: "I",
-            duration: 0.75,
-            delay: 5,
-        });
-        cycleBranchName.to(".landing-branch-name", {
-            text: "IEEE WIE",
-            duration: 0.75,
-        });
-        cycleBranchName.pause(0);
-
-        onLoadTimeline.pause(0);
-        setInterval(updateCurrentTime, 1000);
-        percentageInterval = setInterval(() => {
-            currentLoadingPercentage++;
-        }, 15);
-
-        // scroll animations
+        onLoadTimeline.pause();
+        setInterval(() => {
+            let date = new Date();
+            const options = {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true // Use 24-hour time format
+            };
+            currentTime = new Intl.DateTimeFormat('en-US', options).format(date);
+        }, 1000);
     });
 
-    function updateCurrentTime() {
-        let d = new Date();
-        currentTime = d.toLocaleTimeString();
-    }
-
     $: reactiveTime = currentTime;
-    $: if (currentLoadingPercentage === 100) {
-        clearInterval(percentageInterval);
-        onLoadTimeline.play(0);
-    }
 </script>
 
-<!--<Loader />-->
+<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
 <div class="h-fit min-h-screen w-full bg-surface">
-    <div class="h-screen bg-primary-container w-full sticky top-0">
-        <div
-            class="h-screen w-full flex flex-col items-center justify-center scale-[0.85] bg-surface landing-page-container p-2 overflow-hidden pb-24 pt-12 md:hidden"
-        >
-            <div class="h-full w-full absolute top-0">
-                <CanvasRibbon desktop={false} />
-            </div>
-            <!--            <div class="flex flex-col absolute -left-[42%] top-0 w-fit h-fit gap-5">-->
-            <!--                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>-->
-            <!--                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>-->
-            <!--            </div>-->
-            <!--            <div class="flex flex-col absolute -right-[42%] bottom-0 w-fit h-fit gap-2 -rotate-45">-->
-            <!--                <div class="w-[100vw] h-5 bg-primary-container"></div>-->
-            <!--                <div class="w-[100vw] h-5 bg-primary-container"></div>-->
-            <!--            </div>-->
-            <div
-                class="w-[80%] sm:w-[45%] h-fit py-2 rounded-t-xl flex flex-col items-center justify-center bg-on-surface overflow-hidden -rotate-3 origin-bottom-left"
-            >
-                <div
-                    class="w-full h-fit p-2 flex flex-row items-center justify-center relative"
-                >
-                    <p
-                        class="text-2xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center"
-                    >
-                        CONNECTING <span class="brand-font text-2xl">Ideas</span
-                        >, CREATING
-                        <span class="brand-font text-2xl">Futures</span>
-                    </p>
-                    <div
-                        class="h-6 w-5 absolute -bottom-[0.25rem] -right-[0.35rem] rounded-full bg-surface z-[2]"
-                    ></div>
-                    <div
-                        class="h-6 w-5 absolute -bottom-[0.25rem] -left-[0.35rem] rounded-full bg-surface z-[2]"
-                    ></div>
-                    <hr
-                        class="bg-transparent h-1 w-full absolute -bottom-[0.3rem]"
-                        style="border-style: none none dotted; border: 2px #0e1418 dashed"
-                    />
-                </div>
-            </div>
-            <div
-                class="w-[78%] sm:w-[45%] h-screen max-h-[500px] py-2 rounded-b-xl flex flex-col bg-on-surface z-[3]"
-            >
-                <div
-                    class="w-full h-full relative flex flex-col items-center justify-center"
-                >
-                    <div
-                        class="h-6 w-5 absolute -top-[0.95rem] -right-[0.75rem] rounded-full bg-surface z-[3]"
-                    ></div>
-                    <div
-                        class="h-6 w-5 absolute -top-[0.95rem] -left-[0.75rem] rounded-full bg-surface z-[3]"
-                    ></div>
-                    <div
-                        class="h-full w-full flex flex-col items-center justify-center gap-1 px-4"
-                    >
-                        <p
-                            class="text-2xl text-center primary-font text-surface"
-                        >
-                            YOU HAVE BEEN <span class="brand-font"
-                                >Invited!</span
-                            >
-                        </p>
-                        <div
-                            class="text-8xl font-bold primary-font flex flex-row text-primary-container text-center h-fit w-fit overflow-hidden landing-branch-name"
-                        >
-                            <span
-                                class="landing-branch-letter-1 translate-y-[100px]"
-                                >I</span
-                            ><span
-                                class="landing-branch-letter-2 translate-y-[500px]"
-                                >E</span
-                            ><span
-                                class="landing-branch-letter-3 translate-y-[900px]"
-                                >E</span
-                            ><span
-                                class="landing-branch-letter-4 translate-y-[1300px]"
-                                >E</span
-                            >
-                        </div>
-                        <div
-                            class="text-8xl font-bold primary-font text-primary-container -mt-4 text-center flex flex-col"
-                        >
-                            <div
-                                class="w-fit h-fit flex flex-row overflow-hidden"
-                            >
-                                <span
-                                    class="landing-society-letter-1 translate-y-[100px]"
-                                    >S</span
-                                ><span
-                                    class="landing-society-letter-2 translate-y-[400px]"
-                                    >O</span
-                                ><span
-                                    class="landing-society-letter-3 translate-y-[500px]"
-                                    >C</span
-                                ><span
-                                    class="landing-society-letter-4 translate-y-[900px]"
-                                    >I</span
-                                ><span
-                                    class="landing-society-letter-5 translate-y-[1300px]"
-                                    >E</span
-                                ><span
-                                    class="landing-society-letter-6 translate-y-[1700px]"
-                                    >T</span
-                                ><span
-                                    class="landing-society-letter-7 translate-y-[2100px]"
-                                    >Y</span
-                                >
-                            </div>
-                            <div
-                                class="h-fit w-[105%] bg-tertiary-container text-on-tertiary-container -rotate-3 origin-bottom-left py-1 px-4 flex items-center justify-center landing-student-ribbon"
-                            >
-                                <p class="text-3xl font-bold primary-font">
-                                    STUDENT BRANCH
-                                </p>
-                            </div>
-                        </div>
-                        <RSVP bind:this={mobileRSVP} />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div
-            class="h-screen w-full invisible md:visible md:flex flex-col items-center justify-center scale-[0.85] bg-surface landing-page-container relative p-2 overflow-hidden pb-28 pt-4 px-4"
-        >
-            <div class="h-full absolute top-0 w-full">
-                <CanvasRibbon desktop={true} />
-            </div>
-            <!--            <div class="flex flex-col absolute -left-[42%] top-0 w-fit h-fit gap-5">-->
-            <!--                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>-->
-            <!--                <div class="w-[100vw] -rotate-45 h-5 bg-primary-container"></div>-->
-            <!--            </div>-->
-            <!--            <div class="flex flex-col absolute -right-[42%] bottom-0 w-fit h-fit gap-2 -rotate-45">-->
-            <!--                <div class="w-[100vw] h-5 bg-primary-container"></div>-->
-            <!--                <div class="w-[100vw] h-5 bg-primary-container"></div>-->
-            <!--            </div>-->
-            <div
-                class="min-h-fit w-[85%] min-[900px]:w-[70%] lg:w-[65%] xl:w-[55%] 2xl:w-[47%] flex flex-row items-center justify-start z-[5]"
-            >
-                <div
-                    class="p-7 h-full bg-on-surface rounded-l-xl w-fit flex flex-row items-center justify-center relative overflow-hidden -rotate-1 origin-bottom-right"
-                >
-                    <div
-                        class="h-full w-fit relative flex flex-col items-center justify-between"
-                    >
-                        <div
-                            class="h-fit w-fit flex flex-col items-center justify-center"
-                        >
-                            <p
-                                class="text-2xl lg:text-3xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center rotate-180"
-                                style="writing-mode: vertical-rl"
-                            >
-                                ADMIT X1
-                            </p>
-                        </div>
-                        <div
-                            class="h-fit w-fit flex items-center justify-center"
-                        >
-                            <p
-                                class="text-2xl lg:text-3xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center rotate-180"
-                                style="writing-mode: vertical-rl"
-                            >
-                                YOU HAVE BEEN <span class="brand-font text-2xl"
-                                    >Invited!</span
-                                >
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="h-6 w-5 absolute -right-[0.65rem] -top-[0.75rem] bg-surface rounded-full"
-                    ></div>
-                    <div
-                        class="h-6 w-5 absolute -right-[0.65rem] -bottom-[0.75rem] bg-surface rounded-full"
-                    ></div>
-                    <div
-                        class="absolute right-0 bg-surface w-[0.5px] h-full border-[0.5px] border-surface border-dashed"
-                    ></div>
-                </div>
-                <div
-                    class="w-full bg-on-surface rounded-r-xl relative flex flex-col items-center justify-center pb-4 px-4 pt-4"
-                >
-                    <div
-                        class="h-6 w-5 absolute -left-[0.65rem] -top-[0.75rem] bg-surface rounded-full"
-                    ></div>
-                    <div
-                        class="h-6 w-5 absolute -left-[0.65rem] -bottom-[0.75rem] bg-surface rounded-full"
-                    ></div>
-                    <p
-                        class="text-2xl lg:text-3xl primary-font text-surface capitalize text-center flex flex-row items-center justify-center"
-                    >
-                        CONNECTING <span class="brand-font text-2xl">Ideas</span
-                        >, CREATING
-                        <span class="brand-font text-2xl">Futures</span>
-                    </p>
-                    <div
-                        class="text-[6.5rem] lg:text-9xl font-bold primary-font flex flex-row text-primary-container text-center h-fit w-fit overflow-hidden landing-branch-name leading-[1]"
-                    >
-                        <span
-                            class="landing-branch-letter-1 translate-y-[100px]"
-                            >I</span
-                        ><span
-                            class="landing-branch-letter-2 translate-y-[500px]"
-                            >E</span
-                        ><span
-                            class="landing-branch-letter-3 translate-y-[900px]"
-                            >E</span
-                        ><span
-                            class="landing-branch-letter-4 translate-y-[1300px]"
-                            >E</span
-                        >
-                    </div>
-                    <div
-                        class="text-[6.5rem] lg:text-9xl font-bold primary-font text-primary-container -mt-4 text-center flex flex-row overflow-hidden leading-[1]"
-                    >
-                        <span
-                            class="landing-society-letter-1 translate-y-[100px]"
-                            >S</span
-                        ><span
-                            class="landing-society-letter-2 translate-y-[400px]"
-                            >O</span
-                        ><span
-                            class="landing-society-letter-3 translate-y-[500px]"
-                            >C</span
-                        ><span
-                            class="landing-society-letter-4 translate-y-[900px]"
-                            >I</span
-                        ><span
-                            class="landing-society-letter-5 translate-y-[1300px]"
-                            >E</span
-                        ><span
-                            class="landing-society-letter-6 translate-y-[1700px]"
-                            >T</span
-                        ><span
-                            class="landing-society-letter-7 translate-y-[2100px]"
-                            >Y</span
-                        >
-                    </div>
-                    <div
-                        class="h-fit w-[65%] bg-tertiary-container text-on-tertiary-container -rotate-3 origin-bottom-left py-1 px-4 flex items-center justify-center landing-student-ribbon"
-                    >
-                        <p class="text-3xl lg:text-4xl font-bold primary-font">
-                            STUDENT BRANCH
-                        </p>
-                    </div>
-                    <div class="absolute top-[88%] left-1/2 -translate-x-1/2">
-                        <RSVP bind:this={mobileRSVP} />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="absolute bottom-3 left-3 landing-progress-indicator">
-            <p class="primary-font text-2xl text-black">
-                {currentLoadingPercentage}%
+    <div class="h-screen w-full flex flex-col items-center justify-center pb-12 overflow-hidden">
+        <div class="absolute top-2 left-2 w-fit h-fit">
+            <p class="text-sm text-on-surface primary-font">
+                <span class="text-on-surface/50">WELCOME,</span> <span class="type-username">{userActualName}</span>
             </p>
         </div>
-    </div>
+        <DynamicCard subset="name" position="top-14 left-3" heading="NAME" zLevel="2">
+            <input type="text" placeholder="...your name" class="text-on-surface/50 font-bold primary-font px-3"
+                   style="background: none; border: none; outline: none; opacity: 0.5;"
+                   bind:value={userDiscardName}>
+            <button class="h-fit w-fit p-2 bg-surface border-[1px] border-on-surface/50 text-on-surface primary-font font-bold text-sm rounded-xl"
+                    on:click={() => {
+                        userActualName = userDiscardName.toUpperCase();
+                    }}>
+                CONFIRM
+            </button>
+        </DynamicCard>
+        <DynamicCard subset="time" position="top-32 right-3" heading="DATE & TIME" zLevel="3">
+            <div class="w-fit h-full self-start flex flex-col justify-between">
+                <div class="w-fit h-full self-start flex flex-col">
+                    <p class="primary-font text-sm text-on-surface/50 self-start tracking-widest">
+                        <span class="text-primary/80">BENGALURU</span>, IN
+                    </p>
+                    <p class="primary-font font-bold text-lg text-on-surface self-start tracking-widest">
+                        {#if reactiveTime}
+                            {reactiveTime.split(', ')[2]}
+                        {/if}
+                    </p>
+                </div>
+                <p class="primary-font font-bold text-sm text-on-surface/50 self-start tracking-widest">
+                    {#if reactiveTime}
+                        {reactiveTime.split(',').slice(0, 2)}
+                    {/if}
+                </p>
+            </div>
+        </DynamicCard>
+        <DynamicCard subset="socials" position="bottom-32 left-3" heading="SOCIALS" zlevel="4">
+            <div class="w-full h-full flex flex-col items-start justify-center gap-2">
+                <a href="https://google.com" class="primary-font text-sm text-on-surface/50">
+                    INSTAGRAM
+                </a>
+                <a href="https://google.com" class="primary-font text-sm text-on-surface/50">
+                    TWITTER
+                </a>
+                <a href="https://google.com" class="primary-font text-sm text-on-surface/50">
+                    YOUTUBE
+                </a>
+            </div>
+        </DynamicCard>
+        <DynamicCard subset="announcements" position="bottom-[12rem] right-3" heading="ANNOUNCEMENTS" zlevel="5">
+            <div class="w-full h-full flex flex-col items-start justify-between">
+                <div class="w-fit h-fit">
+                    <p class="text-sm text-on-surface/50 primary-font text-wrap">
+                        CHECK BACK AGAIN FOR EXCITING ANNOUNCEMENTS!
+                    </p>
 
-    <div class="h-[400vh] w-full flex flex-col items-start justify-center">
-        <div
-            class="h-screen w-full bg-surface sticky top-0 flex flex-row items-center justify-start overflow-x-scroll gap-[100vw]"
-        >
-            <AboutSliderSingle heading="IEEE"/>
-            <AboutSliderSingle heading="IEEE CS"/>
+                </div>
+                <div class="w-fit h-fit">
+                    <p class="text-sm text-primary/80 primary-font">
+                        GET IN TOUCH
+                    </p>
+                    <p class="text-lg text-on-surface primary-font leading-[1]">
+                        hello@ieee.society
+                    </p>
+                </div>
+            </div>
+        </DynamicCard>
+        <div class="h-fit w-full flex flex-row text-nowrap items-start justify-center main-heading-container translate-x-[100%]">
+            <div class="primary-font flex flex-row text-[2.5rem] text-on-surface self-start text-left font-bold absolute -left-[26%]">
+                <p class="text-on-surface/30 font-thin">HTTPS://</p>
+                <div class="flex flex-col">
+                    <div class="h-fit w-fit flex overflow-hidden">
+                        <p class="text-lg primary-font text-primary font-thin absolute bottom-[100%] leading-[1] -translate-y-2 opacity-0 main-heading-support">
+                            VERSION'24
+                        </p>
+                    </div>
+                    <p>IEEE.SOCIETY</p>
+                    <div class="h-fit w-fit flex overflow-hidden">
+                        <p class="text-lg primary-font text-on-surface font-thin absolute top-[100%] leading-[1] text-wrap translate-y-2 opacity-0 main-heading-support">
+                            IEEE STUDENT BRANCH OF MIT BENGALURU <br>
+                            <!--                        LINKING <span class="brand-font">knowledge</span>, LEADING <span class="brand-font">progress</span>-->
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <!--    <div class="h-[400vh] w-full flex flex-col items-start justify-center">-->
+    <!--        <div class="h-screen w-full bg-surface sticky top-0 flex flex-row items-center justify-start overflow-x-scroll gap-[100vw]">-->
+    <!--            <AboutSliderSingle heading="IEEE"/>-->
+    <!--            <AboutSliderSingle heading="IEEE CS"/>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </div>

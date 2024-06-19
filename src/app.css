@@ -1,11 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Recursive&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@font-face {
-    font-family: "Murmure";
-    src: url(./lib/assets/fonts/le-murmure.ttf) format("truetype");
-}
 
 @font-face {
     font-family: "Poppins";
@@ -18,7 +14,7 @@
 }
 
 .primary-font {
-    font-family: "Murmure";
+    font-family: 'Recursive', monospace;
 }
 
 .brand-font {

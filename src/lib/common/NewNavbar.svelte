@@ -54,17 +54,17 @@
 </script>
 
 <div class="h-fit w-full flex items-center justify-center">
-    <div class="h-fit w-[65%] sm:w-[55%] flex items-center justify-center fixed bottom-3 z-[2] nav-height-controller scale-0 navbar-closed-display">
+    <div class="h-fit w-[65%] sm:w-[55%] flex items-center justify-center fixed bottom-3 z-[100] nav-height-controller scale-0 navbar-closed-display">
         <div class="nav-width-controller h-full w-[90%] absolute flex flex-col items-end justify-center bg-primary-container rounded-xl px-4">
             <div class="h-fit w-full hidden opacity-0 flex-col items-end justify-center nav-links gap-2">
-                <a class="primary-font text-4xl text-right hover:text-on-tertiary-container" href="/">HOME</a>
-                <a class="primary-font text-4xl text-right" href="/events">EVENTS</a>
-                <a class="primary-font text-4xl text-right" href="/dashboard">DASHBOARD</a>
+                <a class="primary-font text-2xl text-right tracking-tighter font-bold hover:text-on-tertiary-container" href="/">HOME</a>
+                <a class="primary-font text-2xl text-right tracking-tighter font-bold" href="/events">EVENTS</a>
+                <a class="primary-font text-2xl text-right tracking-tighter font-bold" href="/dashboard">DASHBOARD</a>
             </div>
         </div>
         <div class="h-fit w-[90%] flex flex-row items-center justify-between bg-primary-container self-end rounded-xl py-3 px-4 nav-width-controller z-[2] scale-0 navbar-closed-content-display">
-            <p class="primary-font text-4xl text-on-primary-container">HOME</p>
-            <button class="flex items-center text-center justify-center px-2 py-1 rounded-xl bg-on-primary-container text-primary-container text-3xl"
+            <p class="primary-font text-2xl text-on-primary-container tracking-tighter font-bold">HOME</p>
+            <button class="flex items-center text-center justify-center px-3 py-1 rounded-xl bg-on-primary-container text-primary-container text-2xl primary-font"
                     on:click={navController}>
                 +
             </button>
