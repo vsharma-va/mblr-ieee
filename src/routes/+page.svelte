@@ -2,7 +2,6 @@
     import {onMount} from "svelte";
     import {gsap} from "gsap/dist/gsap";
     import DynamicCard from "$lib/landing/DynamicCard.svelte";
-    import CanvasRibbon from "$lib/common/CanvasRibbon.svelte";
     import CursorBuddy from "$lib/common/CursorBuddy.svelte";
     import Loader from "$lib/common/Loader.svelte";
 
@@ -82,10 +81,10 @@
 <Loader on:complete={() => {onLoadTimeline.play(0)}}/>
 <CursorBuddy/>
 <div class="h-fit min-h-screen w-full bg-surface relative overflow-hidden">
-    <div class="absolute top-0 h-full w-full blur-sm">
-<!--        <CanvasRibbon/>-->
+    <div class="absolute top-0 h-full w-full blur-sm object-fit">
+        <!--        <CanvasRibbon/>-->
     </div>
-    <div class="h-screen w-full flex flex-col items-center justify-center pb-12 overflow-hidden">
+    <div class="h-screen w-full flex flex-col items-center justify-center pb-12 overflow-hidden landing">
         <div class="absolute top-2 left-2 w-fit h-fit">
             <p class="text-sm lg:text-xl text-on-surface primary-font">
                 <span class="text-on-surface/50">WELCOME,</span> <span class="type-username">{reactiveUserName}</span>
@@ -217,3 +216,10 @@
     <!--        </div>-->
     <!--    </div>-->
 </div>
+<style>
+    .landing{
+        background-size: 50px 50px;
+        background-image: linear-gradient(to right, #1e1e1e 1px, transparent 1px),
+        linear-gradient(to bottom, #1e1e1e 1px, transparent 1px);
+    }
+</style>
