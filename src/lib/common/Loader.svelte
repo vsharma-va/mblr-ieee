@@ -124,7 +124,7 @@
         }, '<0.50');
         onLoadTimelinePart2.to('.loader-container', {
             display: 'none',
-            xPercent: -100,
+            xPercent: 100,
             duration: 1,
             ease: 'power4.inOut',
         });
@@ -142,7 +142,7 @@
             <div class="type-destination"></div>
         </div>
     </div>
-    <div class="h-fit w-full flex flex-row items-center justify-center gap-1 absolute bottom-5 right-5 font-thin">
+    <div class="h-fit w-full flex flex-row items-center justify-center gap-1 absolute bottom-24 font-thin">
 		<p class="text-lg primary-font text-surface">LOADING</p>
 		<div class="h-fit w-fit flex flex-row">
 			<div

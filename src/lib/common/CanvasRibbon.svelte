@@ -54,9 +54,9 @@
                 x2: -w + Math.random() * w,
                 y2: -h + Math.random() * h,
                 rot: Math.random() * 180,
-                a1: Math.random() * 5,  // Reduced the range
-                a2: Math.random() * 5,  // Reduced the range
-                a3: Math.random() * 5,  // Reduced the range
+                a1: Math.random() * 10,  // Reduced the range
+                a2: Math.random() * 10,  // Reduced the range
+                a3: Math.random() * 10,  // Reduced the range
                 createdAt: Date.now()   // Timestamp when created
             });
         };
