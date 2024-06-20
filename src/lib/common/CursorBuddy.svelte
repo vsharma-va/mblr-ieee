@@ -60,7 +60,7 @@
     }
 </script>
 
-<div class="h-fit w-fit bg-primary text-on-primary rounded-xl buddy absolute pointer-events-none z-[301] p-1 px-2"
+<div class="hidden h-fit w-fit bg-primary-container text-on-primary-container rounded-xl buddy absolute pointer-events-none z-[301] p-1 px-2"
      bind:this={buddyDiv}>
     <p class="text-lg primary-font buddy-text tracking-tighter"></p>
 </div>

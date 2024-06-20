@@ -4,6 +4,7 @@
     import DynamicCard from "$lib/landing/DynamicCard.svelte";
     import CanvasRibbon from "$lib/common/CanvasRibbon.svelte";
     import CursorBuddy from "$lib/common/CursorBuddy.svelte";
+    import Loader from "$lib/common/Loader.svelte";
 
     let userDiscardName = '';
     let userActualName = 'STRANGER';
@@ -17,6 +18,9 @@
             x: 0,
             duration: 1.5,
             ease: 'power4.inOut',
+        });
+        onLoadTimeline.to('.buddy', {
+            display: 'flex',
         });
         onLoadTimeline.to('.main-heading-support', {
             scale: 1,
@@ -55,7 +59,7 @@
             },
             "<0.1",
         );
-        // onLoadTimeline.pause();
+        onLoadTimeline.pause();
         setInterval(() => {
             let date = new Date();
             const options = {
@@ -75,11 +79,11 @@
     $: reactiveUserName = userActualName;
 </script>
 
-<!--<Loader on:complete={() => {onLoadTimeline.play(0)}}/>-->
+<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
 <CursorBuddy/>
 <div class="h-fit min-h-screen w-full bg-surface relative overflow-hidden">
     <div class="absolute top-0 h-full w-full blur-sm">
-        <CanvasRibbon/>
+<!--        <CanvasRibbon/>-->
     </div>
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 overflow-hidden">
         <div class="absolute top-2 left-2 w-fit h-fit">
@@ -121,13 +125,16 @@
         </DynamicCard>
         <DynamicCard subset="socials" position="bottom-32 left-3 md:left-12" heading="SOCIALS" zlevel="4">
             <div class="w-full h-full flex flex-col items-start justify-center gap-2">
-                <a href="https://google.com" class="primary-font text-sm text-on-surface/50">
+                <a href="https://google.com" class="primary-font text-sm text-on-surface/50"
+                   data-buddy-text="@ieee">
                     INSTAGRAM
                 </a>
-                <a href="https://google.com" class="primary-font text-sm text-on-surface/50">
+                <a href="https://google.com" class="primary-font text-sm text-on-surface/50"
+                   data-buddy-text="@ieee-twitter">
                     TWITTER
                 </a>
-                <a href="https://google.com" class="primary-font text-sm text-on-surface/50">
+                <a href="https://google.com" class="primary-font text-sm text-on-surface/50"
+                   data-budy-text="@ieee-youtube">
                     YOUTUBE
                 </a>
             </div>

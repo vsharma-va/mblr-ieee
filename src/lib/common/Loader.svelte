@@ -135,7 +135,7 @@
 
 <div class="fixed top-0 h-screen w-full bg-on-surface flex flex-col items-center justify-center z-[300] loader-container">
     <div class="h-fit w-fit py-1 px-2 border-[1px] border-surface/80 rounded-xl overflow-hidden opacity-0 scale-0 url-container">
-        <div class="primary-font text-sm text-surface flex flex-row">
+        <div class="primary-font text-sm lg:text-2xl text-surface flex flex-row">
             <div class="text-surface/50 translate-y-44 https-text">
                 HTTPS://
             </div>
@@ -143,33 +143,33 @@
         </div>
     </div>
     <div class="h-fit w-full flex flex-row items-center justify-center gap-1 absolute bottom-24 font-thin">
-		<p class="text-lg primary-font text-surface">LOADING</p>
+		<p class="text-lg lg:text-3xl primary-font text-surface">LOADING</p>
 		<div class="h-fit w-fit flex flex-row">
 			<div
 				class="h-[3rem] w-fit text-lg primary-font text-surface relative flex flex-col overflow-hidden items-end justify-center"
 			>
-				<p class="text-lg primary-font invisible">0</p>
-				<p class="text-lg primary-font absolute hundreths-place-0">0</p>
-				<p class="text-lg primary-font absolute translate-y-[50px] hundreths-place-1">1</p>
+				<p class="text-lg lg:text-3xl primary-font invisible">0</p>
+				<p class="text-lg lg:text-3xl primary-font absolute hundreths-place-0">0</p>
+				<p class="text-lg lg:text-3xl primary-font absolute translate-y-[50px] hundreths-place-1">1</p>
 			</div>
 			<div
 				class="h-[3rem] w-fit text-lg primary-font text-surface relative flex flex-col overflow-hidden items-end justify-center"
 			>
-				<p class="text-lg primary-font invisible">0</p>
-				<p class="text-lg primary-font absolute tens-place-0">0</p>
+				<p class="text-lg lg:text-3xl primary-font invisible">0</p>
+				<p class="text-lg lg:text-3xl primary-font absolute tens-place-0">0</p>
 				{#each { length: 10 } as _, i}
-					<p class="text-lg primary-font absolute translate-y-[50px] tens-place-{i + 1}">
+					<p class="text-lg lg:text-3xl primary-font absolute translate-y-[50px] tens-place-{i + 1}">
 						{(i + 1) % 10}
 					</p>
 				{/each}
 			</div>
 			<div
-				class="h-[3rem] w-fit text-lg primary-font text-surface relative flex flex-col overflow-hidden items-end justify-center"
+				class="h-[3rem] w-fit text-lg lg:text-3xl primary-font text-surface relative flex flex-col overflow-hidden items-end justify-center"
 			>
-				<p class="text-lg primary-font invisible">0</p>
-				<p class="text-lg primary-font absolute ones-place-0">0</p>
+				<p class="text-lg lg:text-3xl primary-font invisible">0</p>
+				<p class="text-lg lg:text-3xl primary-font absolute ones-place-0">0</p>
 				{#each { length: 10 } as _, i}
-					<p class="text-lg primary-font absolute translate-y-[50px] ones-place-{i + 1}">
+					<p class="text-lg lg:text-3xl primary-font absolute translate-y-[50px] ones-place-{i + 1}">
 						{(i + 1) % 10}
 					</p>
 				{/each}
