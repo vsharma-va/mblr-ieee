@@ -3,19 +3,16 @@
     import {gsap} from "gsap/dist/gsap";
     import DynamicCard from "$lib/landing/DynamicCard.svelte";
     import Loader from "$lib/common/Loader.svelte";
+    import CanvasRibbon from "../lib/common/CanvasRibbon.svelte";
 
     let userDiscardName = '';
-    let userActualName = '';
+    let userActualName = 'STRANGER';
     let currentTime;
     let onLoadTimeline;
 
     onMount(() => {
-        onLoadTimeline = gsap.timeline({
-            onComplete: () => {
-                userActualName = 'STRANGER';
-            }
-        })
-
+        onLoadTimeline = gsap.timeline();
+        
         onLoadTimeline.to('.main-heading-container', {
             x: 0,
             duration: 1.5,
@@ -27,10 +24,6 @@
             opacity: 1,
             duration: 1,
             ease: 'power4.inOut',
-        });
-        onLoadTimeline.to('.type-username', {
-            text: 'STRANGER',
-            duration: 1,
         });
         onLoadTimeline.to('.dynamic-common', {
             scale: 1,
@@ -79,20 +72,26 @@
     });
 
     $: reactiveTime = currentTime;
+    $: reactiveUserName = userActualName;
 </script>
 
 <Loader on:complete={() => {onLoadTimeline.play(0)}}/>
-<div class="h-fit min-h-screen w-full bg-surface">
+
+<div class="h-fit min-h-screen w-full bg-surface relative">
+    <div class="absolute top-0 h-full w-full blur-sm">
+        <CanvasRibbon />
+    </div>
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 overflow-hidden">
         <div class="absolute top-2 left-2 w-fit h-fit">
             <p class="text-sm text-on-surface primary-font">
-                <span class="text-on-surface/50">WELCOME,</span> <span class="type-username">{userActualName}</span>
+                <span class="text-on-surface/50">WELCOME,</span> <span class="type-username">{reactiveUserName}</span>
             </p>
         </div>
         <DynamicCard subset="name" position="top-14 left-3" heading="NAME" zLevel="2">
-            <input type="text" placeholder="...your name" class="text-on-surface/50 font-bold primary-font px-3"
+            <input type="text" placeholder="...your name" class="text-on-surface/70 font-bold primary-font px-3 h-full w-full"
                    style="background: none; border: none; outline: none; opacity: 0.5;"
-                   bind:value={userDiscardName}>
+                   bind:value={userDiscardName}
+                   on:click={(event) => {event.stopPropagation();}}>
             <button class="h-fit w-fit p-2 bg-surface border-[1px] border-on-surface/50 text-on-surface primary-font font-bold text-sm rounded-xl"
                     on:click={() => {
                         userActualName = userDiscardName.toUpperCase();
@@ -138,7 +137,6 @@
                     <p class="text-sm text-on-surface/50 primary-font text-wrap">
                         CHECK BACK AGAIN FOR EXCITING ANNOUNCEMENTS!
                     </p>
-
                 </div>
                 <div class="w-fit h-fit">
                     <p class="text-sm text-primary/80 primary-font">
@@ -150,7 +148,7 @@
                 </div>
             </div>
         </DynamicCard>
-        <div class="h-fit w-full flex flex-row text-nowrap items-start justify-center main-heading-container translate-x-[100%]">
+        <div class="h-fit w-full flex flex-row text-nowrap items-start justify-center main-heading-container translate-x-[150%]">
             <div class="primary-font flex flex-row text-[2.5rem] text-on-surface self-start text-left font-bold absolute -left-[26%]">
                 <p class="text-on-surface/30 font-thin">HTTPS://</p>
                 <div class="flex flex-col">

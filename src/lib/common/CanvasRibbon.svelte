@@ -1,7 +1,7 @@
 <script>
     import {onMount} from "svelte";
 
-    export let desktop;
+    // export let desktop;
 
     onMount(() => {
         window.requestAnimFrame = (function () {
@@ -15,12 +15,12 @@
                 };
         })();
 
-        var c;
-        if(desktop) {
-            c = document.getElementById('canvas-desktop')
-        } else {
-            c = document.getElementById('canvas-mobile');
-        }
+        var c = document.getElementById('canvas');
+        // if(desktop) {
+        //     c = document.getElementById('canvas-desktop')
+        // } else {
+        //     c = document.getElementById('canvas-mobile');
+        // }
         var $ = c.getContext('2d'),
             w = c.width = window.innerWidth,
             h = c.height = window.innerHeight,
@@ -90,7 +90,7 @@
                 b.x2 += Math.sin(b.a3 -= 0.001) * 0.5;  // Reduced movement
                 b.y2 += Math.sin(b.a3) * 0.5;           // Reduced movement
                 $.save();
-                $.globalAlpha = 0.03;
+                $.globalAlpha = 0.01;
                 $.beginPath();
                 $.strokeStyle = 'rgba(154, 214, 255, 0.7)';  // Fixed color (Orange)
                 $.moveTo(b.x1, b.y1);
@@ -108,8 +108,8 @@
     })
 </script>
 
-{#if desktop}
-    <canvas id='canvas-desktop' class="z-[1] h-full w-full"></canvas>
-{:else}
-    <canvas id='canvas-mobile' class="z-[1] h-full w-full"></canvas>
-{/if}
+<!-- {#if desktop} -->
+    <canvas id='canvas'></canvas>
+<!-- {:else} -->
+    <!-- <canvas id='canvas-mobile' class="z-[1] h-full w-full"></canvas> -->
+<!-- {/if} -->
