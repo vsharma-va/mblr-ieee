@@ -2,13 +2,16 @@
     import {onMount} from "svelte";
     import {gsap} from "gsap/dist/gsap";
     import DynamicCard from "$lib/landing/DynamicCard.svelte";
-    import CursorBuddy from "$lib/common/CursorBuddy.svelte";
-    import Loader from "$lib/common/Loader.svelte";
+    import {swipe} from "svelte-gestures";
+    import ieeeAbout from "$lib/assets/images/ieee-about.jpg";
 
     let userDiscardName = '';
     let userActualName = 'STRANGER';
     let currentTime;
     let onLoadTimeline;
+    let aboutCardIndex = 0;
+    let numberOfBranches = 5;
+    let aboutCardHoverEnabled = true;
 
     onMount(() => {
         onLoadTimeline = gsap.timeline();
@@ -58,7 +61,7 @@
             },
             "<0.1",
         );
-        onLoadTimeline.pause();
+        // onLoadTimeline.pause();
         setInterval(() => {
             let date = new Date();
             const options = {
@@ -74,17 +77,95 @@
         }, 1000);
     });
 
+    // here -7 is the difference in depth/card
+    // currentIndex is the card that is being currently displayed
+    // numberOfBranches = number of cards that are present
+
+    function nextOrPreviousAboutCard(currentIndex, forward) {
+        if (forward) {
+            aboutCardHoverEnabled = false;
+            let forwardTimeline = gsap.timeline();
+            forwardTimeline.to(`.about-card-${currentIndex}`, {
+                rotationY: 135,
+                rotationX: -5,
+                x: window.screen.width,
+                duration: 1,
+                ease: 'sine',
+            });
+            forwardTimeline.to(`.about-card-${currentIndex + 1}`, {
+                z: 0,
+                x: 0,
+                duration: 0.75,
+                ease: 'sine'
+            }, '<');
+            let counter = 1;
+            for (let i = currentIndex + 2; i < numberOfBranches; i++) {
+                forwardTimeline.to(`.about-card-${i}`, {
+                    translateZ: `${-7 * counter}em`,
+                    translateX: `${7 * counter}%`,
+                    duration: 0.75,
+                    ease: 'sine',
+                }, '<');
+                counter++;
+            }
+        } else {
+            let backwardsTimeline = gsap.timeline();
+            backwardsTimeline.to(`.about-card-${currentIndex}`, {
+                rotationY: 0,
+                rotationX: 0,
+                x: 0,
+                duration: 0.75,
+                ease: 'sine',
+            });
+            let counter = 1;
+            for (let i = currentIndex + 1; i < numberOfBranches; i++) {
+                backwardsTimeline.to(`.about-card-${i}`, {
+                    translateZ: `${-7 * counter}em`,
+                    translateX: `${7 * counter}%`,
+                    duration: 0.75,
+                    ease: 'sine',
+                }, '<');
+                counter++;
+            }
+        }
+    }
+
+    function aboutCardHalfWayOver(currentIndex, reset) {
+        if (!reset) {
+            let onHoverTimeline = gsap.timeline();
+            onHoverTimeline.to(`.about-card-${currentIndex}`, {
+                x: 100,
+                rotationY: 35,
+                rotationX: -1.5,
+                ease: 'sine',
+            });
+            onHoverTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
+                width: '50%',
+                ease: 'sine',
+            }, '<');
+        } else {
+            let resetHoverTimeline = gsap.timeline();
+            resetHoverTimeline.to(`.about-card-${currentIndex}`, {
+                x: 0,
+                rotationY: 0,
+                rotationX: 0,
+                ease: 'sine',
+            });
+            resetHoverTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
+                width: 0,
+                ease: 'sine',
+            }, '<');
+        }
+
+    }
+
     $: reactiveTime = currentTime;
     $: reactiveUserName = userActualName;
 </script>
 
-<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
-<CursorBuddy/>
-<div class="h-fit min-h-screen w-full bg-surface relative overflow-hidden">
-    <div class="absolute top-0 h-full w-full blur-sm object-fit">
-        <!--        <CanvasRibbon/>-->
-    </div>
-    <div class="h-screen w-full flex flex-col items-center justify-center pb-12 overflow-hidden landing">
+<!--<Loader on:complete={() => {onLoadTimeline.play(0)}}/>-->
+<div class="h-fit min-h-screen w-screen bg-surface content relative">
+    <div class="h-screen w-full flex flex-col items-center justify-center pb-12 sticky top-0 overflow-x-hidden">
         <div class="absolute top-2 left-2 w-fit h-fit">
             <p class="text-sm lg:text-xl text-on-surface primary-font">
                 <span class="text-on-surface/50">WELCOME,</span> <span class="type-username">{reactiveUserName}</span>
@@ -173,7 +254,9 @@
                     </span>
                     <div class="h-fit w-fit flex flex-row">
                         <div class="relative group cursor-pointer">
-                            IEEE
+                            <span class="group-hover:ieee-mesh-gradient">
+                                IEEE
+                            </span>
                             <div class="h-[70%] w-full absolute top-1/2 -translate-y-1/2 border-2 border-primary opacity-0 group-hover:opacity-100 duration-300 ease-linear"
                                  data-buddy-text="ABOUT">
                                 <div class="absolute -left-[6px] -top-[6px] h-3 w-3 bg-on-surface border-2 border-primary"></div>
@@ -209,17 +292,144 @@
             </h1>
         </div>
     </div>
-    <!--    <div class="h-[400vh] w-full flex flex-col items-start justify-center">-->
-    <!--        <div class="h-screen w-full bg-surface sticky top-0 flex flex-row items-center justify-start overflow-x-scroll gap-[100vw]">-->
-    <!--            <AboutSliderSingle heading="IEEE"/>-->
-    <!--            <AboutSliderSingle heading="IEEE CS"/>-->
-    <!--        </div>-->
-    <!--    </div>-->
+    <div class="h-screen bg-surface w-full sticky top-0 flex flex-col gap-16 items-center justify-center pt-5 content overflow-hidden about-card-3d-parent"
+         use:swipe={{ timeframe: 300, minSwipeDistance: 60, touchAction: 'pan-y' }} on:swipe={(event) => {
+             if(event.detail.direction === 'right') {
+                  if(numberOfBranches !== aboutCardIndex) {
+                    nextOrPreviousAboutCard(aboutCardIndex, true);
+                    aboutCardIndex++;
+                  }
+             } else if(event.detail.direction === 'left') {
+                if(aboutCardIndex > 0) {
+                    aboutCardIndex--;
+                    nextOrPreviousAboutCard(aboutCardIndex, false);
+                }
+             }
+         }}
+    >
+        <div class="absolute top-0 w-full h-2 bg-on-surface transition-all duration-300 ease"
+             style="width: {(aboutCardIndex/numberOfBranches)*100}%"></div>
+        <div class="h-fit w-[80%] flex flex-row items-center justify-between md:hidden">
+            <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]"
+                    on:click={() => {
+                        if(aboutCardIndex > 0) {
+                            aboutCardIndex--;
+                            nextOrPreviousAboutCard(aboutCardIndex, false);
+                        }
+                    }}>
+                PREVIOUS
+            </button>
+            <p class="primary-font text-on-surface">OR SWIPE</p>
+            <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7] relative"
+                    on:click={() => {
+                        if(numberOfBranches !== aboutCardIndex) {
+                            nextOrPreviousAboutCard(aboutCardIndex, true);
+                            aboutCardIndex++;
+                        }
+                    }}>
+                &nbsp;&nbsp;&nbsp;NEXT&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+        <div class="h-screen w-full absolute flex-row justify-center items-stretch hidden md:flex">
+            <div class="w-1/2 h-full pr-32 flex flex-col items-center justify-center">
+                <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]"
+                        on:click={() => {
+                        if(aboutCardIndex > 0) {
+                            aboutCardIndex--;
+                            nextOrPreviousAboutCard(aboutCardIndex, false);
+                        }
+                    }}>
+                    PREVIOUS
+                </button>
+            </div>
+            <div class="w-1/2 h-full pl-32 flex flex-col items-center justify-center relative"
+                 on:pointermove={() =>{
+                                console.log(aboutCardHoverEnabled);
+                                if(aboutCardHoverEnabled) {
+                                    aboutCardHalfWayOver(aboutCardIndex, false);
+                                }
+                            }
+                        }
+                 on:pointerleave={() => {
+                            aboutCardHalfWayOver(aboutCardIndex, true)
+                        }}
+                 on:focus={() => {aboutCardHalfWayOver(aboutCardIndex)}}
+                 on:pointerdown={() => {
+                        if(numberOfBranches !== aboutCardIndex) {
+                            nextOrPreviousAboutCard(aboutCardIndex, true);
+                            setTimeout(() => {aboutCardHoverEnabled = true;}, 750);
+                            aboutCardIndex++;
+                        }
+                    }}
+                 on:keypress={(event) => {
+                     switch (event.key) {
+                         case "Enter":
+                             if(numberOfBranches !== aboutCardIndex)
+                                nextOrPreviousAboutCard(aboutCardIndex, true)
+                             break;
+                     }
+                 }}
+                 role="button"
+                 tabindex="0"
+            >
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-primary-container about-next-hover-indicator-0"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-tertiary about-next-hover-indicator-1"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-green-300 about-next-hover-indicator-2"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-amber-300 about-next-hover-indicator-3"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-on-surface about-next-hover-indicator-4"></div>
+                <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]">
+                    &nbsp;&nbsp;&nbsp;NEXT&nbsp;&nbsp;&nbsp;
+                </button>
+            </div>
+        </div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-primary-container absolute rounded-xl shadow-xl about-card-0 flex flex-col items-start justify-between origin-right p-3 gap-2 z-[5]">
+            <div class="h-[80%] w-full bg-on-surface rounded-xl shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] -translate-x-1 -translate-y-1">
+                <img src="{ieeeAbout}" alt="" class="object-cover w-full h-full rounded-xl">
+            </div>
+            <div class="h-[20%] w-full flex flex-col items-center justify-center border-on-primary border-2 border-solid rounded-xl p-2 about-card-1-content -translate-x-1 -translate-y-1 shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] relative">
+                <div class="absolute top-0">
+                    <p class="text-sm font-thin text-on-primary/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+                <p class="primary-font text-3xl text-on-primary font-bold drop-shadow-[1px_1px_0px_rgba(20,20,20,1)]">
+                    IEEE
+                </p>
+                <div class="absolute bottom-0">
+                    <p class="text-sm font-thin text-on-primary/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+            </div>
+        </div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-tertiary absolute rounded-xl shadow-2xl z-[4] about-card-1"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-green-300 absolute rounded-xl shadow-xl z-[3] about-card-2"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-amber-300 absolute rounded-xl shadow-xl z-[1] about-card-3"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-on-surface absolute rounded-xl shadow-xl z-0 about-card-4"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] invisible -translate-y-8 about-card-4"></div>
+    </div>
 </div>
+
 <style>
-    .landing{
+    .content {
         background-size: 50px 50px;
         background-image: linear-gradient(to right, #1e1e1e 1px, transparent 1px),
         linear-gradient(to bottom, #1e1e1e 1px, transparent 1px);
+    }
+
+    .about-card-3d-parent {
+        perspective: 1100px;
+    }
+
+    .about-card-1 {
+        transform: translateZ(-7em) translateX(7%);
+    }
+
+    .about-card-2 {
+        transform: translateZ(-14em) translateX(14%);
+    }
+
+    .about-card-3 {
+        transform: translateZ(-21em) translateX(21%);
+    }
+
+    .about-card-4 {
+        transform: translateZ(-28em) translateX(28%);
     }
 </style>

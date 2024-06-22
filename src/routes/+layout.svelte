@@ -5,6 +5,7 @@
     import NewNavbar from "$lib/common/NewNavbar.svelte";
     import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
     import {gsap} from "gsap/dist/gsap";
+    import CursorBuddy from "$lib/common/CursorBuddy.svelte";
 
     onMount(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -26,5 +27,6 @@
     )
 </script>
 
+<CursorBuddy/>
 <NewNavbar/>
 <slot/>
