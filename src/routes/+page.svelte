@@ -1,9 +1,13 @@
 <script>
     import {onMount} from "svelte";
     import {gsap} from "gsap/dist/gsap";
+    import footerImg from "$lib/assets/images/footer.gif";
     import DynamicCard from "$lib/landing/DynamicCard.svelte";
     import {swipe} from "svelte-gestures";
     import ieeeAbout from "$lib/assets/images/ieee-about.jpg";
+    import InfiniteMarquee from "$lib/common/InfiniteMarquee.svelte";
+    import Footer from "$lib/common/Footer.svelte";
+    import Loader from "$lib/common/Loader.svelte";
 
     let userDiscardName = '';
     let userActualName = 'STRANGER';
@@ -61,7 +65,7 @@
             },
             "<0.1",
         );
-        // onLoadTimeline.pause();
+        onLoadTimeline.pause();
         setInterval(() => {
             let date = new Date();
             const options = {
@@ -181,7 +185,7 @@
     $: reactiveUserName = userActualName;
 </script>
 
-<!--<Loader on:complete={() => {onLoadTimeline.play(0)}}/>-->
+<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
 <div class="h-fit min-h-screen w-screen bg-surface content relative">
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 sticky top-0 overflow-x-hidden">
         <div class="absolute top-2 left-2 w-fit h-fit">
@@ -232,7 +236,7 @@
                     TWITTER
                 </a>
                 <a href="https://google.com" class="primary-font text-sm text-on-surface/50"
-                   data-budy-text="@ieee-youtube">
+                   data-buddy-text="@ieee-youtube">
                     YOUTUBE
                 </a>
             </div>
@@ -363,8 +367,8 @@
                                 nextOrPreviousAboutCard(aboutCardIndex, true)
                              break;
                  }}}
-                role="button"
-                tabindex="0"
+                 role="button"
+                 tabindex="0"
             >
                 <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]">
                     Previous
@@ -406,7 +410,7 @@
                 <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]">
                     &nbsp;&nbsp;&nbsp;
 
-            NEXT&nbsp;&nbsp;&nbsp;
+                    NEXT&nbsp;&nbsp;&nbsp;
                 </button>
             </div>
         </div>
@@ -432,7 +436,7 @@
         <div class="h-[450px] w-[80%] sm:w-[325px] bg-on-surface absolute rounded-xl shadow-xl z-0 about-card-4"></div>
         <div class="h-[450px] w-[80%] sm:w-[325px] invisible -translate-y-8 about-card-4"></div>
     </div>
-
+    <Footer/>
 </div>
 
 <style>
@@ -460,36 +464,5 @@
 
     .about-card-4 {
         transform: translateZ(-28em) translateX(28%);
-    }
-
-    body { margin: 20px; }
-
-    .marquee {
-        height: 25px;
-        width: 420px;
-
-        overflow: hidden;
-        position: relative;
-    }
-
-    .marquee div {
-        display: block;
-        width: 200%;
-        height: 30px;
-
-        position: absolute;
-        overflow: hidden;
-
-        animation: marquee 5s linear infinite;
-    }
-
-    .marquee span {
-        float: left;
-        width: 50%;
-    }
-
-    @keyframes marquee {
-        0% { left: 0; }
-        100% { left: -100%; }
     }
 </style>
