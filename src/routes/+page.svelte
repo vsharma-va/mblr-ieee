@@ -98,6 +98,21 @@
                 duration: 0.75,
                 ease: 'sine'
             }, '<');
+            forwardTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
+                width: '100%',
+                borderTopRightRadius: '0rem',
+                borderBottomRightRadius: '0rem',
+                ease: 'sine',
+                duration: 0.75,
+            }, '<');
+            forwardTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
+                opacity: '0',
+                ease: 'sine',
+                duration: 0.45,
+            }, '>');
+            forwardTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
+                width: '0%',
+            }, '>');
             let counter = 1;
             for (let i = currentIndex + 2; i < numberOfBranches; i++) {
                 forwardTimeline.to(`.about-card-${i}`, {
@@ -140,6 +155,9 @@
                 ease: 'sine',
             });
             onHoverTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
+                opacity: 1,
+                borderBottomRightRadius: '9999px',
+                borderTopRightRadius: '9999px',
                 width: '50%',
                 ease: 'sine',
             }, '<');
@@ -331,25 +349,33 @@
             </button>
         </div>
         <div class="h-screen w-full absolute flex-row justify-center items-stretch hidden md:flex">
-            <div class="w-1/2 h-full pr-32 flex flex-col items-center justify-center">
-                <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]"
-                        on:click={() => {
+            <div class="w-1/2 h-full pr-32 flex flex-col items-center justify-center"
+                 on:click={() => {
                         if(aboutCardIndex > 0) {
                             aboutCardIndex--;
                             nextOrPreviousAboutCard(aboutCardIndex, false);
                         }
-                    }}>
-                    PREVIOUS
+                    }}
+                 on:keypress={(event) => {
+                      switch (event.key) {
+                         case "Enter":
+                             if(numberOfBranches !== aboutCardIndex)
+                                nextOrPreviousAboutCard(aboutCardIndex, true)
+                             break;
+                 }}}
+                role="button"
+                tabindex="0"
+            >
+                <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]">
+                    Previous
                 </button>
             </div>
             <div class="w-1/2 h-full pl-32 flex flex-col items-center justify-center relative"
                  on:pointermove={() =>{
-                                console.log(aboutCardHoverEnabled);
                                 if(aboutCardHoverEnabled) {
                                     aboutCardHalfWayOver(aboutCardIndex, false);
-                                }
-                            }
-                        }
+                                }}
+                           }
                  on:pointerleave={() => {
                             aboutCardHalfWayOver(aboutCardIndex, true)
                         }}
@@ -372,13 +398,15 @@
                  role="button"
                  tabindex="0"
             >
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-primary-container about-next-hover-indicator-0"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-tertiary about-next-hover-indicator-1"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-green-300 about-next-hover-indicator-2"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-amber-300 about-next-hover-indicator-3"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-on-surface about-next-hover-indicator-4"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-primary-container/70 about-next-hover-indicator-0"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-tertiary/70 about-next-hover-indicator-1"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-green-300/70 about-next-hover-indicator-2"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-amber-300/70 about-next-hover-indicator-3"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-on-surface/70 about-next-hover-indicator-4"></div>
                 <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]">
-                    &nbsp;&nbsp;&nbsp;NEXT&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
+
+            NEXT&nbsp;&nbsp;&nbsp;
                 </button>
             </div>
         </div>
@@ -404,6 +432,7 @@
         <div class="h-[450px] w-[80%] sm:w-[325px] bg-on-surface absolute rounded-xl shadow-xl z-0 about-card-4"></div>
         <div class="h-[450px] w-[80%] sm:w-[325px] invisible -translate-y-8 about-card-4"></div>
     </div>
+
 </div>
 
 <style>
@@ -431,5 +460,36 @@
 
     .about-card-4 {
         transform: translateZ(-28em) translateX(28%);
+    }
+
+    body { margin: 20px; }
+
+    .marquee {
+        height: 25px;
+        width: 420px;
+
+        overflow: hidden;
+        position: relative;
+    }
+
+    .marquee div {
+        display: block;
+        width: 200%;
+        height: 30px;
+
+        position: absolute;
+        overflow: hidden;
+
+        animation: marquee 5s linear infinite;
+    }
+
+    .marquee span {
+        float: left;
+        width: 50%;
+    }
+
+    @keyframes marquee {
+        0% { left: 0; }
+        100% { left: -100%; }
     }
 </style>
