@@ -1,113 +1,40 @@
 <script>
-    import EventsTemplate from "$lib/common/EventsTemplate.svelte";
-    import EventCard from "$lib/common/EventCard.svelte";
-    import Navbar from "$lib/common/Navbar.svelte";
-    import {onMount} from "svelte";
-    import {gsap} from "gsap/dist/gsap";
-    import ScrollTrigger from "gsap/dist/ScrollTrigger";
+    import InfiniteMarquee from "$lib/common/InfiniteMarquee.svelte";
+    import footerImg from "$lib/assets/images/footer.gif";
 
-    gsap.registerPlugin(ScrollTrigger);
-    onMount(() => {
-        let csNavColorChange = gsap.timeline({
-            scrollTrigger: {
-                trigger: '.cs-entry-trigger',
-                start: 'top top',
-                end: 'top top',
-                scrub: true,
-                markers: false,
-            }
-        });
-        csNavColorChange.to('.nav-bg-color', {
-            backgroundColor: "#1d1c16",
-        });
-        csNavColorChange.to('.vertical-strike-nav-menu-bg', {
-            backgroundColor: "#f1e66b",
-        }, ">");
-        csNavColorChange.to('.nav-link-underline-bg', {
-            backgroundColor: "#f1e66b",
-            opacity: 0.9,
-        }, ">");
-        csNavColorChange.to('.department-button-color', {
-            backgroundColor: "#f1e66b",
-        }, ">");
-        csNavColorChange.to('.department-button-text-color', {
-            color: "#1f1c00",
-        }, ">");
-
-        let cisNavColorChange = gsap.timeline({
-            scrollTrigger: {
-                trigger: '.cis-entry-trigger',
-                start: 'top top',
-                end: 'top top',
-                scrub: true,
-                markers: false,
-            }
-        });
-        cisNavColorChange.to('.nav-bg-color', {
-            backgroundColor: "#201a19",
-        });
-        cisNavColorChange.to('.vertical-strike-nav-menu-bg', {
-            backgroundColor: "#ffdad6",
-        }, ">");
-        cisNavColorChange.to('.nav-link-underline-bg', {
-            backgroundColor: "#ffdad6",
-            opacity: 0.9,
-        }, ">");
-        cisNavColorChange.to('.department-button-color', {
-            backgroundColor: "#ffdad6",
-        }, ">");
-        cisNavColorChange.to('.department-button-text-color', {
-            color: "#410003",
-        }, ">");
-    })
 </script>
-
-<Navbar/>
-<div class="h-fit w-full bg-on-surface" id="ieee">
-    <EventsTemplate mainHeading="IEEE" textColorClass="text-primary-container"
-                    revealContainerColorClass="bg-primary-container" mainClassName="ieee">
-        <div class="h-full w-full flex flex-col items-center justify-center gap-5" slot="event-cards">
-            <EventCard textColorClass="text-primary-container" bgDescriptionColorClass="bg-primary-container"
-                       bgDescriptionTextColorClass="text-on-primary-container"
-                       bgSurfaceColorClass="bg-on-surface"></EventCard>
-            <EventCard textColorClass="text-primary-container" bgDescriptionColorClass="bg-primary-container"
-                       bgDescriptionTextColorClass="text-on-primary-container"
-                       bgSurfaceColorClass="bg-on-surface"></EventCard>
-            <EventCard textColorClass="text-primary-container" bgDescriptionColorClass="bg-primary-container"
-                       bgDescriptionTextColorClass="text-on-primary-container"
-                       bgSurfaceColorClass="bg-on-surface"></EventCard>
+<div class="w-full h-fit min-h-screen flex flex-col items-center justify-center bg-surface content relative">
+    <div class="absolute top-2 left-2 w-fit h-fit">
+        <p class="text-sm lg:text-xl text-on-surface primary-font">
+            <span class="text-on-surface/50">WELCOME,</span> <span class="type-username">STRANGER</span>
+        </p>
+    </div>
+    <div class="flex flex-col items-center justify-center p-5 h-fit w-full">
+        <div class="h-[250px] w-full bg-on-surface rounded-xl flex flex-col p-3 gap-2 relative -translate-x-1 -translate-y-1 shadow-[2px_2px_0px_0px_rgba(0,177,245,1)]">
+            <div class="h-fit w-full p-1 bg-primary-container rounded-xl">
+                <InfiniteMarquee mainText="IEEE.SOCIETY" dimText="HTTPS://" textColor="text-on-primary-container" isSmall={true}/>
+                <!-- <p class="text-lg font-bold primary-font text-on-primary-container">IEEE</p> -->
+            </div>
+            <div class="h-fit w-full flex flex-col gap-2 mt-2">
+                <p class="text-2xl font-bold primary-font text-surface leading-[1]">THIS THE EVENT NAME</p>
+                <div class="h-fit w-full flex flex-row items-center justify-between">
+                    <p class="text-lg font-thin primary-font text-surface/50 leading-[1]">8:00pm May 2024</p>
+                    <p class="text-lg font-thin primary-font text-surface/50 leading-[1]">In AB4</p>
+                </div>
+            </div>
+            <div class="h-full w-full flex flex-col items-center justify-center">
+                <p class="text-sm font-thin primary-font text-surface leading-[1]">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                    consectetur harum placeat. Iste necessitatibus doloremque, consequatur vitae hic repudiandae.
+                </p>
+            </div>
+            <div class="h-full w-full flex flex-row items-center justify-center">
+                <img src="{footerImg}" alt="animated gif of bars sliding in opposite direction"
+                    class="w-full object-fill mix-blend-darken h-[45%]">
+                <button class="h-fit w-fit p-1 bg-primary-container text-on-primary-container text-lg primary-font rounded-xl">
+                    REGISTER
+                </button>
+            </div>
         </div>
-    </EventsTemplate>
-</div>
-<div class="h-fit w-full bg-cs-on-surface cs-entry-trigger" id="ieee-cs">
-    <EventsTemplate mainHeading="IEEE CS" textColorClass="text-cs-primary-container"
-                    revealContainerColorClass="bg-cs-primary-container" mainClassName="ieee-cs">
-        <div class="h-full w-full flex flex-col items-center justify-center gap-5" slot="event-cards">
-            <EventCard textColorClass="text-cs-primary-container" bgDescriptionColorClass="bg-cs-primary-container"
-                       bgDescriptionTextColorClass="text-cs-on-primary-container"
-                       bgSurfaceColorClass="bg-cs-on-surface"></EventCard>
-            <EventCard textColorClass="text-cs-primary-container" bgDescriptionColorClass="bg-cs-primary-container"
-                       bgDescriptionTextColorClass="text-cs-on-primary-container"
-                       bgSurfaceColorClass="bg-cs-on-surface"></EventCard>
-            <EventCard textColorClass="text-cs-primary-container" bgDescriptionColorClass="bg-cs-primary-container"
-                       bgDescriptionTextColorClass="text-cs-on-primary-container"
-                       bgSurfaceColorClass="bg-cs-on-surface"></EventCard>
-        </div>
-    </EventsTemplate>
-</div>
-<div class="h-fit w-full bg-cis-on-surface cis-entry-trigger" id="ieee-cis">
-    <EventsTemplate mainHeading="IEEE CIS" textColorClass="text-cis-primary-container"
-                    revealContainerColorClass="bg-cis-primary-container" mainClassName="ieee-cis">
-        <div class="h-full w-full flex flex-col items-center justify-center gap-5" slot="event-cards">
-            <EventCard textColorClass="text-cis-primary-container" bgDescriptionColorClass="bg-cis-primary-container"
-                       bgDescriptionTextColorClass="text-cis-on-primary-container"
-                       bgSurfaceColorClass="bg-cis-on-surface"></EventCard>
-            <EventCard textColorClass="text-cis-primary-container" bgDescriptionColorClass="bg-cis-primary-container"
-                       bgDescriptionTextColorClass="text-cis-on-primary-container"
-                       bgSurfaceColorClass="bg-cis-on-surface"></EventCard>
-            <EventCard textColorClass="text-cis-primary-container" bgDescriptionColorClass="bg-cis-primary-container"
-                       bgDescriptionTextColorClass="text-cis-on-primary-container"
-                       bgSurfaceColorClass="bg-cis-on-surface"></EventCard>
-        </div>
-    </EventsTemplate>
+    </div>
 </div>

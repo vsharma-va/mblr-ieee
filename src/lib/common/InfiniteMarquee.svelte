@@ -2,6 +2,11 @@
     import {gsap} from "gsap/dist/gsap";
     import {onMount} from "svelte";
 
+    export let dimText;
+    export let mainText;
+    export let isSmall;
+    export let textColor = "text-surface";
+
     onMount(() => {
         horizontalLoop(document.getElementsByClassName('marquee-item'),{pause: false, repeat: -1});
     })
@@ -79,7 +84,13 @@
     }
 </script>
 <div class="wrapper flex flex-row gap-5 overflow-hidden leading-[1] h-fit items-center justify-center">
-    <p class="ml-5 text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-surface text-nowrap marquee-item"><span class="text-surface/50">HTTPS://</span>IEEE.SOCIETY</p>
-    <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-surface text-nowrap marquee-item"><span class="text-surface/50">HTTPS://</span>IEEE.SOCIETY</p>
-    <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-surface text-nowrap marquee-item"><span class="text-surface/50">HTTPS://</span>IEEE.SOCIETY</p>
+    {#if !isSmall}
+        <p class="ml-5 text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
+        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
+        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}/50">{dimText}</span>{Text}</p>
+    {:else}
+        {#each {length: 5} as _, i}
+            <p class="text-lg font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}" style="opacity: 0.5">{dimText}</span>{mainText}</p>
+        {/each}
+    {/if}
 </div>

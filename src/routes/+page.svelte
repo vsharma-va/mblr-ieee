@@ -440,12 +440,6 @@
 </div>
 
 <style>
-    .content {
-        background-size: 50px 50px;
-        background-image: linear-gradient(to right, #1e1e1e 1px, transparent 1px),
-        linear-gradient(to bottom, #1e1e1e 1px, transparent 1px);
-    }
-
     .about-card-3d-parent {
         perspective: 1100px;
     }

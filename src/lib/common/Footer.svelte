@@ -23,7 +23,7 @@
 </script>
 <div class="h-[200vh] w-full sticky top-0 flex flex-col items-center justify-start bg-surface content pt-20 pb-28 footer">
     <div class="w-[90%] sm:w-[80%] min-h-[100vh] max-h-fit flex sticky top-10 flex-col bg-on-surface rounded-xl items-center justify-between overflow-hidden p-5 gap-3 footer-child">
-        <InfiniteMarquee/>
+        <InfiniteMarquee dimText="HTTPS://" mainText="IEEE.SOCIETY" isSmall={false}/>
         <div class="w-full h-1/2 bg-primary-container rounded-xl flex flex-col items-center justify-between p-3 xl:p-5">
             <img src="{footerImg}" alt="animated gif of bars sliding in opposite direction"
                  class="w-full object-cover mix-blend-darken max-h-[45%]">
