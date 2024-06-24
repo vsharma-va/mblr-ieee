@@ -13,7 +13,7 @@
                 start: 'top top',
                 end: 'top -200%',
                 scrub: true,
-                markers: true,
+                markers: false,
             }
         });
         onScrollTimeline.to('.footer-child', {

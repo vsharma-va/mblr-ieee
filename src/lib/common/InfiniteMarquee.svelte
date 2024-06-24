@@ -78,7 +78,7 @@
         return tl;
     }
 </script>
-<div class="wrapper flex flex-row gap-5">
+<div class="wrapper flex flex-row gap-5 overflow-hidden leading-[1] h-fit items-center justify-center">
     <p class="ml-5 text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-surface text-nowrap marquee-item"><span class="text-surface/50">HTTPS://</span>IEEE.SOCIETY</p>
     <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-surface text-nowrap marquee-item"><span class="text-surface/50">HTTPS://</span>IEEE.SOCIETY</p>
     <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-surface text-nowrap marquee-item"><span class="text-surface/50">HTTPS://</span>IEEE.SOCIETY</p>
