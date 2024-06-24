@@ -186,7 +186,7 @@
 </script>
 
 <Loader on:complete={() => {onLoadTimeline.play(0)}}/>
-<div class="h-fit min-h-screen w-screen bg-surface content relative">
+<div class="h-fit min-h-screen w-full bg-surface content relative">
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 sticky top-0 overflow-x-hidden">
         <div class="absolute top-2 left-2 w-fit h-fit">
             <p class="text-sm lg:text-xl text-on-surface primary-font">
