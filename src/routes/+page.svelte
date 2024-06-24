@@ -65,7 +65,7 @@
             },
             "<0.1",
         );
-        // onLoadTimeline.pause();
+        onLoadTimeline.pause();
         setInterval(() => {
             let date = new Date();
             const options = {
@@ -185,7 +185,7 @@
     $: reactiveUserName = userActualName;
 </script>
 
-<!-- <Loader on:complete={() => {onLoadTimeline.play(0)}}/> -->
+<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
 <div class="h-fit min-h-screen w-screen bg-surface content relative">
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 sticky top-0 overflow-x-hidden">
         <div class="absolute top-2 left-2 w-fit h-fit">
@@ -270,7 +270,7 @@
                         <!--                                <path d="M 12 1 C 8.6761905 1 6 3.6761905 6 7 L 6 8 C 4.9 8 4 8.9 4 10 L 4 20 C 4 21.1 4.9 22 6 22 L 18 22 C 19.1 22 20 21.1 20 20 L 20 10 C 20 8.9 19.1 8 18 8 L 18 7 C 18 3.6761905 15.32381 1 12 1 z M 12 3 C 14.27619 3 16 4.7238095 16 7 L 16 8 L 8 8 L 8 7 C 8 4.7238095 9.7238095 3 12 3 z M 12 13 C 13.1 13 14 13.9 14 15 C 14 16.1 13.1 17 12 17 C 10.9 17 10 16.1 10 15 C 10 13.9 10.9 13 12 13 z"/>-->
                         <!--                            </svg>-->
                         <!--                        </div>-->
-                        <span class="text-sm lg:text-xl primary-font text-primary font-thin -translate-y-2 opacity-0 main-heading-support">
+                        <span class="text-sm w-fit lg:text-xl primary-font text-primary font-thin -translate-y-2 opacity-0 main-heading-support">
                             VERSION'24
                         </span>
                     </span>
@@ -294,10 +294,10 @@
                             SOCIETY
                             <div class="h-[70%] w-full absolute top-1/2 -translate-y-1/2 border-2 border-primary opacity-0 group-hover:opacity-100 duration-300 ease-linear"
                                  data-buddy-text="EVENTS">
-                                <div class="absolute -left-[6px] -top-[6px] h-3 w-3 bg-on-surface border-2 border-primary"></div>
-                                <div class="absolute -right-[6px] -top-[6px] h-3 w-3 bg-on-surface border-2 border-primary"></div>
-                                <div class="absolute -left-[6px] -bottom-[6px] h-3 w-3 bg-on-surface border-2 border-primary"></div>
-                                <div class="absolute -right-[6px] -bottom-[6px] h-3 w-3 bg-on-surface border-2 border-primary"></div>
+                                <div class="absolute -left-[6px] -top-[6px] h-2 w-2 md:h-3 md:w-3 bg-on-surface border-2 border-primary"></div>
+                                <div class="absolute -right-[6px] -top-[6px] h-2 w-2 md:h-3 md:w-3 bg-on-surface border-2 border-primary"></div>
+                                <div class="absolute -left-[6px] -bottom-[6px] h-2 w-2 md:h-3 md:w-3 bg-on-surface border-2 border-primary"></div>
+                                <div class="absolute -right-[6px] -bottom-[6px] h-2 w-2 md:h-3 md:w-3 bg-on-surface border-2 border-primary"></div>
                             </div>
                         </div>
                     </div>
@@ -314,7 +314,7 @@
             </h1>
         </div>
     </div>
-    <div class="h-[140vh] bg-surface w-full sticky top-0 flex flex-col md:gap-16 items-center justify-start pt-12 content overflow-hidden"
+    <div class="h-screen bg-surface w-full sticky top-0 flex flex-col gap-16 items-center justify-center pt-5 content overflow-hidden about-card-3d-parent"
          use:swipe={{ timeframe: 300, minSwipeDistance: 60, touchAction: 'pan-y' }} on:swipe={(event) => {
              if(event.detail.direction === 'right') {
                   if(numberOfBranches !== aboutCardIndex) {
@@ -352,7 +352,7 @@
                 &nbsp;&nbsp;&nbsp;NEXT&nbsp;&nbsp;&nbsp;
             </button>
         </div>
-        <div class="h-screen w-full absolute flex-row justify-center items-stretch hidden md:flex overflow-hidden">
+        <div class="h-screen w-full absolute flex-row justify-center items-stretch hidden md:flex">
             <div class="w-1/2 h-full pr-32 flex flex-col items-center justify-center"
                  on:click={() => {
                         if(aboutCardIndex > 0) {
@@ -402,11 +402,11 @@
                  role="button"
                  tabindex="0"
             >
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-primary-container/70 about-next-hover-indicator-0 z-[0]"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-tertiary/70 about-next-hover-indicator-1 z-[0]"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-green-300/70 about-next-hover-indicator-2 z-[0]"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-amber-300/70 about-next-hover-indicator-3 z-[0]"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-on-surface/70 about-next-hover-indicator-4 z-[0]"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-primary-container/70 about-next-hover-indicator-0"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-tertiary/70 about-next-hover-indicator-1"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-green-300/70 about-next-hover-indicator-2"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-amber-300/70 about-next-hover-indicator-3"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-on-surface/70 about-next-hover-indicator-4"></div>
                 <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]">
                     &nbsp;&nbsp;&nbsp;
 
@@ -414,29 +414,27 @@
                 </button>
             </div>
         </div>
-        <div class="h-fit md:h-[88vh] w-full flex relative items-center justify-center  about-card-3d-parent">
-            <div class="h-[450px] w-[80%] sm:w-[325px] bg-primary-container absolute rounded-xl shadow-xl about-card-0 flex flex-col items-start justify-between origin-right p-3 gap-2 z-[5]">
-                <div class="h-[80%] w-full bg-on-surface rounded-xl shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] -translate-x-1 -translate-y-1">
-                    <img src="{ieeeAbout}" alt="" class="object-cover w-full h-full rounded-xl">
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-primary-container absolute rounded-xl shadow-xl about-card-0 flex flex-col items-start justify-between origin-right p-3 gap-2 z-[5]">
+            <div class="h-[80%] w-full bg-on-surface rounded-xl shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] -translate-x-1 -translate-y-1">
+                <img src="{ieeeAbout}" alt="" class="object-cover w-full h-full rounded-xl">
+            </div>
+            <div class="h-[20%] w-full flex flex-col items-center justify-center border-on-primary border-2 border-solid rounded-xl p-2 about-card-1-content -translate-x-1 -translate-y-1 shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] relative">
+                <div class="absolute top-0">
+                    <p class="text-sm font-thin text-on-primary/50 primary-font">TAKE ME THERE NOW!</p>
                 </div>
-                <div class="h-[20%] w-full flex flex-col items-center justify-center border-on-primary border-2 border-solid rounded-xl p-2 about-card-1-content -translate-x-1 -translate-y-1 shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] relative">
-                    <div class="absolute top-0">
-                        <p class="text-sm font-thin text-on-primary/50 primary-font">TAKE ME THERE NOW!</p>
-                    </div>
-                    <p class="primary-font text-3xl text-on-primary font-bold drop-shadow-[1px_1px_0px_rgba(20,20,20,1)]">
-                        IEEE
-                    </p>
-                    <div class="absolute bottom-0">
-                        <p class="text-sm font-thin text-on-primary/50 primary-font">TAKE ME THERE NOW!</p>
-                    </div>
+                <p class="primary-font text-3xl text-on-primary font-bold drop-shadow-[1px_1px_0px_rgba(20,20,20,1)]">
+                    IEEE
+                </p>
+                <div class="absolute bottom-0">
+                    <p class="text-sm font-thin text-on-primary/50 primary-font">TAKE ME THERE NOW!</p>
                 </div>
             </div>
-            <div class="h-[450px] w-[80%] sm:w-[325px] bg-tertiary absolute rounded-xl shadow-2xl z-[4] about-card-1"></div>
-            <div class="h-[450px] w-[80%] sm:w-[325px] bg-green-300 absolute rounded-xl shadow-xl z-[3] about-card-2"></div>
-            <div class="h-[450px] w-[80%] sm:w-[325px] bg-amber-300 absolute rounded-xl shadow-xl z-[1] about-card-3"></div>
-            <div class="h-[450px] w-[80%] sm:w-[325px] bg-on-surface absolute rounded-xl shadow-xl z-0 about-card-4"></div>
-            <div class="h-[450px] w-[80%] sm:w-[325px] invisible -translate-y-8 about-card-4"></div>
         </div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-tertiary absolute rounded-xl shadow-2xl z-[4] about-card-1"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-green-300 absolute rounded-xl shadow-xl z-[3] about-card-2"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-amber-300 absolute rounded-xl shadow-xl z-[1] about-card-3"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-on-surface absolute rounded-xl shadow-xl z-0 about-card-4"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] invisible -translate-y-8 about-card-4"></div>
     </div>
     <Footer/>
 </div>
