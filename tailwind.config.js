@@ -1,3 +1,5 @@
+import plugin from "tailwindcss";
+
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -7,28 +9,38 @@ export default {
                 'width': 'width',
             },
             colors: {
-                "surface": "#fafdfd",
-                "border": "#808080",
-                "on-surface": "#191c1d",
-                "primary": "#006874",
-                "on-primary": "#ffffff",
-                "primary-container": "#96f0ff",
-                "on-primary-container": "#001f24",
-                "cis-primary-color": "#b02d2c",
-                "cis-on-primary-color": "#ffffff",
-                "cis-primary-container": "#ffdad6",
-                "cis-on-primary-container": "#410003",
-                "cis-surface": "#fffbff",
-                "cis-on-surface": "#201a19",
-                "cs-primary": "#676000",
-                "cs-on-primary": "#ffffff",
-                "cs-primary-container": "#f1e66b",
-                "cs-on-primary-container": "#1f1c00",
-                "cs-surface": "#fffbff",
-                "cs-on-surface": "#1d1c16",
+                "primary": "#9ad6ff",
+                "on-primary": "#00344c",
+                "secondary": "#a1ccea",
+                "on-secondary": "#00344c",
+                "tertiary": "#edc2ff",
+                "on-tertiary": "#4f0573",
+                "error": "#ffb4ab",
+                "on-error": "#690005",
+                "primary-container": '#00b1f5',
+                "on-primary-container": "#001e2d",
+                "secondary-container": "#11425b",
+                "on-secondary-container": "#acd7f5",
+                "tertiary-container": "#d28cf6",
+                "on-tertiary-container": "#33004d",
+                "surface": "#141414",
+                "dim-surface": "#242424",
+                "on-surface": "#dee3e9",
             }
         },
     },
-    plugins: [],
+    plugins: [
+        plugin(function ({matchUtilities, theme}) {
+            matchUtilities(
+                {
+                    'translate-z': (value) => ({
+                        '--tw-translate-z': value,
+                        transform: ` translate3d(var(--tw-translate-x), var(--tw-translate-y), var(--tw-translate-z)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))`,
+                    }), // this is actual CSS
+                },
+                {values: theme('translate'), supportsNegativeValues: true}
+            )
+        })
+    ],
 }
 

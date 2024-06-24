@@ -19,7 +19,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@neodrag/svelte": "^2.0.6",
 		"@studio-freight/lenis": "^1.0.34",
-		"gsap": "^3.12.5"
+		"gsap": "^3.12.5",
+		"svelte-gestures": "^5.0.1"
 	}
 }
