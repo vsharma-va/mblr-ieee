@@ -87,7 +87,7 @@
     {#if !isSmall}
         <p class="ml-5 text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
         <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
-        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}/50">{dimText}</span>{Text}</p>
+        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
     {:else}
         {#each {length: 5} as _, i}
             <p class="text-lg font-bold primary-font {textColor} text-nowrap marquee-item"><span class="{textColor}" style="opacity: 0.5">{dimText}</span>{mainText}</p>
