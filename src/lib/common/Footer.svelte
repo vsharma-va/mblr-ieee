@@ -22,7 +22,7 @@
 </script>
 <div class="h-full w-full sticky mt-24 top-0 flex flex-col items-center justify-center bg-surface content footer">
     <div class="h-full w-full flex flex-col sticky bottom-0 bg-on-surface rounded-xl items-center justify-between overflow-hidden p-5 gap-3 footer-child">
-        <InfiniteMarquee dimText="HTTPS://" mainText="IEEE.SOCIETY" isSmall={false}/>
+        <InfiniteMarquee dimText="HTTPS://" mainText="IEEE.SOCIETY" isSmall={false} differentiatingFactor="footer"/>
         <div class="flex flex-col md:flex-row w-full h-fit md:h-[225px] gap-2 mt-2">
             <div class="w-full md:w-1/2 h-1/2 md:h-full bg-primary-container rounded-xl flex flex-col items-center justify-between p-3 xl:p-5">
                 <p class="text-on-primary-container font-thin primary-font text-sm md:text-lg xl:text-2xl md:leading-[1.3]">
