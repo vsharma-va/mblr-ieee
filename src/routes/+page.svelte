@@ -401,14 +401,12 @@
                  tabindex="0"
             >
                 <div class="absolute left-0 h-full w-0 rounded-r-full bg-primary-container/70 about-next-hover-indicator-0"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-tertiary/70 about-next-hover-indicator-1"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-green-300/70 about-next-hover-indicator-2"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-amber-300/70 about-next-hover-indicator-3"></div>
-                <div class="absolute left-0 h-full w-0 rounded-r-full bg-on-surface/70 about-next-hover-indicator-4"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-cs-primary-container/70 about-next-hover-indicator-1"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-cis-primary-container/70 about-next-hover-indicator-2"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-wie-primary-container/70 about-next-hover-indicator-3"></div>
+                <div class="absolute left-0 h-full w-0 rounded-r-full bg-grss-primary-container/70 about-next-hover-indicator-4"></div>
                 <button class="bg-surface primary-font shadow-xl border-2 border-solid border-dim-surface p-2 rounded-xl text-on-surface z-[7]">
-                    &nbsp;&nbsp;&nbsp;
-
-                    NEXT&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;NEXT&nbsp;&nbsp;&nbsp;
                 </button>
             </div>
         </div>
@@ -428,10 +426,10 @@
                 </div>
             </div>
         </div>
-        <div class="h-[450px] w-[80%] sm:w-[325px] bg-tertiary absolute rounded-xl shadow-2xl z-[4] about-card-1"></div>
-        <div class="h-[450px] w-[80%] sm:w-[325px] bg-green-300 absolute rounded-xl shadow-xl z-[3] about-card-2"></div>
-        <div class="h-[450px] w-[80%] sm:w-[325px] bg-amber-300 absolute rounded-xl shadow-xl z-[1] about-card-3"></div>
-        <div class="h-[450px] w-[80%] sm:w-[325px] bg-on-surface absolute rounded-xl shadow-xl z-0 about-card-4"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-cs-primary-container absolute rounded-xl shadow-2xl z-[4] about-card-1"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-cis-primary-container absolute rounded-xl shadow-xl z-[3] about-card-2"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-wie-primary-container absolute rounded-xl shadow-xl z-[1] about-card-3"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-grss-primary-container absolute rounded-xl shadow-xl z-0 about-card-4"></div>
         <div class="h-[450px] w-[80%] sm:w-[325px] invisible -translate-y-8 about-card-4"></div>
     </div>
     <Footer/>

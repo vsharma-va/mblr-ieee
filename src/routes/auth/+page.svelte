@@ -56,14 +56,16 @@
 
 <div class="h-screen w-full bg-surface content flex flex-col items-center justify-center relative">
     <div class="w-full h-fit absolute top-24 md:top-16 xl:top-8">
-        <InfiniteMarquee dimText="HTTPS://" mainText="IEEE.SOCIETY/AUTH" isSmall="{false}" textColor="text-on-surface"/>
+        <InfiniteMarquee dimText="HTTPS://" mainText="IEEE.SOCIETY/AUTH" isSmall="{false}" textColor="text-on-surface"
+                         differentiatingFactor="auth"/>
     </div>
     <div class="w-full h-5 bg-primary-container absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-[50%]"></div>
     <div class="w-full h-5 bg-primary-container absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-[50%]"></div>
     <div class="h-fit w-[75%] sm:w-[400px] rounded-xl backdrop-blur-2xl flex flex-col items-center justify-center gap-2 p-4 relative shadow-xl">
         <div class="h-fit w-full flex flex-col items-center justify-center gap-2">
             <p class="text-2xl lg:text-3xl primary-font text-on-surface">HELLO THERE!</p>
-            <p class="text-sm lg:text-lg primary-font text-on-surface/50 leading-[1] text-center">We Would Love To Get You Know Better!</p>
+            <p class="text-sm lg:text-lg primary-font text-on-surface/50 leading-[1] text-center">We Would Love To Get
+                You Know Better!</p>
         </div>
         <form action="?/registerUser" method="post"
               class="h-full w-full flex flex-col gap-2 items-center justify-center"
@@ -115,7 +117,8 @@
                 <button class="w-fit h-fit bg-primary-container text-on-primary-container text-lg lg:text-xl p-2 primary-font rounded-xl relative"
                         type="submit" disabled="{isFormLoading}">
                     {#if isFormLoading}
-                        <ContentLoaderIndicator backgroundColor="bg-on-primary-container" heightAndWidth="h-4 w-4 lg:h-5 lg:w-5"/>
+                        <ContentLoaderIndicator backgroundColor="bg-on-primary-container"
+                                                heightAndWidth="h-4 w-4 lg:h-5 lg:w-5"/>
                         <span class="opacity-0">SUBMIT</span>
                     {:else}
                         SUBMIT
