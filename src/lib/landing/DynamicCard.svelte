@@ -13,7 +13,7 @@
     let slotDiv;
 
     function expandDynamicCard() {
-        slotDiv.addEventListener('mousedown', (event) => {
+        slotDiv.addEventListener('pointerdown', (event) => {
             divHeldAnim();
             isMouseDown = true;
             offset = [
@@ -21,7 +21,7 @@
                 mainDiv.offsetTop - event.clientY,
             ];
         }, true);
-        mainDiv.addEventListener('mouseup', (event) => {
+        mainDiv.addEventListener('pointerup', (event) => {
             divReleasedAnim();
             if(position.includes('bottom')) {
                 mainDiv.style.bottom = `${mainDiv.offsetParent.offsetHeight - mainDiv.offsetTop - mainDiv.offsetHeight}px`;
@@ -36,6 +36,15 @@
                 mainDiv.style.top = `${event.clientY + offset[1]}px`;
             }
         }, true)
+        mainDiv.addEventListener('touchmove', (event) => {
+            event.preventDefault();
+            const { touches, changedTouches } = event.originalEvent ?? event;
+            const touch = touches[0] ?? changedTouches[0];
+            if(isMouseDown) {
+                mainDiv.style.left = `${touch.pageX + offset[0]}px`;
+                mainDiv.style.top = `${touch.pageY + offset[1]}px`;
+            }
+        })
 
         if (isDynamicCardOpen) {
             let closeDynamicCardTimeline = gsap.timeline();
