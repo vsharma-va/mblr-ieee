@@ -1,73 +1,112 @@
 <script>
-    import {gsap} from "gsap/dist/gsap";
+    import gsap from "gsap/dist/gsap";
+    import {onMount} from "svelte";
 
-    let navOpen = false;
+    let navIsOpen = false;
+    let surfaceBehindNav;
+
+    onMount(() => {
+        surfaceBehindNav = document.getElementById('surface-behind-nav');
+        console.log(surfaceBehindNav);
+    });
 
     function navController() {
-        if (navOpen) {
+        if (navIsOpen) {
             closeNav();
         } else {
             openNav();
         }
-        navOpen = !navOpen;
-    }
-
-    function openNav() {
-        let openNavTimeline = gsap.timeline();
-        openNavTimeline.to('.nav-width-controller', {
-            width: "100%",
-            duration: 0.75,
-            ease: "power4.inOut"
-        });
-        openNavTimeline.to('.nav-height-controller', {
-            height: "50%",
-            duration: 0.75,
-            ease: "power4.inOut",
-        }, '<0.2');
-        openNavTimeline.to('.nav-links', {
-            display: 'flex',
-            opacity: 1,
-            duration: 0.25,
-            ease: "power4.inOut",
-        }, '<0.2');
+        navIsOpen = !navIsOpen;
+        console.log(navIsOpen);
     }
 
     function closeNav() {
-        let closeNavTimeline = gsap.timeline();
-        closeNavTimeline.to('.nav-height-controller', {
-            height: "auto",
-            duration: 0.75,
-            ease: "power4.inOut",
+        let closeNavController = gsap.timeline({
+            onComplete: () => {
+                gsap.set('.main-nav-container', {clearProps: 'all'});
+            }
         });
-        closeNavTimeline.to('.nav-links', {
-            display: 'none',
-            opacity: 0,
-            duration: 0.25,
-            ease: "power4.inOut",
+        closeNavController.to('.main-nav-container', {
+            rotationY: 135,
+            rotationX: -5,
+            x: window.screen.width,
+            duration: 1,
+            ease: 'sine',
         }, '<');
-        closeNavTimeline.to('.nav-width-controller', {
-            width: "90%",
+        closeNavController.to(surfaceBehindNav, {
+            translateZ: '0em',
+            translateX: '0%',
             duration: 0.75,
-            ease: "power4.inOut",
-        }, '<0.2');
+            ease: 'sine',
+        }, '<');
+        closeNavController.to('.perspective-wrapper', {
+            display: 'none',
+        })
     }
+
+    function openNav() {
+        let openNavController = gsap.timeline();
+        openNavController.to('.perspective-wrapper', {
+            display: 'flex',
+        });
+        openNavController.to('.main-nav-container', {
+            rotationY: 0,
+            rotationX: 0,
+            rotationZ: 0,
+            duration: 1,
+            x: 0,
+            ease: 'sine',
+        }, '<');
+        openNavController.to(surfaceBehindNav, {
+            translateZ: '-7em',
+            duration: 0.75,
+            ease: 'sine',
+        }, '<');
+    }
+
 </script>
 
-<div class="h-fit w-full flex items-center justify-center">
-    <div class="h-fit w-[65%] sm:w-[55%] flex items-center justify-center fixed bottom-3 z-[100] nav-height-controller scale-0 navbar-closed-display">
-        <div class="nav-width-controller h-full w-[90%] absolute flex flex-col items-end justify-center bg-primary-container rounded-xl px-4">
-            <div class="h-fit w-full hidden opacity-0 flex-col items-end justify-center nav-links gap-2">
-                <a class="primary-font text-2xl text-right tracking-tighter font-bold hover:text-on-tertiary-container" href="/">HOME</a>
-                <a class="primary-font text-2xl text-right tracking-tighter font-bold" href="/events">EVENTS</a>
-                <a class="primary-font text-2xl text-right tracking-tighter font-bold" href="/dashboard">DASHBOARD</a>
+<div class="fixed top-2 w-full h-fit flex items-center justify-end px-3 z-[300]">
+    <button class="text-sm primary-font w-fit h-fit text-on-surface"
+            on:click={() => {
+            navController();
+        }}>[MENU]
+    </button>
+</div>
+<div class="perspective-wrapper w-full h-screen fixed top-0 items-center justify-center hidden z-[300]">
+    <div class="h-[90vh] w-[90vw] sm:w-[450px] bg backdrop-blur-xl rounded-2xl z-[5] flex flex-col items-center justify-center p-3 main-nav-container relative shadow-2xl border-2 border-primary border-solid">
+        <div class="flex flex-row w-full h-fit items-center absolute top-0 justify-between px-3 py-2">
+            <div class="w-fit h-fit">
+                <p class="primary-font text-xl text-on-surface font-bold">IEEE</p>
             </div>
-        </div>
-        <div class="h-fit w-[90%] flex flex-row items-center justify-between bg-primary-container self-end rounded-xl py-3 px-4 nav-width-controller z-[2] scale-0 navbar-closed-content-display">
-            <p class="primary-font text-2xl text-on-primary-container tracking-tighter font-bold">HOME</p>
-            <button class="flex items-center text-center justify-center px-3 py-1 rounded-xl bg-on-primary-container text-primary-container text-2xl primary-font"
-                    on:click={navController}>
-                +
+            <button class="w-fit h-fit flex flex-row items-center justify-center primary-font text-lg text-primary font-bold"
+                    on:click={() => {
+                    navController();
+                }}>
+                [<span>{navIsOpen ? 'CLOSE' : 'MENU'}</span>]
             </button>
+        </div>
+        <div class="flex flex-col items-center justify-center w-full h-full gap-4">
+            <p class="primary-font text-3xl font-thin leading-[0.9] text-on-surface">HOME</p>
+            <p class="primary-font text-3xl font-thin leading-[0.9] text-on-surface">ADVERTISING</p>
+            <p class="primary-font text-3xl font-thin leading-[0.9] text-on-surface">EDITORIAL</p>
+            <p class="primary-font text-3xl font-thin leading-[0.9] text-on-surface">MOTION</p>
+            <p class="primary-font text-3xl font-thin leading-[0.9] text-on-surface">INFO</p>
+        </div>
+        <div class="flex flex-row w-full h-fit items-center absolute bottom-0 justify-between px-3 py-2">
+            <div class="w-fit h-fit">
+                <p class="primary-font text-xl text-primary font-bold">©IEEE.SOCIETY</p>
+            </div>
         </div>
     </div>
 </div>
+
+<style>
+    .perspective-wrapper {
+        perspective: 800px;
+    }
+
+    .main-nav-container {
+        transform: translate(-100vw) rotateX(5deg) rotateY(-75deg);
+    }
+</style>
