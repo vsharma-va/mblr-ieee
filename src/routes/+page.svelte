@@ -1,13 +1,10 @@
 <script>
     import {onMount} from "svelte";
     import {gsap} from "gsap/dist/gsap";
-    import footerImg from "$lib/assets/images/footer.gif";
     import DynamicCard from "$lib/landing/DynamicCard.svelte";
     import {swipe} from "svelte-gestures";
     import ieeeAbout from "$lib/assets/images/ieee-about.jpg";
-    import InfiniteMarquee from "$lib/common/InfiniteMarquee.svelte";
     import Footer from "$lib/common/Footer.svelte";
-    import Loader from "$lib/common/Loader.svelte";
 
     let userDiscardName = '';
     let userActualName = 'STRANGER';
@@ -65,7 +62,7 @@
             },
             "<0.1",
         );
-        onLoadTimeline.pause();
+        // onLoadTimeline.pause();
         setInterval(() => {
             let date = new Date();
             const options = {
@@ -185,12 +182,13 @@
     $: reactiveUserName = userActualName;
 </script>
 
-<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
-<div class="h-fit min-h-screen w-full bg-surface content relative">
+<!--<Loader on:complete={() => {onLoadTimeline.play(0)}}/>-->
+<div class="h-fit min-h-screen w-full bg-surface content relative" style="transform: translateZ(-7em)">
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 sticky top-0 overflow-x-hidden">
         <div class="absolute top-2 left-2 w-fit h-fit">
             <p class="text-sm lg:text-xl text-on-surface primary-font">
-                <span class="text-on-surface/50">WELCOME,</span> <span class="type-username">{reactiveUserName}</span>
+                <span class="text-on-surface/50">WELCOME,</span> <span
+                    class="type-username">{reactiveUserName}</span>
             </p>
         </div>
         <DynamicCard subset="name" position="md:left-12 top-14 left-3" heading="NAME" zLevel="2">
