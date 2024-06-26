@@ -12,6 +12,7 @@
     export let societyName;
     export let eventId;
     export let isRegistered;
+    export let isEventCompleted;
 
     let attemptRegistrationButton;
     let registrationErrorText = undefined;
@@ -26,7 +27,6 @@
     let getRequiredColor = (suffix) => {
         return onlySocietyName ? `${onlySocietyName}-${suffix}` : `${suffix}`;
     }
-    console.log(getRequiredColor('primary-container'));
 
     eventDate = new Date(eventDate);
     const options = {
@@ -52,8 +52,8 @@
 </script>
 
 <div class="h-[250px] w-full max-w-[465px] relative">
-    <div class="h-full w-full bg-{getRequiredColor('primary-container')} absolute top-1 left-1 rounded-xl"></div>
-    <div class="h-[250px] w-full max-w-[465px] bg-on-surface rounded-xl flex flex-col p-3 gap-2 relative -translate-x-1 -translate-y-1 overflow-hidden items-center justify-center z-[3]">
+    <div class="h-full w-full bg-{getRequiredColor('primary-container')}{isEventCompleted?'/70': ''} absolute top-1 left-1 rounded-xl"></div>
+    <div class="h-[250px] w-full max-w-[465px] bg-on-surface{isEventCompleted?'/70':''} rounded-xl flex flex-col p-3 gap-2 relative -translate-x-1 -translate-y-1 overflow-hidden items-center justify-center z-[3]">
         {#if reactiveRegistrationErrorText}
             {#key reactiveRegistrationErrorText}
                 <OnDemandSnackBar bind:errorText={reactiveRegistrationErrorText} isError="{true}"/>
@@ -98,6 +98,10 @@
                     <div class="h-fit w-fit p-1 px-3 bg-{getRequiredColor('primary-container')} text-on-{getRequiredColor('primary-container')} text-lg primary-font rounded-xl -translate-y-1 -translate-x-1 shadow-[2px_2px_0px_0px_rgba(20,20,20,1)]">
                         REGISTERED!
                     </div>
+                {:else if isEventCompleted}
+                    <div class="h-fit w-fit p-1 px-3 bg-{getRequiredColor('primary-container')}{isEventCompleted?'/70':''} text-on-{getRequiredColor('primary-container')} text-lg primary-font rounded-xl -translate-y-1 -translate-x-1 shadow-[2px_2px_0px_0px_rgba(20,20,20,1)]">
+                        EVENT COMPLETED!
+                    </div>
                 {:else}
                     <form action="?/registerUser" method="post" use:enhance={(data) => {
                     attemptRegistration(data);
@@ -112,6 +116,7 @@
                     }
                 }}>
                         <button class="h-fit w-fit p-1 px-3 bg-{getRequiredColor('primary-container')} text-on-{getRequiredColor('primary-container')} text-lg primary-font rounded-xl"
+                                data-buddy-text="{onlySocietyName ? onlySocietyName.toUpperCase() : 'IEEE'}"
                                 data-event-id="{eventId}"
                                 bind:this={attemptRegistrationButton}>
                             REGISTER

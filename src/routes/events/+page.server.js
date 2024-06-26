@@ -14,12 +14,14 @@ export const load = async (event) => {
         body: JSON.stringify({
             query: `
                 {
-                  eventCards {
+                  eventCards(orderBy: isEventCompleted_ASC) {
                     eventDateTime
                     eventDescription
                     eventName
                     id
                     societyName
+                    eventLocation
+                    isEventCompleted
                 }
             }`
         }),
@@ -27,7 +29,7 @@ export const load = async (event) => {
     const response = await fetch(process.env.HYGRAPH_CONTENT_API, queryToHygraph);
     const json = await response.json();
     let userRegisteredEventIds = undefined;
-    if(session?.user) {
+    if (session?.user) {
         userRegisteredEventIds = await eventRegistrations.find({email: session.user.email},
             {projection: {_id: 0, event_id: 1}}).toArray();
     }
@@ -71,7 +73,10 @@ export const actions = {
             return fail(422, {details: 'Invalid Event ID (Tampered)'});
         }
 
-        const existingRegistration = await eventRegistrations.findOne({email: session.user.email});
+        const existingRegistration = await eventRegistrations.findOne({
+            email: session.user.email,
+            event_id: json.data.eventCard.id
+        });
         if (existingRegistration) {
             return fail(409, {details: 'User already exists!'});
         }

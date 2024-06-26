@@ -36,22 +36,26 @@
                 </div>
                 <div class="flex flex-row items-stretch justify-between w-full h-full">
                     <div class="flex flex-col w-fit h-full items-start justify-start gap-3">
-                        <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
+                        <p data-buddy-text="@ieee" class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
                             INSTAGRAM</p>
-                        <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
+                        <p data-buddy-text="@ieee-linkedin" class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
                             LINKEDIN</p>
-                        <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
+                        <p data-buddy-text="@ieee-youtube" class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
                             YOUTUBE</p>
                     </div>
                     <div class="flex flex-col w-fit h-full items-center justify-start gap-3">
-                        <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">IEEE
-                            EVENTS</p>
-                        <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">CS
-                            EVENTS</p>
-                        <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">CIS
-                            EVENTS</p>
-                        <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">WIE
-                            EVENTS</p>
+                        <a href="/events" data-buddy-text="/events"
+                           class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">IEEE
+                            EVENTS</a>
+                        <a href="/events" data-buddy-text="/events"
+                           class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">CS
+                            EVENTS</a>
+                        <a href="/events" data-buddy-text="/events"
+                           class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">CIS
+                            EVENTS</a>
+                        <a href="/events" data-buddy-text="/events"
+                           class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">WIE
+                            EVENTS</a>
                     </div>
                     <div class="flex flex-col w-fit h-full items-center justify-start gap-3">
                         <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
@@ -61,7 +65,11 @@
             </div>
         </div>
         <div class="h-fit w-full flex items-center justify-center bg-surface p-3 rounded-xl">
-            <p class="text-on-surface text-thin text-xl primary-font">CODE AVAILABLE ON GITHUB</p>
+            <p class="text-on-surface text-thin text-xl primary-font">CODE AVAILABLE ON <a
+                    data-buddy-text="/vsharma-va"
+                    href="https://github.com/vsharma-va/mblr-ieee"
+                    target="_blank"
+                    class="underline underline-primary-container">GITHUB</a></p>
         </div>
     </div>
 </div>

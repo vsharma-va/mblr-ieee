@@ -6,9 +6,10 @@
     import ieeeAbout from "$lib/assets/images/ieee-about.jpg";
     import Footer from "$lib/common/Footer.svelte";
     import Loader from "$lib/common/Loader.svelte";
+    import Header from "$lib/common/Header.svelte";
 
     let userDiscardName = '';
-    let userActualName = 'STRANGER';
+    let userActualName = '';
     let currentTime;
     let onLoadTimeline;
     let aboutCardIndex = 0;
@@ -63,7 +64,7 @@
             },
             "<0.1",
         );
-        onLoadTimeline.pause();
+        // onLoadTimeline.pause();
         setInterval(() => {
             let date = new Date();
             const options = {
@@ -86,7 +87,13 @@
     function nextOrPreviousAboutCard(currentIndex, forward) {
         if (forward) {
             aboutCardHoverEnabled = false;
-            let forwardTimeline = gsap.timeline();
+            let forwardTimeline = gsap.timeline({
+                onComplete: () => {
+                    hoverIndicatorTimeline.play(0);
+                }
+            });
+            let hoverIndicatorTimeline = gsap.timeline();
+            hoverIndicatorTimeline.pause();
             forwardTimeline.to(`.about-card-${currentIndex}`, {
                 rotationY: 135,
                 rotationX: -5,
@@ -107,12 +114,12 @@
                 ease: 'sine',
                 duration: 0.75,
             }, '<');
-            forwardTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
+            hoverIndicatorTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
                 opacity: '0',
                 ease: 'sine',
                 duration: 0.45,
-            }, '>');
-            forwardTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
+            }, '<');
+            hoverIndicatorTimeline.to(`.about-next-hover-indicator-${currentIndex}`, {
                 width: '0%',
             }, '>');
             let counter = 1;
@@ -183,15 +190,10 @@
     $: reactiveUserName = userActualName;
 </script>
 
-<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
+<!--<Loader on:complete={() => {onLoadTimeline.play(0)}}/>-->
 <div class="h-fit min-h-screen w-full bg-surface content relative" style="transform: translateZ(-7em)">
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 sticky top-0 overflow-x-hidden">
-        <div class="absolute top-2 left-2 w-fit h-fit">
-            <p class="text-sm lg:text-xl text-on-surface primary-font">
-                <span class="text-on-surface/50">WELCOME,</span> <span
-                    class="type-username">{reactiveUserName}</span>
-            </p>
-        </div>
+        <Header customDisplay="{reactiveUserName}"/>
         <DynamicCard subset="name" position="md:left-12 top-14 left-3" heading="NAME" zLevel="2">
             <input type="text" placeholder="...your name"
                    class="text-on-surface/70 font-bold primary-font px-3 h-full w-full"
@@ -353,6 +355,7 @@
         </div>
         <div class="h-screen w-full absolute flex-row justify-center items-stretch hidden md:flex">
             <div class="w-1/2 h-full pr-32 flex flex-col items-center justify-center"
+                 data-buddy-text="PREVIOUS AMAZING SOCIETY!"
                  on:click={() => {
                         if(aboutCardIndex > 0) {
                             aboutCardIndex--;
@@ -374,6 +377,7 @@
                 </button>
             </div>
             <div class="w-1/2 h-full pl-32 flex flex-col items-center justify-center relative"
+                 data-buddy-text="NEXT AMAZING SOCIETY!"
                  on:pointermove={() =>{
                                 if(aboutCardHoverEnabled) {
                                     aboutCardHalfWayOver(aboutCardIndex, false);

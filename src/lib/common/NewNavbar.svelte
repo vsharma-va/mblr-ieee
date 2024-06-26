@@ -22,6 +22,11 @@
         if(navIsOpen) {
             navController();
         }
+        gsap.to('.nav-links', {
+            opacity: 1,
+            duration: 0.1,
+            ease: 'sine',
+        });
         isLoading = false;
     });
 
@@ -58,6 +63,11 @@
     }
 
     function openNav() {
+        gsap.to('.nav-links', {
+            opacity: 1,
+            duration: 0.1,
+            ease: 'sine',
+        });
         let openNavController = gsap.timeline();
         openNavController.to('.perspective-wrapper', {
             display: 'flex',
@@ -76,6 +86,7 @@
 
 <div class="fixed top-2 w-full h-fit flex items-center justify-end px-3 z-[300]">
     <button class="text-sm lg:text-xl primary-font w-fit h-fit text-on-surface"
+            data-buddy-text="NAVIGATE?"
             on:click={() => {
             navController();
         }}>[MENU]
@@ -88,6 +99,7 @@
                 <p class="primary-font text-xl text-on-surface font-bold">IEEE</p>
             </div>
             <button class="w-fit h-fit flex flex-row items-center justify-center primary-font text-lg text-primary font-bold"
+                    data-buddy-text="navIsOpen ? close : open"
                     on:click={() => {
                     navController();
                 }}>
@@ -95,10 +107,20 @@
             </button>
         </div>
         <div class="flex flex-col items-center justify-center w-full h-full gap-4">
-            <a href="/" class="primary-font text-3xl font-thin leading-[0.9] text-on-surface nav-links">HOME</a>
-            <a href="/events" class="primary-font text-3xl font-thin leading-[0.9] text-on-surface nav-links">EVENTS</a>
-            <a href="/dashboard" class="primary-font text-3xl font-thin leading-[0.9] text-on-surface nav-links">DASHBOARD</a>
+            <a href="/" class="primary-font text-3xl font-thin leading-[0.9] text-on-surface nav-links"
+                data-buddy-text="/">
+                HOME
+            </a>
+            <a href="/events" class="primary-font text-3xl font-thin leading-[0.9] text-on-surface nav-links"
+                data-buddy-text="/events">
+                EVENTS
+            </a>
+            <a href="/dashboard" class="primary-font text-3xl font-thin leading-[0.9] text-on-surface nav-links"
+                data-buddy-text="/dashboard">
+                DASHBOARD
+            </a>
             <button class="primary-font text-3xl font-thin leading-[0.9] text-on-surface nav-links"
+                    data-buddy-text="/google"
                 on:click={async () => {
                     if(!$page.data?.session?.user) {
                         await signIn('google', {callbackUrl: `${$page.url.pathname}`});

@@ -2,6 +2,7 @@
 
     import EventCard from "$lib/events/EventCard.svelte";
     import InfiniteMarquee from "$lib/common/InfiniteMarquee.svelte";
+    import Header from "$lib/common/Header.svelte";
 
     export let data;
 
@@ -12,15 +13,10 @@
             registeredEventIds.push(eventId.event_id);
         }
     }
-
 </script>
 
 <div class="w-full h-fit min-h-screen flex flex-col items-center justify-start bg-surface content relative overflow-hidden">
-    <div class="absolute top-2 left-2 w-fit h-fit">
-        <p class="text-sm lg:text-xl text-on-surface primary-font">
-            <span class="text-on-surface/50">WELCOME,</span> <span class="type-username">STRANGER</span>
-        </p>
-    </div>
+    <Header />
     <div class="w-full h-fit mt-14">
         <InfiniteMarquee isSmall="{false}" dimText="HTTPS://" mainText="IEEE.SOCIETY/EVENTS" textColor="text-on-surface"
                          differentiatingFactor="events"/>
@@ -30,15 +26,18 @@
             <EventCard eventDescription="{event.eventDescription}" eventDate="{event.eventDateTime}"
                        eventLocation="{event.eventLocation}"
                        societyName="{event.societyName}" eventHeading="{event.eventName}" eventId="{event.id}"
-                       isRegistered="{registeredEventIds.includes(event.id)}"/>
+                       isRegistered="{registeredEventIds.includes(event.id)}"
+                       isEventCompleted="{event.isEventCompleted}"/>
             <EventCard eventDescription="{event.eventDescription}" eventDate="{event.eventDateTime}"
                        eventLocation="{event.eventLocation}"
                        societyName="{event.societyName}" eventHeading="{event.eventName}" eventId="{event.id}"
-                       isRegistered="{registeredEventIds.includes(event.id)}"/>
+                       isRegistered="{registeredEventIds.includes(event.id)}"
+                       isEventCompleted="{event.isEventCompleted}"/>
             <EventCard eventDescription="{event.eventDescription}" eventDate="{event.eventDateTime}"
                        eventLocation="{event.eventLocation}"
                        societyName="{event.societyName}" eventHeading="{event.eventName}" eventId="{event.id}"
-                       isRegistered="{registeredEventIds.includes(event.id)}"/>
+                       isRegistered="{registeredEventIds.includes(event.id)}"
+                       isEventCompleted="{event.isEventCompleted}"/>
         {/each}
     </div>
 </div>
