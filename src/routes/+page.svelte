@@ -64,7 +64,7 @@
             },
             "<0.1",
         );
-        // onLoadTimeline.pause();
+        onLoadTimeline.pause();
         setInterval(() => {
             let date = new Date();
             const options = {
@@ -190,7 +190,7 @@
     $: reactiveUserName = userActualName;
 </script>
 
-<!--<Loader on:complete={() => {onLoadTimeline.play(0)}}/>-->
+<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
 <div class="h-fit min-h-screen w-full bg-surface content relative" style="transform: translateZ(-7em)">
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 sticky top-0 overflow-x-hidden">
         <Header customDisplay="{reactiveUserName}"/>
