@@ -1,4 +1,7 @@
 <script>
+    import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+    injectSpeedInsights();
+
     import "../app.css";
     import Lenis from '@studio-freight/lenis';
     import {onMount} from "svelte";

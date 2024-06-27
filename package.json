@@ -22,6 +22,7 @@
 		"@auth/sveltekit": "^1.4.1",
 		"@neodrag/svelte": "^2.0.6",
 		"@studio-freight/lenis": "^1.0.34",
+		"@vercel/speed-insights": "^1.0.12",
 		"dotenv": "^16.4.5",
 		"gsap": "^3.12.5",
 		"mongodb": "^6.7.0",
