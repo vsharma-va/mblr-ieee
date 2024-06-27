@@ -38,5 +38,5 @@
 </script>
 
 <div class="flex flex-col w-full absolute bottom-0 {bgColour} p-1 px-2 on-demand-error-div translate-y-[100%]">
-    <p class="text-sm primary-font font-bold {textColour}">{errorText}</p>
+    <p class="text-sm lg:text-xl primary-font font-bold {textColour}">{errorText}</p>
 </div>

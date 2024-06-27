@@ -4,6 +4,7 @@
     import InfiniteMarquee from "$lib/common/InfiniteMarquee.svelte";
     import {enhance} from "$app/forms";
     import OnDemandSnackBar from "$lib/error/OnDemandSnackBar.svelte";
+    import ContentLoaderIndicator from "$lib/common/ContentLoaderIndicator.svelte";
 
     export let eventHeading;
     export let eventDate;
@@ -18,6 +19,8 @@
     let registrationErrorText = undefined;
     let registrationSuccess = false;
     let onlySocietyName;
+    let isFormLoading = false;
+
     if (societyName.split('_').length === 2) {
         onlySocietyName = societyName.split('_')[1].toLowerCase();
     } else {
@@ -43,6 +46,7 @@
         if ($page.data?.session?.user) {
             formData.set('eventId', attemptRegistrationButton.dataset.eventId);
         } else {
+            isFormLoading = false;
             cancel();
         }
     }
@@ -74,8 +78,8 @@
         <div class="h-fit w-full flex flex-col gap-2 mt-2">
             <p class="text-2xl font-bold primary-font text-surface leading-[1]">{eventHeading}</p>
             <div class="h-fit w-full flex flex-row items-center justify-between">
-                <p class="text-lg font-thin primary-font text-surface/50 leading-[1]">{eventDate}</p>
-                <p class="text-lg font-thin primary-font text-surface/50 leading-[1]">{eventLocation}</p>
+                <p class="text-lg font-thin primary-font text-surface/80 leading-[1]">{eventDate}</p>
+                <p class="text-lg font-thin primary-font text-surface/80 leading-[1]">{eventLocation}</p>
             </div>
         </div>
         <div class="h-full w-full flex flex-col items-center justify-center">
@@ -104,22 +108,31 @@
                     </div>
                 {:else}
                     <form action="?/registerUser" method="post" use:enhance={(data) => {
+                    isFormLoading = true;
                     attemptRegistration(data);
                     return async ({result}) => {
-                        console.log(result);
                         if(result.type === 'failure') {
+                            isFormLoading = false;
                             console.log(result.data.details);
                             registrationErrorText = result.data.details;
                         } else if(result.type === 'success') {
+                            isFormLoading = false;
                             registrationSuccess = result.data.details;
+                            isRegistered = true;
                         }
                     }
                 }}>
-                        <button class="h-fit w-fit p-1 px-3 bg-{getRequiredColor('primary-container')} text-on-{getRequiredColor('primary-container')} text-lg primary-font rounded-xl"
+                        <button class="h-fit w-fit p-1 px-3 bg-{getRequiredColor('primary-container')} text-on-{getRequiredColor('primary-container')} text-lg primary-font rounded-xl relative"
                                 data-buddy-text="{onlySocietyName ? onlySocietyName.toUpperCase() : 'IEEE'}"
                                 data-event-id="{eventId}"
                                 bind:this={attemptRegistrationButton}>
-                            REGISTER
+                            {#if isFormLoading}
+                                <ContentLoaderIndicator backgroundColor="bg-on-primary-container"
+                                                        heightAndWidth="h-4 w-4 lg:h-5 lg:w-5"/>
+                                <span class="opacity-0">REGISTER</span>
+                            {:else}
+                                REGISTER
+                            {/if}
                         </button>
                     </form>
                 {/if}
