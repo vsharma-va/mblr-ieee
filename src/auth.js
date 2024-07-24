@@ -7,6 +7,6 @@ export const { handle, signIn, signOut } = SvelteKitAuth(async (event) => {
     return {
         providers: [Google({ clientId: process.env.GOOGLE_CLIENT_ID, clientSecret: process.env.GOOGLE_CLIENT_SECRET })],
         secret: process.env.SECRET,
-        trustHost: true
+        trustHost: true,
     }
 });

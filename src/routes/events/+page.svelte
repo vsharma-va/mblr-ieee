@@ -28,16 +28,6 @@
                        societyName="{event.societyName}" eventHeading="{event.eventName}" eventId="{event.id}"
                        isRegistered="{registeredEventIds.includes(event.id)}"
                        isEventCompleted="{event.isEventCompleted}"/>
-            <EventCard eventDescription="{event.eventDescription}" eventDate="{event.eventDateTime}"
-                       eventLocation="{event.eventLocation}"
-                       societyName="{event.societyName}" eventHeading="{event.eventName}" eventId="{event.id}"
-                       isRegistered="{registeredEventIds.includes(event.id)}"
-                       isEventCompleted="{event.isEventCompleted}"/>
-            <EventCard eventDescription="{event.eventDescription}" eventDate="{event.eventDateTime}"
-                       eventLocation="{event.eventLocation}"
-                       societyName="{event.societyName}" eventHeading="{event.eventName}" eventId="{event.id}"
-                       isRegistered="{registeredEventIds.includes(event.id)}"
-                       isEventCompleted="{event.isEventCompleted}"/>
         {/each}
     </div>
 </div>

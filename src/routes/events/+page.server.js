@@ -86,6 +86,8 @@ export const actions = {
             event_id: json.data.eventCard.id,
             event_name: json.data.eventCard.eventName,
             date_timestamp: new Date(),
+            join_code: Math.floor(100000 + Math.random() * 900000),
+            attended: false,
         });
         return {details: 'User Registered!'};
     }

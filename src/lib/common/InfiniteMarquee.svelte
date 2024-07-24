@@ -9,6 +9,10 @@
     export let differentiatingFactor;
 
     onMount(() => {
+        let marqueeText = document.getElementsByClassName(`marquee-item-${differentiatingFactor}`);
+        for(let i of marqueeText) {
+            i.classList.add(textColor);
+        }
         horizontalLoop(document.getElementsByClassName(`marquee-item-${differentiatingFactor}`),{pause: false, repeat: -1});
     })
 
@@ -86,12 +90,31 @@
 </script>
 <div class="wrapper flex flex-row gap-5 overflow-hidden leading-[1] h-fit items-center justify-center">
     {#if !isSmall}
-        <p class="ml-5 text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
-        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
-        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font {textColor} text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
+        <p class="ml-5 text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
+        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
+        <p class="text-5xl md:text-7xl xl:text-8xl font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}/50">{dimText}</span>{mainText}</p>
     {:else}
-        {#each {length: 5} as _, i}
-            <p class="text-lg font-bold primary-font {textColor} text-nowrap marquee-item-{differentiatingFactor}"><span class="{textColor}" style="opacity: 0.5">{dimText}</span>{mainText}</p>
+        {#each {length: 5} as _}
+            <p class="text-lg font-bold primary-font text-nowrap marquee-item-{differentiatingFactor}"
+                data-text-color="{textColor}"><span class="{textColor}" style="opacity: 0.5">{dimText}</span>{mainText}</p>
         {/each}
     {/if}
 </div>
+
+<style>
+    .ieee {
+        color: theme("colors.on-primary-container");
+    }
+    .cs {
+        color: theme("colors.cs-on-primary-container");
+    }
+    .cis {
+        color: theme("colors.cis-on-primary-container");
+    }
+    .wie {
+        color: theme("colors.wie-on-primary-container");
+    }
+    .grss {
+        color: theme("colors.grss-on-primary-container");
+    }
+</style>
