@@ -30,12 +30,12 @@
                     robotics, AI, and more. Discover your passion and thrive with us!
                 </p>
             </div>
-            <div class="w-full md:w-1/2 h-1/2 md:h-full bg-primary-container rounded-xl flex flex-col items-center justify-between p-3 gap-3">
+            <div class="w-full md:w-1/2 h-1/2 md:h-full bg-primary-container rounded-xl flex flex-col items-center justify-between p-3 gap-1">
                 <div class="w-full h-fit flex items-center justify-end">
                     <p class="text-on-primary-container primary-font text-lg md:text-xl xl:text-2xl font-bold">LINKS</p>
                 </div>
                 <div class="flex flex-row items-stretch justify-between w-full h-full">
-                    <div class="flex flex-col w-fit h-full items-start justify-start gap-3">
+                    <div class="flex flex-col w-fit h-full items-start justify-start gap-1">
                         <p data-buddy-text="@ieee" class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
                             INSTAGRAM</p>
                         <p data-buddy-text="@ieee-linkedin" class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
@@ -43,7 +43,7 @@
                         <p data-buddy-text="@ieee-youtube" class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
                             YOUTUBE</p>
                     </div>
-                    <div class="flex flex-col w-fit h-full items-center justify-start gap-3">
+                    <div class="flex flex-col flex-wrap w-fit h-full items-center justify-start gap-1">
                         <a href="/events" data-buddy-text="/events"
                            class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">IEEE
                             EVENTS</a>
@@ -56,7 +56,13 @@
                         <a href="/events" data-buddy-text="/events"
                            class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">WIE
                             EVENTS</a>
+                        <a href="/events" data-buddy-text="/events"
+                           class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">GRSS
+                            EVENTS</a>
                     </div>
+<!--                    <div class="flex flex-col flex-wrap w-fit h-full items-center justify-start gap-3">-->
+
+<!--                    </div>-->
                     <div class="flex flex-col w-fit h-full items-center justify-start gap-3">
                         <p class="text-on-primary-container primary-font text-sm md:text-lg xl:text-xl font-thin">
                             GITHUB</p>
