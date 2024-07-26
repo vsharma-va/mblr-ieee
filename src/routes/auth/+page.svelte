@@ -127,7 +127,6 @@
                     <option value="DS" class="bg-surface text-on-surface">DATA SCIENCE</option>
                     <option value="ECM" class="bg-surface text-on-surface">ECM</option>
                     <option value="ECE" class="bg-surface text-on-surface">ECE</option>
-                    <option value="ENC" class="bg-surface text-on-surface">ENC</option>
                 </select>
                 <label for="name" class="form__label lg:text-lg primary-font">BRANCH?</label>
                 <p class="text-sm lg:text-lg text-error primary-font">{clientFormErrors.userBranchError}</p>
