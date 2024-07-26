@@ -8,9 +8,10 @@
     export let data;
 
     let userName;
-    let clientFormErrors = {userNameError: '', userYearError: '', userBranchError: ''};
+    let clientFormErrors = {userNameError: '', userYearError: '', userBranchError: '', userRegistrationNumError: ''};
     let userYear;
     let userBranch;
+    let userRegistrationNum;
     let isFormLoading = false;
 
     function validateUserName() {
@@ -38,15 +39,25 @@
         }
     }
 
+    function validateRegistrationNum() {
+        if (userRegistrationNum?.toString().match(/^\d+$/) == null || userRegistrationNum == null || userRegistrationNum.toString().length !== 9) {
+            clientFormErrors.userRegistrationNumError = 'Please enter a valid registration number';
+        } else {
+            clientFormErrors.userRegistrationNumError = '';
+        }
+    }
+
     function submitForm({formData, cancel}) {
         validateBranch();
         validateYear();
         validateUserName()
-        if (!clientFormErrors.userBranchError && !clientFormErrors.userNameError && !clientFormErrors.userYearError) {
+        validateRegistrationNum()
+        if (!clientFormErrors.userBranchError && !clientFormErrors.userNameError && !clientFormErrors.userYearError && !clientFormErrors.userRegistrationNumError) {
             formData.set('userBranch', userBranch);
             formData.set('userName', userName);
             formData.set('userYear', userYear);
             formData.set('from', data.from);
+            formData.set('userRegistrationNum', userRegistrationNum);
         } else {
             isFormLoading = false;
             cancel();
@@ -94,6 +105,13 @@
                 <p class="text-sm lg:text-lg text-error primary-font">{clientFormErrors.userYearError}</p>
             </div>
             <div class="form__group field">
+                <input type="number" class="form__field lg:text-lg primary-font" placeholder="Registration Number"
+                       required=""
+                       bind:value={userRegistrationNum} on:input={validateRegistrationNum}>
+                <label for="name" class="form__label lg:text-lg primary-font">Registration Number</label>
+                <p class="text-sm lg:text-lg text-error primary-font">{clientFormErrors.userRegistrationNumError}</p>
+            </div>
+            <div class="form__group field">
                 <select class="form__field lg:text-lg primary-font bg-surface text-on-surface border-2 border-on-surface"
                         type="input"
                         required=""
@@ -107,6 +125,9 @@
                     <option value="CSE-CYBER" class="bg-surface text-on-surface">CSE CYBER</option>
                     <option value="IT" class="bg-surface text-on-surface">IT</option>
                     <option value="DS" class="bg-surface text-on-surface">DATA SCIENCE</option>
+                    <option value="ECM" class="bg-surface text-on-surface">ECM</option>
+                    <option value="ECE" class="bg-surface text-on-surface">ECE</option>
+                    <option value="ENC" class="bg-surface text-on-surface">ENC</option>
                 </select>
                 <label for="name" class="form__label lg:text-lg primary-font">BRANCH?</label>
                 <p class="text-sm lg:text-lg text-error primary-font">{clientFormErrors.userBranchError}</p>

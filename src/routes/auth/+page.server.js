@@ -34,8 +34,14 @@ export const actions = {
         const userName = formData.get('userName');
         const userYear = formData.get('userYear');
         const userBranch = formData.get('userBranch');
+        const userRegistrationNum = formData.get('userRegistrationNum');
         const from = formData.get('from');
-        const serverFormError = {userNameError: '', userYearError: '', userBranchError: ''};
+        const serverFormError = {
+            userNameError: '',
+            userYearError: '',
+            userBranchError: '',
+            userRegistrationNumError: ''
+        };
 
         if (userName?.match(/^[a-zA-Z\- ]+$/) == null || userName === 'null' || userName === null || userName === undefined || userName === 'undefined') {
             serverFormError.userNameError = 'Only alphabets are allowed!';
@@ -53,6 +59,12 @@ export const actions = {
             serverFormError.userBranchError = 'Invalid branch';
         }
 
+        if (userRegistrationNum?.toString().match(/^\d+$/) == null || userRegistrationNum == null && userRegistrationNum.length !== 9) {
+            serverFormError.userRegistrationNumError = 'Please enter a valid registration number';
+        } else {
+            serverFormError.userRegistrationNumError = '';
+        }
+
         if (!Object.values(serverFormError).every(x => x === null || x === '')) {
             console.log('errorFound');
             return fail(400, serverFormError);
@@ -64,6 +76,7 @@ export const actions = {
             user_name: userName,
             user_year: Number(userYear),
             user_branch: userBranch,
+            user_registration_number: Number(userRegistrationNum),
         });
         return {goto: from.replace('-', '/')};
     }

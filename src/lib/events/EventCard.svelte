@@ -73,10 +73,10 @@
     $: reactiveRegistrationSuccess = registrationSuccess;
 </script>
 
-<div class="h-[250px] w-full max-w-[465px] relative">
+<div class="h-[250px] min-h-fit w-full max-w-[465px] relative">
     <div class="h-full w-full bg-{getRequiredColor('primary-container')} absolute top-1 left-1 rounded-xl"
          id="event-shadow-container-{eventId}"></div>
-    <div class="h-[250px] w-full max-w-[465px] bg-on-surface rounded-xl flex flex-col p-3 gap-2 relative -translate-x-1 -translate-y-1 overflow-hidden items-center justify-center z-[3]"
+    <div class="h-[250px] min-h-fit w-full max-w-[465px] bg-on-surface rounded-xl flex flex-col p-3 gap-2 relative -translate-x-1 -translate-y-1 overflow-hidden items-center justify-center z-[3]"
          id="event-main-container-{eventId}">
         {#if reactiveRegistrationErrorText}
             {#key reactiveRegistrationErrorText}
