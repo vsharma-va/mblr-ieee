@@ -65,6 +65,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>AUTH - WELCOME BACK!</title>
+</svelte:head>
+
 <div class="h-screen w-full bg-surface content flex flex-col items-center justify-center relative">
     <div class="w-full h-fit absolute top-24 md:top-16 xl:top-8">
         <InfiniteMarquee dimText="HTTPS://" mainText="IEEE.SOCIETY/AUTH" isSmall="{false}" textColor="text-on-surface"

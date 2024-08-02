@@ -15,6 +15,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>EVENTS - REGISTER!</title>
+</svelte:head>
+
 <div class="w-full h-fit min-h-screen flex flex-col items-center justify-start bg-surface content relative overflow-hidden">
     <Header />
     <div class="w-full h-fit mt-14">

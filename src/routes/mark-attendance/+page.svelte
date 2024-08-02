@@ -31,6 +31,10 @@
     $: reactiveSuccess = success;
 </script>
 
+<svelte:head>
+    <title>ATTENDANCE</title>
+</svelte:head>
+
 {#if reactiveSuccess}
     <div class="absolute top-32 left-1/2 -translate-x-1/2 bg-green-300 p-3 rounded-xl z-[5]">
         <p class="text-xl primary-font text-green-700">Recorded Attendance Successfully!</p>

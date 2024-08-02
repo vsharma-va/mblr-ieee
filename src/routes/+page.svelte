@@ -1,12 +1,13 @@
 <script>
     import {onMount} from "svelte";
     import {gsap} from "gsap/dist/gsap";
+    import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
     import DynamicCard from "$lib/landing/DynamicCard.svelte";
     import {swipe} from "svelte-gestures";
     import ieeeAbout from "$lib/assets/images/ieee-about.jpg";
     import Footer from "$lib/common/Footer.svelte";
-    import Loader from "$lib/common/Loader.svelte";
     import Header from "$lib/common/Header.svelte";
+    import {goto} from "$app/navigation";
 
     let userDiscardName = '';
     let userActualName = '';
@@ -17,6 +18,7 @@
     let aboutCardHoverEnabled = true;
 
     onMount(() => {
+        gsap.registerPlugin(ScrollToPlugin);
         onLoadTimeline = gsap.timeline();
 
         onLoadTimeline.to('.main-heading-container', {
@@ -64,7 +66,7 @@
             },
             "<0.1",
         );
-        onLoadTimeline.pause();
+        // onLoadTimeline.pause();
         setInterval(() => {
             let date = new Date();
             const options = {
@@ -190,7 +192,11 @@
     $: reactiveUserName = userActualName;
 </script>
 
-<Loader on:complete={() => {onLoadTimeline.play(0)}}/>
+<svelte:head>
+    <title>HOME - WELCOME!</title>
+</svelte:head>
+
+<!--<Loader on:complete={() => {onLoadTimeline.play(0)}}/>-->
 <div class="h-fit min-h-screen w-full bg-surface content relative" style="transform: translateZ(-7em)">
     <div class="h-screen w-full flex flex-col items-center justify-center pb-12 sticky top-0 overflow-x-hidden">
         <Header customDisplay="{reactiveUserName}"/>
@@ -276,12 +282,17 @@
                         </span>
                     </span>
                     <div class="h-fit w-fit flex flex-row">
-                        <div class="relative group cursor-pointer">
+                        <div class="relative group cursor-pointer"
+                             on:click={() => {gsap.to(window, { duration: 1, scrollto: { y: `#about`, offsety: 0, offsetx: 0 } })}}
+                             on:keydown={() => {gsap.to(window, { duration: 1, scrollto: { y: `#about`, offsety: 0, offsetx: 0 } })}}
+                             role="button"
+                             tabindex="0">
                             <span class="group-hover:ieee-mesh-gradient">
                                 IEEE
                             </span>
                             <div class="h-[70%] w-full absolute top-1/2 -translate-y-1/2 border-2 border-primary opacity-0 group-hover:opacity-100 duration-300 ease-linear"
-                                 data-buddy-text="ABOUT">
+                                 data-buddy-text="ABOUT"
+                            >
                                 <div class="absolute -left-[6px] -top-[6px] h-3 w-3 bg-on-surface border-2 border-primary"></div>
                                 <div class="absolute -right-[6px] -top-[6px] h-3 w-3 bg-on-surface border-2 border-primary"></div>
                                 <div class="absolute -left-[6px] -bottom-[6px] h-3 w-3 bg-on-surface border-2 border-primary"></div>
@@ -291,7 +302,11 @@
                         <div>
                             .
                         </div>
-                        <div class="relative group cursor-pointer">
+                        <div class="relative group cursor-pointer"
+                             on:click={() => {goto('/events')}}
+                             on:keydown={() => {goto('/events')}}
+                             role="button"
+                             tabindex="0">
                             SOCIETY
                             <div class="h-[70%] w-full absolute top-1/2 -translate-y-1/2 border-2 border-primary opacity-0 group-hover:opacity-100 duration-300 ease-linear"
                                  data-buddy-text="EVENTS">
@@ -316,6 +331,7 @@
         </div>
     </div>
     <div class="h-screen bg-surface w-full sticky top-0 flex flex-col gap-16 items-center justify-center pt-5 content overflow-hidden about-card-3d-parent"
+         id="about"
          use:swipe={{ timeframe: 300, minSwipeDistance: 60, touchAction: 'pan-y' }} on:swipe={(event) => {
              if(event.detail.direction === 'right') {
                   if(numberOfBranches !== aboutCardIndex) {
@@ -431,10 +447,70 @@
                 </div>
             </div>
         </div>
-        <div class="h-[450px] w-[80%] sm:w-[325px] bg-cs-primary-container absolute rounded-xl shadow-2xl z-[4] about-card-1"></div>
-        <div class="h-[450px] w-[80%] sm:w-[325px] bg-cis-primary-container absolute rounded-xl shadow-xl z-[3] about-card-2"></div>
-        <div class="h-[450px] w-[80%] sm:w-[325px] bg-wie-primary-container absolute rounded-xl shadow-xl z-[1] about-card-3"></div>
-        <div class="h-[450px] w-[80%] sm:w-[325px] bg-grss-primary-container absolute rounded-xl shadow-xl z-0 about-card-4"></div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-cs-primary-container absolute rounded-xl shadow-xl z-[4] about-card-1 flex flex-col items-start justify-between origin-right p-3 gap-2">
+            <div class="h-[80%] w-full bg-on-surface rounded-xl shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] -translate-x-1 -translate-y-1">
+                <img src="{ieeeAbout}" alt="" class="object-cover w-full h-full rounded-xl">
+            </div>
+            <div class="h-[20%] w-full flex flex-col items-center justify-center border-cs-on-primary-container border-2 border-solid rounded-xl p-2 about-card-1-content -translate-x-1 -translate-y-1 shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] relative">
+                <div class="absolute top-0">
+                    <p class="text-sm font-thin text-cs-on-primary-container/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+                <p class="primary-font text-3xl text-cs-on-primary-container font-bold drop-shadow-[1px_1px_0px_rgba(20,20,20,1)]">
+                    IEEE
+                </p>
+                <div class="absolute bottom-0">
+                    <p class="text-sm font-thin text-cs-on-primary-container/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+            </div>
+        </div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-cis-primary-container absolute rounded-xl shadow-xl z-[3] about-card-2 flex flex-col items-start justify-between origin-right p-3 gap-2">
+            <div class="h-[80%] w-full bg-on-surface rounded-xl shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] -translate-x-1 -translate-y-1">
+                <img src="{ieeeAbout}" alt="" class="object-cover w-full h-full rounded-xl">
+            </div>
+            <div class="h-[20%] w-full flex flex-col items-center justify-center border-cis-on-primary-container border-2 border-solid rounded-xl p-2 about-card-1-content -translate-x-1 -translate-y-1 shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] relative">
+                <div class="absolute top-0">
+                    <p class="text-sm font-thin text-cis-on-primary-container/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+                <p class="primary-font text-3xl text-cis-on-primary-container font-bold drop-shadow-[1px_1px_0px_rgba(20,20,20,1)]">
+                    IEEE CIS
+                </p>
+                <div class="absolute bottom-0">
+                    <p class="text-sm font-thin text-cis-on-primary-container/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+            </div>
+        </div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-wie-primary-container absolute rounded-xl shadow-xl z-[1] about-card-3 flex flex-col items-start justify-between origin-right p-3 gap-2">
+            <div class="h-[80%] w-full bg-on-surface rounded-xl shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] -translate-x-1 -translate-y-1">
+                <img src="{ieeeAbout}" alt="" class="object-cover w-full h-full rounded-xl">
+            </div>
+            <div class="h-[20%] w-full flex flex-col items-center justify-center border-wie-on-primary-container border-2 border-solid rounded-xl p-2 about-card-1-content -translate-x-1 -translate-y-1 shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] relative">
+                <div class="absolute top-0">
+                    <p class="text-sm font-thin text-wie-on-primary-container/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+                <p class="primary-font text-3xl text-wie-on-primary-container font-bold drop-shadow-[1px_1px_0px_rgba(20,20,20,1)]">
+                    IEEE WIE
+                </p>
+                <div class="absolute bottom-0">
+                    <p class="text-sm font-thin text-wie-on-primary-container/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+            </div>
+        </div>
+        <div class="h-[450px] w-[80%] sm:w-[325px] bg-grss-primary-container absolute rounded-xl shadow-xl z-0 about-card-4 flex flex-col items-start justify-between origin-right p-3 gap-2">
+            <div class="h-[80%] w-full bg-on-surface rounded-xl shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] -translate-x-1 -translate-y-1">
+                <img src="{ieeeAbout}" alt="" class="object-cover w-full h-full rounded-xl">
+            </div>
+            <div class="h-[20%] w-full flex flex-col items-center justify-center border-grss-on-primary-container border-2 border-solid rounded-xl p-2 about-card-1-content -translate-x-1 -translate-y-1 shadow-[6px_6px_0px_0px_rgba(20,20,20,1)] relative">
+                <div class="absolute top-0">
+                    <p class="text-sm font-thin text-grss-on-primary-container/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+                <p class="primary-font text-3xl text-grss-on-primary-container font-bold drop-shadow-[1px_1px_0px_rgba(20,20,20,1)]">
+                    IEEE GRSS
+                </p>
+                <div class="absolute bottom-0">
+                    <p class="text-sm font-thin text-grss-on-primary-container/50 primary-font">TAKE ME THERE NOW!</p>
+                </div>
+            </div>
+        </div>
         <div class="h-[450px] w-[80%] sm:w-[325px] invisible -translate-y-8 about-card-4"></div>
     </div>
     <Footer/>

@@ -6,6 +6,10 @@
     export let data;
 </script>
 
+<svelte:head>
+    <title>DASHBOARD</title>
+</svelte:head>
+
 <div class="h-fit min-h-screen w-full bg-surface content">
     <Header/>
     <div class="w-full h-fit pt-14">
