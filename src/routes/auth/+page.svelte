@@ -79,8 +79,8 @@
     <div class="h-fit w-[75%] sm:w-[400px] rounded-xl backdrop-blur-2xl flex flex-col items-center justify-center gap-2 p-4 relative shadow-xl">
         <div class="h-fit w-full flex flex-col items-center justify-center gap-2">
             <p class="text-2xl lg:text-3xl primary-font text-on-surface">HELLO THERE!</p>
-            <p class="text-sm lg:text-lg primary-font text-on-surface/50 leading-[1] text-center">We Would Love To Get
-                You Know Better!</p>
+            <p class="text-sm lg:text-lg primary-font text-on-surface/50 leading-[1] text-center">We would love to get
+                to know you better</p>
         </div>
         <form action="?/registerUser" method="post"
               class="h-full w-full flex flex-col gap-2 items-center justify-center"
